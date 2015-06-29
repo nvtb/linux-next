@@ -1,0 +1,130 @@
+
+U-Boot SPL 2015.04-rc3-00209-ga74ef40 (Mar 16 2015 - 14:43:39)
+
+
+U-Boot 2015.04-rc3-00209-ga74ef40 (Mar 16 2015 - 14:43:39)
+
+TEGRA20
+Model: Compulab TrimSlice board
+DRAM:  1 GiB
+MMC:   Tegra SD/MMC: 0, Tegra SD/MMC: 1
+SF: Detected W25Q80BL with page size 256 Bytes, erase size 4 KiB, total 1 MiB
+tegra-pcie: PCI regions:
+tegra-pcie:   I/O: 0x82000000-0x82010000
+tegra-pcie:   non-prefetchable memory: 0xa0000000-0xa8000000
+tegra-pcie:   prefetchable memory: 0xa8000000-0xc0000000
+tegra-pcie: dual-mode configuration
+tegra-pcie: probing port 0, using 2 lanes
+In:    serial
+Out:   serial
+Err:   serial
+Net:   RTL8169#0
+Hit any key to stop autoboot:  2  0 
+Tegra20 (TrimSlice) # 
+Tegra20 (TrimSlice) # usb reset
+resetting USB...
+USB0:   USB EHCI 1.00
+scanning bus 0 for devices... 2 USB Device(s) found
+USB1:   USB EHCI 1.00
+scanning bus 1 for devices... 1 USB Device(s) found
+USB2:   lowlevel init failed
+       scanning usb for storage devices... 0 Storage Device(s) found
+       scanning usb for ethernet devices... 0 Ethernet Device(s) found
+Tegra20 (TrimSlice) # setenv bootargs 'ignore_loglevel console=ttyS0,115200n8 rw root=/dev/mmcblk0p1 rootwait gpt debug noinitrd earlyprintk init=/bin/bash'
+Tegra20 (TrimSlice) # setenv ipaddr 192.168.100.103; setenv serverip 192.168.100.1; setenv tftpserverip 192.168.100.1
+Tegra20 (TrimSlice) # tftpboot 0x00408000 zImage.tegra_defconfig
+Using RTL8169#0 device
+TFTP from server 192.168.100.1; our IP address is 192.168.100.103
+Filename 'zImage.tegra_defconfig'.
+Load address: 0x408000
+Loading: *#################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #########
+	 3.6 MiB/s
+done
+Bytes transferred = 4897456 (4abab0 hex)
+Tegra20 (TrimSlice) # tftpboot 0x02408000 tegra20-trimslice.dtb
+Using RTL8169#0 device
+TFTP from server 192.168.100.1; our IP address is 192.168.100.103
+Filename 'tegra20-trimslice.dtb'.
+Load address: 0x2408000
+Loading: *##
+	 2.9 MiB/s
+done
+Bytes transferred = 21130 (528a hex)
+Tegra20 (TrimSlice) # bootz 0x00408000 - 0x02408000
+Kernel image @ 0x408000 [ 0x000000 - 0x4abab0 ]
+## Flattened Device Tree blob at 02408000
+   Booting using the fdt blob at 0x2408000
+   Using Device Tree in place at 02408000, end 02410289
+
+Starting kernel ...
+
+Uncompressing Linux... done, booting the kernel.
+[    0.000000] Booting Linux on physical CPU 0x0
+[    0.000000] Initializing cgroup subsys cpu
+[    0.000000] Initializing cgroup subsys cpuacct
+[    0.000000] Linux version 4.1.0-rc1-next-20150501-13856-gba5ed02 (pwalmsley@kaivo) (gcc version 4.7.3 20130328 (prerelease) (crosstool-NG linaro-1.13.1-4.7-2013.04-20130415 - Linaro GCC 2013.04) ) #1 SMP PREEMPT Thu Apr 30 21:48:01 PDT 2015
+[    0.000000] CPU: ARMv7 Processor [411fc090] revision 0 (ARMv7), cr=10c5387d
+[    0.000000] CPU: PIPT / VIPT nonaliasing data cache, VIPT aliasing instruction cache
+[    0.000000] Machine model: Compulab TrimSlice board
+[    0.000000] debug: ignoring loglevel setting.
+[    0.000000] earlycon: no match for ttyS0,115200n8
+[    0.000000] bootconsole [earlycon0] enabled
+[    0.000000] cma: Reserved 64 MiB at 0x3c000000
+[    0.000000] Memory policy: Data cache writealloc
+[    0.000000] On node 0 totalpages: 262144
+[    0.000000] free_area_init_node: node 0, pgdat c096a340, node_mem_map eeff7000
+[    0.000000]   Normal zone: 1520 pages used for memmap
+[    0.000000]   Normal zone: 0 pages reserved
+[    0.000000]   Normal zone: 194560 pages, LIFO batch:31
+[    0.000000]   HighMem zone: 67584 pages, LIFO batch:15
+[    0.000000] page:ef5e7000 count:0 mapcount:1 mapping:  (null) index:0x0
+[    0.000000] flags: 0x0()
+[    0.000000] page dumped because: VM_BUG_ON_PAGE(!zone_spans_pfn(zone, pfn))
+[    0.000000] ------------[ cut here ]------------
+[    0.000000] kernel BUG at mm/page_alloc.c:6510!
+[    0.000000] Internal error: Oops - BUG: 0 [#1] PREEMPT SMP ARM
+[    0.000000] Modules linked in:
+[    0.000000] CPU: 0 PID: 0 Comm: swapper Not tainted 4.1.0-rc1-next-20150501-13856-gba5ed02 #1
+[    0.000000] Hardware name: NVIDIA Tegra SoC (Flattened Device Tree)
+[    0.000000] task: c09241a8 ti: c091e000 task.ti: c091e000
+[    0.000000] PC is at set_pfnblock_flags_mask+0xb4/0xc4
+[    0.000000] LR is at dump_page_badflags+0xd0/0xf8
+[    0.000000] pc : [<c00ad670>]    lr : [<c00c7c48>]    psr: 600001d3
+[    0.000000] sp : c091fe60  ip : 00000000  fp : c09abe80
+[    0.000000] r10: 00000001  r9 : c0923ec4  r8 : 00040000
+[    0.000000] r7 : 0002f800  r6 : ef7fce40  r5 : ef5e7000  r4 : 00000000
+[    0.000000] r3 : 00000000  r2 : 00200001  r1 : 600001d3  r0 : 0000003f
+[    0.000000] Flags: nZCv  IRQs off  FIQs off  Mode SVC_32  ISA ARM  Segment kernel
+[    0.000000] Control: 10c5387d  Table: 0000404a  DAC: 00000015
+[    0.000000] Process swapper (pid: 0, stack limit = 0xc091e210)
+[    0.000000] Stack: (0xc091fe60 to 0xc0920000)
+[    0.000000] fe60: 0002f800 ef5e7000 eeff7000 c00ad6c8 00000007 c0655c18 00000000 c08ff514
+[    0.000000] fe80: c096a780 40000000 c096a340 c096a780 00000001 00010800 00010800 00010800
+[    0.000000] fea0: c066a5b8 c0912798 c091fefc c08de050 00000000 2f7f7000 c07df110 c091fef0
+[    0.000000] fec0: 00040000 00000000 c0908d00 0002f800 00040000 00000000 c091fef0 0000000c
+[    0.000000] fee0: 00a00000 c0908d00 00000000 c08d566c 0002f800 00010800 00000000 00000000
+[    0.000000] ff00: 00000000 00000000 00000000 ef7f7000 c096e418 c092c020 00000000 c08d7050
+[    0.000000] ff20: c0000000 00000a00 c0901304 c0a00000 ffff1000 0002f7ff 00001000 00000007
+[    0.000000] ff40: 00000000 c0901304 c0008000 c091ffd4 c092c1b8 80000200 0000000c c08cf624
+[    0.000000] ff60: c0920474 c08d3218 0000006c 10c5387d ffffffff 00000000 411fc090 00000000
+[    0.000000] ff80: 00000000 c006563c c07d1bc0 c091ffb4 00000000 c0657cbc 00000000 00000000
+[    0.000000] ffa0: 00000001 c096e000 ffffffff 00000000 411fc090 00000000 00000000 c08d0938
+[    0.000000] ffc0: 00000000 00000000 00000000 00000000 00000000 c0907e88 00000000 c096e294
+[    0.000000] ffe0: c0920480 c0907e84 c09253f4 0000406a 00000000 0000807c 00000000 00000000
+[    0.000000] [<c00ad670>] (set_pfnblock_flags_mask) from [<c00ad6c8>] (set_pageblock_migratetype+0x48/0x68)
+[    0.000000] [<c00ad6c8>] (set_pageblock_migratetype) from [<c08ff514>] (memmap_init_zone+0x5c/0xec)
+[    0.000000] [<c08ff514>] (memmap_init_zone) from [<c08de050>] (free_area_init_node+0x2d4/0x370)
+[    0.000000] [<c08de050>] (free_area_init_node) from [<c08d566c>] (bootmem_init+0xf4/0x124)
+[    0.000000] [<c08d566c>] (bootmem_init) from [<c08d7050>] (paging_init+0x990/0xa30)
+[    0.000000] [<c08d7050>] (paging_init) from [<c08d3218>] (setup_arch+0x55c/0xa48)
+[    0.000000] [<c08d3218>] (setup_arch) from [<c08d0938>] (start_kernel+0x8c/0x3c8)
+[    0.000000] [<c08d0938>] (start_kernel) from [<0000807c>] (0x807c)
+[    0.000000] Code: e1a0300c eafffff0 e59f100c eb00697f (e7f001f2) 
+[    0.000000] ---[ end trace cb88537fdc8fa200 ]---
+[    0.000000] Kernel panic - not syncing: Attempted to kill the idle task!
+[    0.000000] ---[ end Kernel panic - not syncing: Attempted to kill the idle task!

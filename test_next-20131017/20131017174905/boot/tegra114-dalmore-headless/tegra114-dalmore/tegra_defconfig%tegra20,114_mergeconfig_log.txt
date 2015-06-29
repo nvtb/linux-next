@@ -1,0 +1,57 @@
+
+
+U-Boot 2011.03 (Jun 11 2013 - 06:07:37)
+
+T114
+Board: NVIDIA Dalmore
+DRAM:  2 GiB
+MMC:   Tegra2 SD/MMC: 0, Tegra2 SD/MMC: 1
+In:    serial
+Out:   serial
+Err:   serial
+Net:   Net Initialization Skipped
+No ethernet found.
+Hit any key to stop autoboot:  2  0 
+Dalmore #
+Dalmore #usb reset
+(Re)start USB...
+USB:   Register 10011 NbrPorts 1
+USB EHCI 1.10
+scanning bus for devices... 2 USB Device(s) found
+       scanning bus for storage devices... 0 Storage Device(s) found
+       scanning bus for ethernet devices... 1 Ethernet Device(s) found
+Dalmore #setenv bootargs 'ignore_loglevel console=ttyS0,115200n8 rw root=/dev/mmcblk0p1 rootwait gpt init=/bin/bash'
+Dalmore #setenv ipaddr 192.168.100.100; setenv serverip 192.168.100.1; setenv tftpserverip 192.168.100.1
+Dalmore #tftpboot 0x81000000 zImage.tegra_defconfig%tegra20,114_mergeconfig
+Waiting for Ethernet connection... done.
+Using asx0 device
+TFTP from server 192.168.100.1; our IP address is 192.168.100.100
+Filename 'zImage.tegra_defconfig%tegra20,114_mergeconfig'.
+Load address: 0x81000000
+Loading: *#################################################  2.8 MiB/s
+done
+Bytes transferred = 4501888 (44b180 hex)
+Dalmore #tftpboot 0x82000000 tegra114-dalmore.dtb
+Using asx0 device
+TFTP from server 192.168.100.1; our IP address is 192.168.100.100
+Filename 'tegra114-dalmore.dtb'.
+Load address: 0x82000000
+Loading: *#################################################  2.6 MiB/s
+done
+Bytes transferred = 29436 (72fc hex)
+Dalmore #bootz 0x81000000 - 0x82000000
+## Flattened Device Tree blob at 82000000
+   Booting using the fdt blob at 0x82000000
+   Loading Device Tree to 81ff5000, end 81fff2fb ... OK
+
+Starting kernel ...
+
+Timer summary in microseconds:
+       Mark    Elapsed  Stage
+          0          0  awake
+  2,127,676  2,127,676  usb_start
+  6,133,204  4,005,528  eth_start
+  6,133,201         -3  tftp start
+ 10,097,550  3,964,349  tftp done
+ 12,143,391  2,045,841  start_kernel
+Uncompressing Linux... done, booting the kernel.

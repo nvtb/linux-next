@@ -1,0 +1,1089 @@
+Diff for ./tegra114-dalmore-a04/tegra114-dalmore/multi_v7_defconfig_log.txt
+--- /tmp/fooa	2014-04-29 01:02:10.971492417 -0700
++++ /tmp/foob	2014-04-29 01:02:10.971492417 -0700
+@@ -38,26 +38,26 @@
+ 	 ############################################################
+ 	 3.3 MiB/s
+ done
+-Bytes transferred = 4692328 (479968 hex)
++Bytes transferred = 4694080 (47a040 hex)
+ Tegra114 (Dalmore) # tftpboot 0x82000000 tegra114-dalmore.dtb
+ Using asx0 device
+ TFTP from server 192.168.100.1; our IP address is 192.168.100.100
+ Filename 'tegra114-dalmore.dtb'.
+ Load address: 0x82000000
+ Loading: *###
+-	 2.5 MiB/s
++	 3 MiB/s
+ done
+-Bytes transferred = 33963 (84ab hex)
++Bytes transferred = 34211 (85a3 hex)
+ Tegra114 (Dalmore) # bootz 0x81000000 - 0x82000000
+-Kernel image @ 0x81000000 [ 0x000000 - 0x479968 ]
++Kernel image @ 0x81000000 [ 0x000000 - 0x47a040 ]
+ ## Flattened Device Tree blob at 82000000
+    Booting using the fdt blob at 0x82000000
+-   Loading Device Tree to 8fff4000, end 8ffff4aa ... OK
++   Loading Device Tree to 8fff4000, end 8ffff5a2 ... OK
+ 
+ Starting kernel ...
+ 
+ Booting Linux on physical CPU 0x0
+-Linux version 3.15.0-rc2-next-20140428-17974-g5bd4e10 (pwalmsley@kaivo) (gcc version 4.7.3 20130328 (prerelease) (crosstool-NG linaro-1.13.1-4.7-2013.04-20130415 - Linaro GCC 2013.04) ) #1 SMP Mon Apr 28 00:32:53 PDT 2014
++Linux version 3.15.0-rc3-next-20140429-18137-g7cd285f (pwalmsley@kaivo) (gcc version 4.7.3 20130328 (prerelease) (crosstool-NG linaro-1.13.1-4.7-2013.04-20130415 - Linaro GCC 2013.04) ) #1 SMP Tue Apr 29 00:47:51 PDT 2014
+ CPU: ARMv7 Processor [412fc0f2] revision 2 (ARMv7), cr=10c5387d
+ CPU: PIPT / VIPT nonaliasing data cache, PIPT instruction cache
+ Machine model: NVIDIA Tegra114 Dalmore evaluation board
+@@ -88,7 +88,7 @@
+     lowmem  : 0xc0000000 - 0xef800000   ( 760 MB)
+     pkmap   : 0xbfe00000 - 0xc0000000   (   2 MB)
+     modules : 0xbf000000 - 0xbfe00000   (  14 MB)
+-      .text : 0xc0208000 - 0xc0a510d8   (8485 kB)
++      .text : 0xc0208000 - 0xc0a510d0   (8485 kB)
+       .init : 0xc0a52000 - 0xc0adce40   ( 556 kB)
+       .data : 0xc0ade000 - 0xc0ba6560   ( 802 kB)
+        .bss : 0xc0ba6568 - 0xc0beebe0   ( 290 kB)
+@@ -110,7 +110,7 @@
+ /cpus/cpu@2 missing clock-frequency property
+ /cpus/cpu@3 missing clock-frequency property
+ CPU0: thread -1, cpu 0, socket 0, mpidr 80000000
+-Setting up static identity map for 0x807bc7b8 - 0x807bc850
++Setting up static identity map for 0x807bc9c0 - 0x807bca58
+ CPU1: Booted secondary processor
+ CPU1: thread -1, cpu 1, socket 0, mpidr 80000001
+ CPU2: Booted secondary processor
+@@ -142,10 +142,14 @@
+ usb2_vbus: Failed to request enable GPIO86: -517
+ reg-fixed-voltage 4.regulator: Failed to register regulator: -517
+ platform 4.regulator: Driver reg-fixed-voltage requests probe deferral
+-vdd_hdmi_5v0: Failed to request enable GPIO81: -517
++vdd_hdmi_5v0: 5000 mV 
++reg-fixed-voltage 5.regulator: Failed to find supply vin
+ reg-fixed-voltage 5.regulator: Failed to register regulator: -517
+ platform 5.regulator: Driver reg-fixed-voltage requests probe deferral
+ platform 6.regulator: Driver reg-fixed-voltage requests probe deferral
++VDD_5V0_HDMI_CON: Failed to request enable GPIO81: -517
++reg-fixed-voltage 7.regulator: Failed to register regulator: -517
++platform 7.regulator: Driver reg-fixed-voltage requests probe deferral
+ vgaarb: loaded
+ SCSI subsystem initialized
+ libata version 3.00 loaded.
+@@ -264,8 +268,7 @@
+ serial: Freescale lpuart driver
+ [drm] Initialized drm 1.1.0 20060810
+ platform 54300000.dsi: Driver tegra-dsi requests probe deferral
+-54280000.hdmi supply hdmi not found, using dummy regulator
+-tegra-hdmi 54280000.hdmi: failed to get VDD regulator
++tegra-hdmi 54280000.hdmi: failed to get HDMI regulator
+ platform 54280000.hdmi: Driver tegra-hdmi requests probe deferral
+ loop: module loaded
+ pegasus: v0.9.3 (2013/04/25), Pegasus/Pegasus II USB Ethernet driver
+@@ -398,7 +401,8 @@
+ vdd_hdmi_5v0: 5000 mV 
+ vdd_hdmi_5v0: supplied by vdd-sys-5v0
+ vdd_cam_1v8_reg: 1800 mV 
+-54280000.hdmi supply hdmi not found, using dummy regulator
++VDD_5V0_HDMI_CON: 5000 mV 
++VDD_5V0_HDMI_CON: supplied by vdd-sys-5v0
+ [drm] Supports vblank timestamp caching Rev 2 (21.10.2013).
+ [drm] No driver support for vblank timestamp query.
+ Console: switching to colour frame buffer device 240x75
+@@ -413,7 +417,7 @@
+ hub 1-0:1.0: USB hub found
+ hub 1-0:1.0: 1 port detected
+ input: gpio-keys.3 as /devices/soc0/gpio-keys.3/input/input1
+-palmas-rtc rtc.8: setting system clock to 2000-03-12 22:46:53 UTC (952901213)
++palmas-rtc rtc.8: setting system clock to 2000-03-13 23:01:56 UTC (952988516)
+ ALSA device list:
+   #0: NVIDIA Tegra Dalmore
+ EXT4-fs (mmcblk0p1): mounting ext3 file system using the ext4 subsystem
+@@ -425,4 +429,4 @@
+ bash: cannot set terminal process group (-1): Inappropriate ioctl for device
+ bash: no job control in this shell
+ usb 1-1: new high-speed USB device number 2 using tegra-ehci
+-root@(none):/# [    3.699911] asix 1-1:1.0 eth0: register 'asix' at usb-7d008000.usb-1, ASIX AX88772 USB 2.0 Ethernet, 00:50:b6:0d:b5:16
++root@(none):/# [    3.649796] asix 1-1:1.0 eth0: register 'asix' at usb-7d008000.usb-1, ASIX AX88772 USB 2.0 Ethernet, 00:50:b6:0d:b5:16
+Diff for ./tegra114-dalmore-a04/tegra114-dalmore/tegra_defconfig_log.txt
+--- /tmp/fooa	2014-04-29 01:02:10.975492421 -0700
++++ /tmp/foob	2014-04-29 01:02:10.979492415 -0700
+@@ -36,23 +36,23 @@
+ 	 #################################################################
+ 	 #################################################################
+ 	 #####################################
+-	 3.6 MiB/s
++	 3.5 MiB/s
+ done
+-Bytes transferred = 4347232 (425560 hex)
++Bytes transferred = 4346560 (4252c0 hex)
+ Tegra114 (Dalmore) # tftpboot 0x82000000 tegra114-dalmore.dtb
+ Using asx0 device
+ TFTP from server 192.168.100.1; our IP address is 192.168.100.100
+ Filename 'tegra114-dalmore.dtb'.
+ Load address: 0x82000000
+ Loading: *###
+-	 3.2 MiB/s
++	 3 MiB/s
+ done
+-Bytes transferred = 33963 (84ab hex)
++Bytes transferred = 34211 (85a3 hex)
+ Tegra114 (Dalmore) # bootz 0x81000000 - 0x82000000
+-Kernel image @ 0x81000000 [ 0x000000 - 0x425560 ]
++Kernel image @ 0x81000000 [ 0x000000 - 0x4252c0 ]
+ ## Flattened Device Tree blob at 82000000
+    Booting using the fdt blob at 0x82000000
+-   Loading Device Tree to 8fff4000, end 8ffff4aa ... OK
++   Loading Device Tree to 8fff4000, end 8ffff5a2 ... OK
+ 
+ Starting kernel ...
+ 
+@@ -60,7 +60,7 @@
+ Booting Linux on physical CPU 0x0
+ Initializing cgroup subsys cpu
+ Initializing cgroup subsys cpuacct
+-Linux version 3.15.0-rc2-next-20140428-56744-g5bd4e10 (pwalmsley@tamien) (gcc version 4.7.3 20130328 (prerelease) (crosstool-NG linaro-1.13.1-4.7-2013.04-20130415 - Linaro GCC 2013.04) ) #1 SMP PREEMPT Mon Apr 28 00:33:36 PDT 2014
++Linux version 3.15.0-rc3-next-20140429-56907-g7cd285f (pwalmsley@tamien) (gcc version 4.7.3 20130328 (prerelease) (crosstool-NG linaro-1.13.1-4.7-2013.04-20130415 - Linaro GCC 2013.04) ) #1 SMP PREEMPT Tue Apr 29 00:48:34 PDT 2014
+ CPU: ARMv7 Processor [412fc0f2] revision 2 (ARMv7), cr=10c5387d
+ CPU: PIPT / VIPT nonaliasing data cache, PIPT instruction cache
+ Machine model: NVIDIA Tegra114 Dalmore evaluation board
+@@ -83,7 +83,7 @@
+ PID hash table entries: 4096 (order: 2, 16384 bytes)
+ Dentry cache hash table entries: 131072 (order: 7, 524288 bytes)
+ Inode-cache hash table entries: 65536 (order: 6, 262144 bytes)
+-Memory: 2004108K/2096128K available (5928K kernel code, 333K rwdata, 1952K rodata, 260K init, 345K bss, 92020K reserved, 1317888K highmem)
++Memory: 2004108K/2096128K available (5932K kernel code, 333K rwdata, 1952K rodata, 260K init, 345K bss, 92020K reserved, 1317888K highmem)
+ Virtual kernel memory layout:
+     vector  : 0xffff0000 - 0xffff1000   (   4 kB)
+     fixmap  : 0xffc00000 - 0xffe00000   (2048 kB)
+@@ -91,8 +91,8 @@
+     lowmem  : 0xc0000000 - 0xef800000   ( 760 MB)
+     pkmap   : 0xbfe00000 - 0xc0000000   (   2 MB)
+     modules : 0xbf000000 - 0xbfe00000   (  14 MB)
+-      .text : 0xc0008000 - 0xc07ba750   (7882 kB)
+-      .init : 0xc07bb000 - 0xc07fc1c0   ( 261 kB)
++      .text : 0xc0008000 - 0xc07bb764   (7886 kB)
++      .init : 0xc07bc000 - 0xc07fd1c0   ( 261 kB)
+       .data : 0xc07fe000 - 0xc0851780   ( 334 kB)
+        .bss : 0xc085178c - 0xc08a7cd0   ( 346 kB)
+ Preemptible hierarchical RCU implementation.
+@@ -114,7 +114,7 @@
+ /cpus/cpu@2 missing clock-frequency property
+ /cpus/cpu@3 missing clock-frequency property
+ CPU0: thread -1, cpu 0, socket 0, mpidr 80000000
+-Setting up static identity map for 0x8059f1a0 - 0x8059f238
++Setting up static identity map for 0x8059f3b0 - 0x8059f448
+ CPU1: Booted secondary processor
+ CPU1: thread -1, cpu 1, socket 0, mpidr 80000001
+ CPU2: Booted secondary processor
+@@ -145,10 +145,14 @@
+ usb2_vbus: Failed to request enable GPIO86: -517
+ reg-fixed-voltage 4.regulator: Failed to register regulator: -517
+ platform 4.regulator: Driver reg-fixed-voltage requests probe deferral
+-vdd_hdmi_5v0: Failed to request enable GPIO81: -517
++vdd_hdmi_5v0: 5000 mV 
++reg-fixed-voltage 5.regulator: Failed to find supply vin
+ reg-fixed-voltage 5.regulator: Failed to register regulator: -517
+ platform 5.regulator: Driver reg-fixed-voltage requests probe deferral
+ platform 6.regulator: Driver reg-fixed-voltage requests probe deferral
++VDD_5V0_HDMI_CON: Failed to request enable GPIO81: -517
++reg-fixed-voltage 7.regulator: Failed to register regulator: -517
++platform 7.regulator: Driver reg-fixed-voltage requests probe deferral
+ vgaarb: loaded
+ SCSI subsystem initialized
+ usbcore: registered new interface driver usbfs
+@@ -259,8 +263,7 @@
+ console [ttyS0] enabled
+ [drm] Initialized drm 1.1.0 20060810
+ platform 54300000.dsi: Driver tegra-dsi requests probe deferral
+-54280000.hdmi supply hdmi not found, using dummy regulator
+-tegra-hdmi 54280000.hdmi: failed to get VDD regulator
++tegra-hdmi 54280000.hdmi: failed to get HDMI regulator
+ platform 54280000.hdmi: Driver tegra-hdmi requests probe deferral
+ loop: module loaded
+ pegasus: v0.9.3 (2013/04/25), Pegasus/Pegasus II USB Ethernet driver
+@@ -399,7 +402,8 @@
+ vdd_hdmi_5v0: 5000 mV 
+ vdd_hdmi_5v0: supplied by vdd-sys-5v0
+ vdd_cam_1v8_reg: 1800 mV 
+-54280000.hdmi supply hdmi not found, using dummy regulator
++VDD_5V0_HDMI_CON: 5000 mV 
++VDD_5V0_HDMI_CON: supplied by vdd-sys-5v0
+ [drm] Supports vblank timestamp caching Rev 2 (21.10.2013).
+ [drm] No driver support for vblank timestamp query.
+ Console: switching to colour frame buffer device 240x75
+@@ -414,7 +418,7 @@
+ hub 1-0:1.0: USB hub found
+ hub 1-0:1.0: 1 port detected
+ input: gpio-keys.3 as /devices/soc0/gpio-keys.3/input/input1
+-palmas-rtc rtc.8: setting system clock to 2000-03-12 22:47:51 UTC (952901271)
++palmas-rtc rtc.8: setting system clock to 2000-03-13 23:02:53 UTC (952988573)
+ ALSA device list:
+   #0: NVIDIA Tegra Dalmore
+ kjournald starting.  Commit interval 5 seconds
+@@ -423,8 +427,8 @@
+ EXT3-fs (mmcblk0p1): mounted filesystem with writeback data mode
+ VFS: Mounted root (ext3 filesystem) on device 179:1.
+ devtmpfs: mounted
+-Freeing unused kernel memory: 260K (c07bb000 - c07fc000)
++Freeing unused kernel memory: 260K (c07bc000 - c07fd000)
+ bash: cannot set terminal process group (-1): Inappropriate ioctl for device
+ bash: no job control in this shell
+-root@(none):/# [    3.330210] usb 1-1: new high-speed USB device number 2 using tegra-ehci
++root@(none):/# [    3.300235] usb 1-1: new high-speed USB device number 2 using tegra-ehci
+ asix 1-1:1.0 eth0: register 'asix' at usb-7d008000.usb-1, ASIX AX88772 USB 2.0 Ethernet, 00:50:b6:0d:b5:16
+Diff for ./tegra114-dalmore-a04/tegra114-dalmore/tegra_defconfig%tegra114_mergeconfig_log.txt
+--- /tmp/fooa	2014-04-29 01:02:10.987492402 -0700
++++ /tmp/foob	2014-04-29 01:02:10.991492402 -0700
+@@ -35,24 +35,24 @@
+ 	 #################################################################
+ 	 #################################################################
+ 	 #################################################################
+-	 ##################################
++	 ###################################
+ 	 3.5 MiB/s
+ done
+-Bytes transferred = 4315808 (41daa0 hex)
++Bytes transferred = 4316264 (41dc68 hex)
+ Tegra114 (Dalmore) # tftpboot 0x82000000 tegra114-dalmore.dtb
+ Using asx0 device
+ TFTP from server 192.168.100.1; our IP address is 192.168.100.100
+ Filename 'tegra114-dalmore.dtb'.
+ Load address: 0x82000000
+ Loading: *###
+-	 3.2 MiB/s
++	 3 MiB/s
+ done
+-Bytes transferred = 33963 (84ab hex)
++Bytes transferred = 34211 (85a3 hex)
+ Tegra114 (Dalmore) # bootz 0x81000000 - 0x82000000
+-Kernel image @ 0x81000000 [ 0x000000 - 0x41daa0 ]
++Kernel image @ 0x81000000 [ 0x000000 - 0x41dc68 ]
+ ## Flattened Device Tree blob at 82000000
+    Booting using the fdt blob at 0x82000000
+-   Loading Device Tree to 8fff4000, end 8ffff4aa ... OK
++   Loading Device Tree to 8fff4000, end 8ffff5a2 ... OK
+ 
+ Starting kernel ...
+ 
+@@ -60,7 +60,7 @@
+ Booting Linux on physical CPU 0x0
+ Initializing cgroup subsys cpu
+ Initializing cgroup subsys cpuacct
+-Linux version 3.15.0-rc2-next-20140428-17974-g5bd4e10 (pwalmsley@kaivo) (gcc version 4.7.3 20130328 (prerelease) (crosstool-NG linaro-1.13.1-4.7-2013.04-20130415 - Linaro GCC 2013.04) ) #1 SMP PREEMPT Mon Apr 28 00:37:49 PDT 2014
++Linux version 3.15.0-rc3-next-20140429-18137-g7cd285f (pwalmsley@kaivo) (gcc version 4.7.3 20130328 (prerelease) (crosstool-NG linaro-1.13.1-4.7-2013.04-20130415 - Linaro GCC 2013.04) ) #1 SMP PREEMPT Tue Apr 29 00:52:43 PDT 2014
+ CPU: ARMv7 Processor [412fc0f2] revision 2 (ARMv7), cr=10c5387d
+ CPU: PIPT / VIPT nonaliasing data cache, PIPT instruction cache
+ Machine model: NVIDIA Tegra114 Dalmore evaluation board
+@@ -91,7 +91,7 @@
+     lowmem  : 0xc0000000 - 0xef800000   ( 760 MB)
+     pkmap   : 0xbfe00000 - 0xc0000000   (   2 MB)
+     modules : 0xbf000000 - 0xbfe00000   (  14 MB)
+-      .text : 0xc0008000 - 0xc07a83f8   (7809 kB)
++      .text : 0xc0008000 - 0xc07a840c   (7810 kB)
+       .init : 0xc07a9000 - 0xc07e71c0   ( 249 kB)
+       .data : 0xc07e8000 - 0xc0837840   ( 319 kB)
+        .bss : 0xc083784c - 0xc088dd50   ( 346 kB)
+@@ -114,7 +114,7 @@
+ /cpus/cpu@2 missing clock-frequency property
+ /cpus/cpu@3 missing clock-frequency property
+ CPU0: thread -1, cpu 0, socket 0, mpidr 80000000
+-Setting up static identity map for 0x805997a0 - 0x80599838
++Setting up static identity map for 0x805999b8 - 0x80599a50
+ CPU1: Booted secondary processor
+ CPU1: thread -1, cpu 1, socket 0, mpidr 80000001
+ CPU2: Booted secondary processor
+@@ -145,10 +145,14 @@
+ usb2_vbus: Failed to request enable GPIO86: -517
+ reg-fixed-voltage 4.regulator: Failed to register regulator: -517
+ platform 4.regulator: Driver reg-fixed-voltage requests probe deferral
+-vdd_hdmi_5v0: Failed to request enable GPIO81: -517
++vdd_hdmi_5v0: 5000 mV 
++reg-fixed-voltage 5.regulator: Failed to find supply vin
+ reg-fixed-voltage 5.regulator: Failed to register regulator: -517
+ platform 5.regulator: Driver reg-fixed-voltage requests probe deferral
+ platform 6.regulator: Driver reg-fixed-voltage requests probe deferral
++VDD_5V0_HDMI_CON: Failed to request enable GPIO81: -517
++reg-fixed-voltage 7.regulator: Failed to register regulator: -517
++platform 7.regulator: Driver reg-fixed-voltage requests probe deferral
+ vgaarb: loaded
+ SCSI subsystem initialized
+ usbcore: registered new interface driver usbfs
+@@ -259,8 +263,7 @@
+ console [ttyS0] enabled
+ [drm] Initialized drm 1.1.0 20060810
+ platform 54300000.dsi: Driver tegra-dsi requests probe deferral
+-54280000.hdmi supply hdmi not found, using dummy regulator
+-tegra-hdmi 54280000.hdmi: failed to get VDD regulator
++tegra-hdmi 54280000.hdmi: failed to get HDMI regulator
+ platform 54280000.hdmi: Driver tegra-hdmi requests probe deferral
+ loop: module loaded
+ pegasus: v0.9.3 (2013/04/25), Pegasus/Pegasus II USB Ethernet driver
+@@ -341,7 +344,8 @@
+ vdd_hdmi_5v0: 5000 mV 
+ vdd_hdmi_5v0: supplied by vdd-sys-5v0
+ vdd_cam_1v8_reg: 1800 mV 
+-54280000.hdmi supply hdmi not found, using dummy regulator
++VDD_5V0_HDMI_CON: 5000 mV 
++VDD_5V0_HDMI_CON: supplied by vdd-sys-5v0
+ [drm] Supports vblank timestamp caching Rev 2 (21.10.2013).
+ [drm] No driver support for vblank timestamp query.
+ Console: switching to colour frame buffer device 240x75
+@@ -363,10 +367,10 @@
+ platform sound.5: Driver tegra-snd-rt5640 requests probe deferral
+ input: gpio-keys.3 as /devices/soc0/gpio-keys.3/input/input0
+ tegra-snd-rt5640 sound.5: ASoC: CPU DAI (null) not registered
+-palmas-rtc rtc.8: setting system clock to 2000-03-12 22:51:41 UTC (952901501)
++palmas-rtc rtc.8: setting system clock to 2000-03-13 23:06:43 UTC (952988803)
+ tegra-snd-rt5640 sound.5: snd_soc_register_card failed (-517)
+-ALSA device list:
+ platform sound.5: Driver tegra-snd-rt5640 requests probe deferral
++ALSA device list:
+   No soundcards found.
+ kjournald starting.  Commit interval 5 seconds
+ EXT3-fs (mmcblk0p1): using internal journal
+@@ -377,4 +381,4 @@
+ Freeing unused kernel memory: 248K (c07a9000 - c07e7000)
+ bash: cannot set terminal process group (-1): Inappropriate ioctl for device
+ bash: no job control in this shell
+-root@(none):/# [    2.889988] usb 1-1: new high-speed USB device number 2 using tegra-ehci
++root@(none):/# [    2.870120] usb 1-1: new high-speed USB device number 2 using tegra-ehci
+Diff for ./tegra114-dalmore-a04/tegra114-dalmore/tegra_defconfig%tegra20,114_mergeconfig_log.txt
+--- /tmp/fooa	2014-04-29 01:02:10.999492413 -0700
++++ /tmp/foob	2014-04-29 01:02:10.999492413 -0700
+@@ -36,23 +36,23 @@
+ 	 #################################################################
+ 	 #################################################################
+ 	 ####################################
+-	 3.5 MiB/s
++	 3.4 MiB/s
+ done
+-Bytes transferred = 4332128 (421a60 hex)
++Bytes transferred = 4332448 (421ba0 hex)
+ Tegra114 (Dalmore) # tftpboot 0x82000000 tegra114-dalmore.dtb
+ Using asx0 device
+ TFTP from server 192.168.100.1; our IP address is 192.168.100.100
+ Filename 'tegra114-dalmore.dtb'.
+ Load address: 0x82000000
+ Loading: *###
+-	 3.2 MiB/s
++	 1.8 MiB/s
+ done
+-Bytes transferred = 33963 (84ab hex)
++Bytes transferred = 34211 (85a3 hex)
+ Tegra114 (Dalmore) # bootz 0x81000000 - 0x82000000
+-Kernel image @ 0x81000000 [ 0x000000 - 0x421a60 ]
++Kernel image @ 0x81000000 [ 0x000000 - 0x421ba0 ]
+ ## Flattened Device Tree blob at 82000000
+    Booting using the fdt blob at 0x82000000
+-   Loading Device Tree to 8fff4000, end 8ffff4aa ... OK
++   Loading Device Tree to 8fff4000, end 8ffff5a2 ... OK
+ 
+ Starting kernel ...
+ 
+@@ -60,7 +60,7 @@
+ Booting Linux on physical CPU 0x0
+ Initializing cgroup subsys cpu
+ Initializing cgroup subsys cpuacct
+-Linux version 3.15.0-rc2-next-20140428-56744-g5bd4e10 (pwalmsley@tamien) (gcc version 4.7.3 20130328 (prerelease) (crosstool-NG linaro-1.13.1-4.7-2013.04-20130415 - Linaro GCC 2013.04) ) #1 SMP PREEMPT Mon Apr 28 00:39:33 PDT 2014
++Linux version 3.15.0-rc3-next-20140429-56907-g7cd285f (pwalmsley@tamien) (gcc version 4.7.3 20130328 (prerelease) (crosstool-NG linaro-1.13.1-4.7-2013.04-20130415 - Linaro GCC 2013.04) ) #1 SMP PREEMPT Tue Apr 29 00:54:30 PDT 2014
+ CPU: ARMv7 Processor [412fc0f2] revision 2 (ARMv7), cr=10c5387d
+ CPU: PIPT / VIPT nonaliasing data cache, PIPT instruction cache
+ Machine model: NVIDIA Tegra114 Dalmore evaluation board
+@@ -91,7 +91,7 @@
+     lowmem  : 0xc0000000 - 0xef800000   ( 760 MB)
+     pkmap   : 0xbfe00000 - 0xc0000000   (   2 MB)
+     modules : 0xbf000000 - 0xbfe00000   (  14 MB)
+-      .text : 0xc0008000 - 0xc07b160c   (7846 kB)
++      .text : 0xc0008000 - 0xc07b1620   (7846 kB)
+       .init : 0xc07b2000 - 0xc07f21c0   ( 257 kB)
+       .data : 0xc07f4000 - 0xc08459c0   ( 327 kB)
+        .bss : 0xc08459cc - 0xc089bed0   ( 346 kB)
+@@ -114,7 +114,7 @@
+ /cpus/cpu@2 missing clock-frequency property
+ /cpus/cpu@3 missing clock-frequency property
+ CPU0: thread -1, cpu 0, socket 0, mpidr 80000000
+-Setting up static identity map for 0x8059c670 - 0x8059c708
++Setting up static identity map for 0x8059c888 - 0x8059c920
+ CPU1: Booted secondary processor
+ CPU1: thread -1, cpu 1, socket 0, mpidr 80000001
+ CPU2: Booted secondary processor
+@@ -145,10 +145,14 @@
+ usb2_vbus: Failed to request enable GPIO86: -517
+ reg-fixed-voltage 4.regulator: Failed to register regulator: -517
+ platform 4.regulator: Driver reg-fixed-voltage requests probe deferral
+-vdd_hdmi_5v0: Failed to request enable GPIO81: -517
++vdd_hdmi_5v0: 5000 mV 
++reg-fixed-voltage 5.regulator: Failed to find supply vin
+ reg-fixed-voltage 5.regulator: Failed to register regulator: -517
+ platform 5.regulator: Driver reg-fixed-voltage requests probe deferral
+ platform 6.regulator: Driver reg-fixed-voltage requests probe deferral
++VDD_5V0_HDMI_CON: Failed to request enable GPIO81: -517
++reg-fixed-voltage 7.regulator: Failed to register regulator: -517
++platform 7.regulator: Driver reg-fixed-voltage requests probe deferral
+ vgaarb: loaded
+ SCSI subsystem initialized
+ usbcore: registered new interface driver usbfs
+@@ -259,8 +263,7 @@
+ console [ttyS0] enabled
+ [drm] Initialized drm 1.1.0 20060810
+ platform 54300000.dsi: Driver tegra-dsi requests probe deferral
+-54280000.hdmi supply hdmi not found, using dummy regulator
+-tegra-hdmi 54280000.hdmi: failed to get VDD regulator
++tegra-hdmi 54280000.hdmi: failed to get HDMI regulator
+ platform 54280000.hdmi: Driver tegra-hdmi requests probe deferral
+ loop: module loaded
+ pegasus: v0.9.3 (2013/04/25), Pegasus/Pegasus II USB Ethernet driver
+@@ -341,7 +344,8 @@
+ vdd_hdmi_5v0: 5000 mV 
+ vdd_hdmi_5v0: supplied by vdd-sys-5v0
+ vdd_cam_1v8_reg: 1800 mV 
+-54280000.hdmi supply hdmi not found, using dummy regulator
++VDD_5V0_HDMI_CON: 5000 mV 
++VDD_5V0_HDMI_CON: supplied by vdd-sys-5v0
+ [drm] Supports vblank timestamp caching Rev 2 (21.10.2013).
+ [drm] No driver support for vblank timestamp query.
+ Console: switching to colour frame buffer device 240x75
+@@ -363,10 +367,10 @@
+ platform sound.5: Driver tegra-snd-rt5640 requests probe deferral
+ input: gpio-keys.3 as /devices/soc0/gpio-keys.3/input/input0
+ tegra-snd-rt5640 sound.5: ASoC: CPU DAI (null) not registered
+-palmas-rtc rtc.8: setting system clock to 2000-03-12 22:53:37 UTC (952901617)
++palmas-rtc rtc.8: setting system clock to 2000-03-13 23:08:39 UTC (952988919)
+ tegra-snd-rt5640 sound.5: snd_soc_register_card failed (-517)
+-ALSA device list:
+ platform sound.5: Driver tegra-snd-rt5640 requests probe deferral
++ALSA device list:
+   No soundcards found.
+ kjournald starting.  Commit interval 5 seconds
+ EXT3-fs (mmcblk0p1): using internal journal
+@@ -377,4 +381,4 @@
+ Freeing unused kernel memory: 256K (c07b2000 - c07f2000)
+ bash: cannot set terminal process group (-1): Inappropriate ioctl for device
+ bash: no job control in this shell
+-root@(none):/# [    2.900187] usb 1-1: new high-speed USB device number 2 using tegra-ehci
++root@(none):/# [    2.880280] usb 1-1: new high-speed USB device number 2 using tegra-ehci
+Diff for ./tegra114-dalmore-a04/tegra114-dalmore/tegra_defconfig%tegra30,114_mergeconfig_log.txt
+--- /tmp/fooa	2014-04-29 01:02:11.007492418 -0700
++++ /tmp/foob	2014-04-29 01:02:11.011492419 -0700
+@@ -36,23 +36,23 @@
+ 	 #################################################################
+ 	 #################################################################
+ 	 ####################################
+-	 3.1 MiB/s
++	 3.3 MiB/s
+ done
+-Bytes transferred = 4333376 (421f40 hex)
++Bytes transferred = 4333896 (422148 hex)
+ Tegra114 (Dalmore) # tftpboot 0x82000000 tegra114-dalmore.dtb
+ Using asx0 device
+ TFTP from server 192.168.100.1; our IP address is 192.168.100.100
+ Filename 'tegra114-dalmore.dtb'.
+ Load address: 0x82000000
+ Loading: *###
+-	 2.7 MiB/s
++	 3 MiB/s
+ done
+-Bytes transferred = 33963 (84ab hex)
++Bytes transferred = 34211 (85a3 hex)
+ Tegra114 (Dalmore) # bootz 0x81000000 - 0x82000000
+-Kernel image @ 0x81000000 [ 0x000000 - 0x421f40 ]
++Kernel image @ 0x81000000 [ 0x000000 - 0x422148 ]
+ ## Flattened Device Tree blob at 82000000
+    Booting using the fdt blob at 0x82000000
+-   Loading Device Tree to 8fff4000, end 8ffff4aa ... OK
++   Loading Device Tree to 8fff4000, end 8ffff5a2 ... OK
+ 
+ Starting kernel ...
+ 
+@@ -60,7 +60,7 @@
+ Booting Linux on physical CPU 0x0
+ Initializing cgroup subsys cpu
+ Initializing cgroup subsys cpuacct
+-Linux version 3.15.0-rc2-next-20140428-56744-g5bd4e10 (pwalmsley@tamien) (gcc version 4.7.3 20130328 (prerelease) (crosstool-NG linaro-1.13.1-4.7-2013.04-20130415 - Linaro GCC 2013.04) ) #1 SMP PREEMPT Mon Apr 28 00:42:30 PDT 2014
++Linux version 3.15.0-rc3-next-20140429-56907-g7cd285f (pwalmsley@tamien) (gcc version 4.7.3 20130328 (prerelease) (crosstool-NG linaro-1.13.1-4.7-2013.04-20130415 - Linaro GCC 2013.04) ) #1 SMP PREEMPT Tue Apr 29 00:57:26 PDT 2014
+ CPU: ARMv7 Processor [412fc0f2] revision 2 (ARMv7), cr=10c5387d
+ CPU: PIPT / VIPT nonaliasing data cache, PIPT instruction cache
+ Machine model: NVIDIA Tegra114 Dalmore evaluation board
+@@ -91,7 +91,7 @@
+     lowmem  : 0xc0000000 - 0xef800000   ( 760 MB)
+     pkmap   : 0xbfe00000 - 0xc0000000   (   2 MB)
+     modules : 0xbf000000 - 0xbfe00000   (  14 MB)
+-      .text : 0xc0008000 - 0xc07b3554   (7854 kB)
++      .text : 0xc0008000 - 0xc07b3568   (7854 kB)
+       .init : 0xc07b4000 - 0xc07f41c0   ( 257 kB)
+       .data : 0xc07f6000 - 0xc0847600   ( 326 kB)
+        .bss : 0xc084760c - 0xc089db10   ( 346 kB)
+@@ -114,7 +114,7 @@
+ /cpus/cpu@2 missing clock-frequency property
+ /cpus/cpu@3 missing clock-frequency property
+ CPU0: thread -1, cpu 0, socket 0, mpidr 80000000
+-Setting up static identity map for 0x8059c3e8 - 0x8059c480
++Setting up static identity map for 0x8059c600 - 0x8059c698
+ CPU1: Booted secondary processor
+ CPU1: thread -1, cpu 1, socket 0, mpidr 80000001
+ CPU2: Booted secondary processor
+@@ -145,10 +145,14 @@
+ usb2_vbus: Failed to request enable GPIO86: -517
+ reg-fixed-voltage 4.regulator: Failed to register regulator: -517
+ platform 4.regulator: Driver reg-fixed-voltage requests probe deferral
+-vdd_hdmi_5v0: Failed to request enable GPIO81: -517
++vdd_hdmi_5v0: 5000 mV 
++reg-fixed-voltage 5.regulator: Failed to find supply vin
+ reg-fixed-voltage 5.regulator: Failed to register regulator: -517
+ platform 5.regulator: Driver reg-fixed-voltage requests probe deferral
+ platform 6.regulator: Driver reg-fixed-voltage requests probe deferral
++VDD_5V0_HDMI_CON: Failed to request enable GPIO81: -517
++reg-fixed-voltage 7.regulator: Failed to register regulator: -517
++platform 7.regulator: Driver reg-fixed-voltage requests probe deferral
+ vgaarb: loaded
+ SCSI subsystem initialized
+ usbcore: registered new interface driver usbfs
+@@ -259,8 +263,7 @@
+ console [ttyS0] enabled
+ [drm] Initialized drm 1.1.0 20060810
+ platform 54300000.dsi: Driver tegra-dsi requests probe deferral
+-54280000.hdmi supply hdmi not found, using dummy regulator
+-tegra-hdmi 54280000.hdmi: failed to get VDD regulator
++tegra-hdmi 54280000.hdmi: failed to get HDMI regulator
+ platform 54280000.hdmi: Driver tegra-hdmi requests probe deferral
+ loop: module loaded
+ pegasus: v0.9.3 (2013/04/25), Pegasus/Pegasus II USB Ethernet driver
+@@ -399,7 +402,8 @@
+ vdd_hdmi_5v0: 5000 mV 
+ vdd_hdmi_5v0: supplied by vdd-sys-5v0
+ vdd_cam_1v8_reg: 1800 mV 
+-54280000.hdmi supply hdmi not found, using dummy regulator
++VDD_5V0_HDMI_CON: 5000 mV 
++VDD_5V0_HDMI_CON: supplied by vdd-sys-5v0
+ [drm] Supports vblank timestamp caching Rev 2 (21.10.2013).
+ [drm] No driver support for vblank timestamp query.
+ Console: switching to colour frame buffer device 240x75
+@@ -414,7 +418,7 @@
+ hub 1-0:1.0: USB hub found
+ hub 1-0:1.0: 1 port detected
+ input: gpio-keys.3 as /devices/soc0/gpio-keys.3/input/input1
+-palmas-rtc rtc.8: setting system clock to 2000-03-12 22:56:14 UTC (952901774)
++palmas-rtc rtc.8: setting system clock to 2000-03-13 23:11:13 UTC (952989073)
+ ALSA device list:
+   #0: NVIDIA Tegra Dalmore
+ kjournald starting.  Commit interval 5 seconds
+@@ -426,5 +430,5 @@
+ Freeing unused kernel memory: 256K (c07b4000 - c07f4000)
+ bash: cannot set terminal process group (-1): Inappropriate ioctl for device
+ bash: no job control in this shell
+-root@(none):/# [    3.320059] usb 1-1: new high-speed USB device number 2 using tegra-ehci
++root@(none):/# [    3.300020] usb 1-1: new high-speed USB device number 2 using tegra-ehci
+ asix 1-1:1.0 eth0: register 'asix' at usb-7d008000.usb-1, ASIX AX88772 USB 2.0 Ethernet, 00:50:b6:0d:b5:16
+Diff for ./tegra30-beaver/tegra30-beaver/multi_v7_defconfig_log.txt
+--- /tmp/fooa	2014-04-29 01:02:11.019492417 -0700
++++ /tmp/foob	2014-04-29 01:02:11.019492417 -0700
+@@ -38,26 +38,26 @@
+ 	 ############################################################
+ 	 3.1 MiB/s
+ done
+-Bytes transferred = 4692328 (479968 hex)
++Bytes transferred = 4694080 (47a040 hex)
+ Tegra30 (Beaver) # tftpboot 0x82000000 tegra30-beaver.dtb
+ Using asx0 device
+ TFTP from server 192.168.100.1; our IP address is 192.168.100.101
+ Filename 'tegra30-beaver.dtb'.
+ Load address: 0x82000000
+ Loading: *##
+-	 2.5 MiB/s
++	 2.9 MiB/s
+ done
+-Bytes transferred = 23973 (5da5 hex)
++Bytes transferred = 24197 (5e85 hex)
+ Tegra30 (Beaver) # bootz 0x81000000 - 0x82000000
+-Kernel image @ 0x81000000 [ 0x000000 - 0x479968 ]
++Kernel image @ 0x81000000 [ 0x000000 - 0x47a040 ]
+ ## Flattened Device Tree blob at 82000000
+    Booting using the fdt blob at 0x82000000
+-   Loading Device Tree to 8fff7000, end 8ffffda4 ... OK
++   Loading Device Tree to 8fff7000, end 8ffffe84 ... OK
+ 
+ Starting kernel ...
+ 
+ Booting Linux on physical CPU 0x0
+-Linux version 3.15.0-rc2-next-20140428-17974-g5bd4e10 (pwalmsley@kaivo) (gcc version 4.7.3 20130328 (prerelease) (crosstool-NG linaro-1.13.1-4.7-2013.04-20130415 - Linaro GCC 2013.04) ) #1 SMP Mon Apr 28 00:32:53 PDT 2014
++Linux version 3.15.0-rc3-next-20140429-18137-g7cd285f (pwalmsley@kaivo) (gcc version 4.7.3 20130328 (prerelease) (crosstool-NG linaro-1.13.1-4.7-2013.04-20130415 - Linaro GCC 2013.04) ) #1 SMP Tue Apr 29 00:47:51 PDT 2014
+ CPU: ARMv7 Processor [412fc099] revision 9 (ARMv7), cr=10c5387d
+ CPU: PIPT / VIPT nonaliasing data cache, VIPT aliasing instruction cache
+ Machine model: NVIDIA Tegra30 Beaver evaluation board
+@@ -99,7 +99,7 @@
+     lowmem  : 0xc0000000 - 0xef800000   ( 760 MB)
+     pkmap   : 0xbfe00000 - 0xc0000000   (   2 MB)
+     modules : 0xbf000000 - 0xbfe00000   (  14 MB)
+-      .text : 0xc0208000 - 0xc0a510d8   (8485 kB)
++      .text : 0xc0208000 - 0xc0a510d0   (8485 kB)
+       .init : 0xc0a52000 - 0xc0adce40   ( 556 kB)
+       .data : 0xc0ade000 - 0xc0ba6560   ( 802 kB)
+        .bss : 0xc0ba6568 - 0xc0beebe0   ( 290 kB)
+@@ -114,7 +114,7 @@
+ Mountpoint-cache hash table entries: 2048 (order: 1, 8192 bytes)
+ CPU: Testing write buffer coherency: ok
+ CPU0: thread -1, cpu 0, socket 0, mpidr 80000000
+-Setting up static identity map for 0x807bc7b8 - 0x807bc850
++Setting up static identity map for 0x807bc9c0 - 0x807bca58
+ L2C-310 erratum 769419 enabled
+ L2C-310 cache controller enabled, 8 ways, 1024 kB
+ L2C-310: CACHE_ID 0x410000c7, AUX_CTRL 0x7e480001
+@@ -155,6 +155,10 @@
+ sys_3v3_pexs: Failed to request enable GPIO95: -517
+ reg-fixed-voltage 7.regulator: Failed to register regulator: -517
+ platform 7.regulator: Driver reg-fixed-voltage requests probe deferral
+++VDD_5V_HDMI: 5000 mV 
++reg-fixed-voltage 8.regulator: Failed to find supply vin
++reg-fixed-voltage 8.regulator: Failed to register regulator: -517
++platform 8.regulator: Driver reg-fixed-voltage requests probe deferral
+ vgaarb: loaded
+ SCSI subsystem initialized
+ libata version 3.00 loaded.
+@@ -226,8 +230,7 @@
+ STMicroelectronics ASC driver initialized
+ serial: Freescale lpuart driver
+ [drm] Initialized drm 1.1.0 20060810
+-54280000.hdmi supply hdmi not found, using dummy regulator
+-tegra-hdmi 54280000.hdmi: failed to get VDD regulator
++tegra-hdmi 54280000.hdmi: failed to get HDMI regulator
+ platform 54280000.hdmi: Driver tegra-hdmi requests probe deferral
+ loop: module loaded
+ pegasus: v0.9.3 (2013/04/25), Pegasus/Pegasus II USB Ethernet driver
+@@ -365,6 +368,8 @@
+ sys_3v3,vdd_3v3_alw: supplied by vdd_5v_in
+ sys_3v3_pexs: 3300 mV 
+ sys_3v3_pexs: supplied by sys_3v3,vdd_3v3_alw
+++VDD_5V_HDMI: 5000 mV 
+++VDD_5V_HDMI: supplied by sys_3v3,vdd_3v3_alw
+ tegra-pcie 3000.pcie-controller: 2x3 configuration
+ tegra-pcie 3000.pcie-controller: probing port 0, using 2 lanes
+ tegra-pcie 3000.pcie-controller: probing port 2, using 2 lanes
+@@ -402,7 +407,6 @@
+ r8169 0000:01:00.0: enabling device (0140 -> 0143)
+ r8169 0000:01:00.0 eth0: RTL8168evl/8111evl at 0xf002e000, 02:04:4b:01:60:a6, XID 0c900800 IRQ 472
+ r8169 0000:01:00.0 eth0: jumbo features [frames: 9200 bytes, tx checksumming: ko]
+-54280000.hdmi supply hdmi not found, using dummy regulator
+ [drm] Supports vblank timestamp caching Rev 2 (21.10.2013).
+ [drm] No driver support for vblank timestamp query.
+ host1x drm: No connectors reported connected with modes
+Diff for ./tegra30-beaver/tegra30-beaver/tegra_defconfig_log.txt
+--- /tmp/fooa	2014-04-29 01:02:11.027492417 -0700
++++ /tmp/foob	2014-04-29 01:02:11.031492420 -0700
+@@ -36,9 +36,9 @@
+ 	 #################################################################
+ 	 #################################################################
+ 	 #####################################
+-	 3.5 MiB/s
++	 3.4 MiB/s
+ done
+-Bytes transferred = 4347232 (425560 hex)
++Bytes transferred = 4346560 (4252c0 hex)
+ Tegra30 (Beaver) # tftpboot 0x82000000 tegra30-beaver.dtb
+ Using asx0 device
+ TFTP from server 192.168.100.1; our IP address is 192.168.100.101
+@@ -47,12 +47,12 @@
+ Loading: *##
+ 	 2.9 MiB/s
+ done
+-Bytes transferred = 23973 (5da5 hex)
++Bytes transferred = 24197 (5e85 hex)
+ Tegra30 (Beaver) # bootz 0x81000000 - 0x82000000
+-Kernel image @ 0x81000000 [ 0x000000 - 0x425560 ]
++Kernel image @ 0x81000000 [ 0x000000 - 0x4252c0 ]
+ ## Flattened Device Tree blob at 82000000
+    Booting using the fdt blob at 0x82000000
+-   Loading Device Tree to 8fff7000, end 8ffffda4 ... OK
++   Loading Device Tree to 8fff7000, end 8ffffe84 ... OK
+ 
+ Starting kernel ...
+ 
+@@ -60,7 +60,7 @@
+ Booting Linux on physical CPU 0x0
+ Initializing cgroup subsys cpu
+ Initializing cgroup subsys cpuacct
+-Linux version 3.15.0-rc2-next-20140428-56744-g5bd4e10 (pwalmsley@tamien) (gcc version 4.7.3 20130328 (prerelease) (crosstool-NG linaro-1.13.1-4.7-2013.04-20130415 - Linaro GCC 2013.04) ) #1 SMP PREEMPT Mon Apr 28 00:33:36 PDT 2014
++Linux version 3.15.0-rc3-next-20140429-56907-g7cd285f (pwalmsley@tamien) (gcc version 4.7.3 20130328 (prerelease) (crosstool-NG linaro-1.13.1-4.7-2013.04-20130415 - Linaro GCC 2013.04) ) #1 SMP PREEMPT Tue Apr 29 00:48:34 PDT 2014
+ CPU: ARMv7 Processor [412fc099] revision 9 (ARMv7), cr=10c5387d
+ CPU: PIPT / VIPT nonaliasing data cache, VIPT aliasing instruction cache
+ Machine model: NVIDIA Tegra30 Beaver evaluation board
+@@ -94,7 +94,7 @@
+ PID hash table entries: 4096 (order: 2, 16384 bytes)
+ Dentry cache hash table entries: 131072 (order: 7, 524288 bytes)
+ Inode-cache hash table entries: 65536 (order: 6, 262144 bytes)
+-Memory: 2004160K/2096128K available (5928K kernel code, 333K rwdata, 1952K rodata, 260K init, 345K bss, 91968K reserved, 1317888K highmem)
++Memory: 2004160K/2096128K available (5932K kernel code, 333K rwdata, 1952K rodata, 260K init, 345K bss, 91968K reserved, 1317888K highmem)
+ Virtual kernel memory layout:
+     vector  : 0xffff0000 - 0xffff1000   (   4 kB)
+     fixmap  : 0xffc00000 - 0xffe00000   (2048 kB)
+@@ -102,8 +102,8 @@
+     lowmem  : 0xc0000000 - 0xef800000   ( 760 MB)
+     pkmap   : 0xbfe00000 - 0xc0000000   (   2 MB)
+     modules : 0xbf000000 - 0xbfe00000   (  14 MB)
+-      .text : 0xc0008000 - 0xc07ba750   (7882 kB)
+-      .init : 0xc07bb000 - 0xc07fc1c0   ( 261 kB)
++      .text : 0xc0008000 - 0xc07bb764   (7886 kB)
++      .init : 0xc07bc000 - 0xc07fd1c0   ( 261 kB)
+       .data : 0xc07fe000 - 0xc0851780   ( 334 kB)
+        .bss : 0xc085178c - 0xc08a7cd0   ( 346 kB)
+ Preemptible hierarchical RCU implementation.
+@@ -118,7 +118,7 @@
+ Initializing cgroup subsys freezer
+ CPU: Testing write buffer coherency: ok
+ CPU0: thread -1, cpu 0, socket 0, mpidr 80000000
+-Setting up static identity map for 0x8059f1a0 - 0x8059f238
++Setting up static identity map for 0x8059f3b0 - 0x8059f448
+ CPU1: Booted secondary processor
+ CPU1: thread -1, cpu 1, socket 0, mpidr 80000001
+ CPU2: Booted secondary processor
+@@ -155,6 +155,10 @@
+ sys_3v3_pexs: Failed to request enable GPIO95: -517
+ reg-fixed-voltage 7.regulator: Failed to register regulator: -517
+ platform 7.regulator: Driver reg-fixed-voltage requests probe deferral
+++VDD_5V_HDMI: 5000 mV 
++reg-fixed-voltage 8.regulator: Failed to find supply vin
++reg-fixed-voltage 8.regulator: Failed to register regulator: -517
++platform 8.regulator: Driver reg-fixed-voltage requests probe deferral
+ vgaarb: loaded
+ SCSI subsystem initialized
+ usbcore: registered new interface driver usbfs
+@@ -219,8 +223,7 @@
+ 70006000.serial: ttyS0 at MMIO 0x70006000 (irq = 68, base_baud = 25500000) is a Tegra
+ console [ttyS0] enabled
+ [drm] Initialized drm 1.1.0 20060810
+-54280000.hdmi supply hdmi not found, using dummy regulator
+-tegra-hdmi 54280000.hdmi: failed to get VDD regulator
++tegra-hdmi 54280000.hdmi: failed to get HDMI regulator
+ platform 54280000.hdmi: Driver tegra-hdmi requests probe deferral
+ loop: module loaded
+ pegasus: v0.9.3 (2013/04/25), Pegasus/Pegasus II USB Ethernet driver
+@@ -364,6 +367,8 @@
+ sys_3v3,vdd_3v3_alw: supplied by vdd_5v_in
+ sys_3v3_pexs: 3300 mV 
+ sys_3v3_pexs: supplied by sys_3v3,vdd_3v3_alw
+++VDD_5V_HDMI: 5000 mV 
+++VDD_5V_HDMI: supplied by sys_3v3,vdd_3v3_alw
+ tegra-pcie 3000.pcie-controller: 2x3 configuration
+ tegra-pcie 3000.pcie-controller: probing port 0, using 2 lanes
+ tegra-pcie 3000.pcie-controller: probing port 2, using 2 lanes
+@@ -404,7 +409,6 @@
+ r8169 0000:01:00.0: enabling device (0140 -> 0143)
+ r8169 0000:01:00.0 eth0: RTL8168evl/8111evl at 0xf002e000, 02:04:4b:01:60:a6, XID 0c900800 IRQ 473
+ r8169 0000:01:00.0 eth0: jumbo features [frames: 9200 bytes, tx checksumming: ko]
+-54280000.hdmi supply hdmi not found, using dummy regulator
+ [drm] Supports vblank timestamp caching Rev 2 (21.10.2013).
+ [drm] No driver support for vblank timestamp query.
+ host1x drm: No connectors reported connected with modes
+@@ -427,7 +431,7 @@
+ tegra-ehci 7d008000.usb: USB 2.0 started, EHCI 1.00
+ hub 2-0:1.0: USB hub found
+ hub 2-0:1.0: 1 port detected
+-tps65910-rtc tps65910-rtc: setting system clock to 2000-01-01 00:00:03 UTC (946684803)
++tps65910-rtc tps65910-rtc: setting system clock to 2000-01-01 00:00:02 UTC (946684802)
+ ALSA device list:
+   #0: NVIDIA Tegra Beaver
+ kjournald starting.  Commit interval 5 seconds
+@@ -437,7 +441,7 @@
+ EXT3-fs (mmcblk0p1): mounted filesystem with writeback data mode
+ VFS: Mounted root (ext3 filesystem) on device 179:1.
+ devtmpfs: mounted
+-Freeing unused kernel memory: 260K (c07bb000 - c07fc000)
++Freeing unused kernel memory: 260K (c07bc000 - c07fd000)
+ usb 2-1: new high-speed USB device number 2 using tegra-ehci
+ bash: cannot set terminal process group (-1): Inappropriate ioctl for device
+ bash: no job control in this shell
+Diff for ./tegra30-beaver/tegra30-beaver/tegra_defconfig%tegra20,30_mergeconfig_log.txt
+--- /tmp/fooa	2014-04-29 01:02:11.039492426 -0700
++++ /tmp/foob	2014-04-29 01:02:11.043492428 -0700
+@@ -38,21 +38,21 @@
+ 	 ####################################
+ 	 3.5 MiB/s
+ done
+-Bytes transferred = 4343168 (424580 hex)
++Bytes transferred = 4341584 (423f50 hex)
+ Tegra30 (Beaver) # tftpboot 0x82000000 tegra30-beaver.dtb
+ Using asx0 device
+ TFTP from server 192.168.100.1; our IP address is 192.168.100.101
+ Filename 'tegra30-beaver.dtb'.
+ Load address: 0x82000000
+ Loading: *##
+-	 2.9 MiB/s
++	 3.3 MiB/s
+ done
+-Bytes transferred = 23973 (5da5 hex)
++Bytes transferred = 24197 (5e85 hex)
+ Tegra30 (Beaver) # bootz 0x81000000 - 0x82000000
+-Kernel image @ 0x81000000 [ 0x000000 - 0x424580 ]
++Kernel image @ 0x81000000 [ 0x000000 - 0x423f50 ]
+ ## Flattened Device Tree blob at 82000000
+    Booting using the fdt blob at 0x82000000
+-   Loading Device Tree to 8fff7000, end 8ffffda4 ... OK
++   Loading Device Tree to 8fff7000, end 8ffffe84 ... OK
+ 
+ Starting kernel ...
+ 
+@@ -60,7 +60,7 @@
+ Booting Linux on physical CPU 0x0
+ Initializing cgroup subsys cpu
+ Initializing cgroup subsys cpuacct
+-Linux version 3.15.0-rc2-next-20140428-17974-g5bd4e10 (pwalmsley@kaivo) (gcc version 4.7.3 20130328 (prerelease) (crosstool-NG linaro-1.13.1-4.7-2013.04-20130415 - Linaro GCC 2013.04) ) #1 SMP PREEMPT Mon Apr 28 00:40:05 PDT 2014
++Linux version 3.15.0-rc3-next-20140429-18137-g7cd285f (pwalmsley@kaivo) (gcc version 4.7.3 20130328 (prerelease) (crosstool-NG linaro-1.13.1-4.7-2013.04-20130415 - Linaro GCC 2013.04) ) #1 SMP PREEMPT Tue Apr 29 00:55:07 PDT 2014
+ CPU: ARMv7 Processor [412fc099] revision 9 (ARMv7), cr=10c5387d
+ CPU: PIPT / VIPT nonaliasing data cache, VIPT aliasing instruction cache
+ Machine model: NVIDIA Tegra30 Beaver evaluation board
+@@ -102,7 +102,7 @@
+     lowmem  : 0xc0000000 - 0xef800000   ( 760 MB)
+     pkmap   : 0xbfe00000 - 0xc0000000   (   2 MB)
+     modules : 0xbf000000 - 0xbfe00000   (  14 MB)
+-      .text : 0xc0008000 - 0xc07b66d8   (7866 kB)
++      .text : 0xc0008000 - 0xc07b66ec   (7866 kB)
+       .init : 0xc07b7000 - 0xc07f71c0   ( 257 kB)
+       .data : 0xc07f8000 - 0xc084a7c0   ( 330 kB)
+        .bss : 0xc084a7cc - 0xc08a0cd0   ( 346 kB)
+@@ -118,7 +118,7 @@
+ Initializing cgroup subsys freezer
+ CPU: Testing write buffer coherency: ok
+ CPU0: thread -1, cpu 0, socket 0, mpidr 80000000
+-Setting up static identity map for 0x8059ec20 - 0x8059ecb8
++Setting up static identity map for 0x8059ee30 - 0x8059eec8
+ CPU1: Booted secondary processor
+ CPU1: thread -1, cpu 1, socket 0, mpidr 80000001
+ CPU2: Booted secondary processor
+@@ -155,6 +155,10 @@
+ sys_3v3_pexs: Failed to request enable GPIO95: -517
+ reg-fixed-voltage 7.regulator: Failed to register regulator: -517
+ platform 7.regulator: Driver reg-fixed-voltage requests probe deferral
+++VDD_5V_HDMI: 5000 mV 
++reg-fixed-voltage 8.regulator: Failed to find supply vin
++reg-fixed-voltage 8.regulator: Failed to register regulator: -517
++platform 8.regulator: Driver reg-fixed-voltage requests probe deferral
+ vgaarb: loaded
+ SCSI subsystem initialized
+ usbcore: registered new interface driver usbfs
+@@ -219,8 +223,7 @@
+ 70006000.serial: ttyS0 at MMIO 0x70006000 (irq = 68, base_baud = 25500000) is a Tegra
+ console [ttyS0] enabled
+ [drm] Initialized drm 1.1.0 20060810
+-54280000.hdmi supply hdmi not found, using dummy regulator
+-tegra-hdmi 54280000.hdmi: failed to get VDD regulator
++tegra-hdmi 54280000.hdmi: failed to get HDMI regulator
+ platform 54280000.hdmi: Driver tegra-hdmi requests probe deferral
+ loop: module loaded
+ pegasus: v0.9.3 (2013/04/25), Pegasus/Pegasus II USB Ethernet driver
+@@ -364,6 +367,8 @@
+ sys_3v3,vdd_3v3_alw: supplied by vdd_5v_in
+ sys_3v3_pexs: 3300 mV 
+ sys_3v3_pexs: supplied by sys_3v3,vdd_3v3_alw
+++VDD_5V_HDMI: 5000 mV 
+++VDD_5V_HDMI: supplied by sys_3v3,vdd_3v3_alw
+ tegra-pcie 3000.pcie-controller: 2x3 configuration
+ tegra-pcie 3000.pcie-controller: probing port 0, using 2 lanes
+ tegra-pcie 3000.pcie-controller: probing port 2, using 2 lanes
+@@ -404,7 +409,6 @@
+ r8169 0000:01:00.0: enabling device (0140 -> 0143)
+ r8169 0000:01:00.0 eth0: RTL8168evl/8111evl at 0xf002e000, 02:04:4b:01:60:a6, XID 0c900800 IRQ 473
+ r8169 0000:01:00.0 eth0: jumbo features [frames: 9200 bytes, tx checksumming: ko]
+-54280000.hdmi supply hdmi not found, using dummy regulator
+ [drm] Supports vblank timestamp caching Rev 2 (21.10.2013).
+ [drm] No driver support for vblank timestamp query.
+ host1x drm: No connectors reported connected with modes
+Diff for ./tegra30-beaver/tegra30-beaver/tegra_defconfig%tegra30,114_mergeconfig_log.txt
+--- /tmp/fooa	2014-04-29 01:02:11.071492436 -0700
++++ /tmp/foob	2014-04-29 01:02:11.071492436 -0700
+@@ -36,23 +36,23 @@
+ 	 #################################################################
+ 	 #################################################################
+ 	 ####################################
+-	 3.1 MiB/s
++	 2.9 MiB/s
+ done
+-Bytes transferred = 4333376 (421f40 hex)
++Bytes transferred = 4333896 (422148 hex)
+ Tegra30 (Beaver) # tftpboot 0x82000000 tegra30-beaver.dtb
+ Using asx0 device
+ TFTP from server 192.168.100.1; our IP address is 192.168.100.101
+ Filename 'tegra30-beaver.dtb'.
+ Load address: 0x82000000
+ Loading: *##
+-	 2.5 MiB/s
++	 2.6 MiB/s
+ done
+-Bytes transferred = 23973 (5da5 hex)
++Bytes transferred = 24197 (5e85 hex)
+ Tegra30 (Beaver) # bootz 0x81000000 - 0x82000000
+-Kernel image @ 0x81000000 [ 0x000000 - 0x421f40 ]
++Kernel image @ 0x81000000 [ 0x000000 - 0x422148 ]
+ ## Flattened Device Tree blob at 82000000
+    Booting using the fdt blob at 0x82000000
+-   Loading Device Tree to 8fff7000, end 8ffffda4 ... OK
++   Loading Device Tree to 8fff7000, end 8ffffe84 ... OK
+ 
+ Starting kernel ...
+ 
+@@ -60,7 +60,7 @@
+ Booting Linux on physical CPU 0x0
+ Initializing cgroup subsys cpu
+ Initializing cgroup subsys cpuacct
+-Linux version 3.15.0-rc2-next-20140428-56744-g5bd4e10 (pwalmsley@tamien) (gcc version 4.7.3 20130328 (prerelease) (crosstool-NG linaro-1.13.1-4.7-2013.04-20130415 - Linaro GCC 2013.04) ) #1 SMP PREEMPT Mon Apr 28 00:42:30 PDT 2014
++Linux version 3.15.0-rc3-next-20140429-56907-g7cd285f (pwalmsley@tamien) (gcc version 4.7.3 20130328 (prerelease) (crosstool-NG linaro-1.13.1-4.7-2013.04-20130415 - Linaro GCC 2013.04) ) #1 SMP PREEMPT Tue Apr 29 00:57:26 PDT 2014
+ CPU: ARMv7 Processor [412fc099] revision 9 (ARMv7), cr=10c5387d
+ CPU: PIPT / VIPT nonaliasing data cache, VIPT aliasing instruction cache
+ Machine model: NVIDIA Tegra30 Beaver evaluation board
+@@ -102,7 +102,7 @@
+     lowmem  : 0xc0000000 - 0xef800000   ( 760 MB)
+     pkmap   : 0xbfe00000 - 0xc0000000   (   2 MB)
+     modules : 0xbf000000 - 0xbfe00000   (  14 MB)
+-      .text : 0xc0008000 - 0xc07b3554   (7854 kB)
++      .text : 0xc0008000 - 0xc07b3568   (7854 kB)
+       .init : 0xc07b4000 - 0xc07f41c0   ( 257 kB)
+       .data : 0xc07f6000 - 0xc0847600   ( 326 kB)
+        .bss : 0xc084760c - 0xc089db10   ( 346 kB)
+@@ -118,7 +118,7 @@
+ Initializing cgroup subsys freezer
+ CPU: Testing write buffer coherency: ok
+ CPU0: thread -1, cpu 0, socket 0, mpidr 80000000
+-Setting up static identity map for 0x8059c3e8 - 0x8059c480
++Setting up static identity map for 0x8059c600 - 0x8059c698
+ CPU1: Booted secondary processor
+ CPU1: thread -1, cpu 1, socket 0, mpidr 80000001
+ CPU2: Booted secondary processor
+@@ -155,6 +155,10 @@
+ sys_3v3_pexs: Failed to request enable GPIO95: -517
+ reg-fixed-voltage 7.regulator: Failed to register regulator: -517
+ platform 7.regulator: Driver reg-fixed-voltage requests probe deferral
+++VDD_5V_HDMI: 5000 mV 
++reg-fixed-voltage 8.regulator: Failed to find supply vin
++reg-fixed-voltage 8.regulator: Failed to register regulator: -517
++platform 8.regulator: Driver reg-fixed-voltage requests probe deferral
+ vgaarb: loaded
+ SCSI subsystem initialized
+ usbcore: registered new interface driver usbfs
+@@ -219,8 +223,7 @@
+ 70006000.serial: ttyS0 at MMIO 0x70006000 (irq = 68, base_baud = 25500000) is a Tegra
+ console [ttyS0] enabled
+ [drm] Initialized drm 1.1.0 20060810
+-54280000.hdmi supply hdmi not found, using dummy regulator
+-tegra-hdmi 54280000.hdmi: failed to get VDD regulator
++tegra-hdmi 54280000.hdmi: failed to get HDMI regulator
+ platform 54280000.hdmi: Driver tegra-hdmi requests probe deferral
+ loop: module loaded
+ pegasus: v0.9.3 (2013/04/25), Pegasus/Pegasus II USB Ethernet driver
+@@ -364,6 +367,8 @@
+ sys_3v3,vdd_3v3_alw: supplied by vdd_5v_in
+ sys_3v3_pexs: 3300 mV 
+ sys_3v3_pexs: supplied by sys_3v3,vdd_3v3_alw
+++VDD_5V_HDMI: 5000 mV 
+++VDD_5V_HDMI: supplied by sys_3v3,vdd_3v3_alw
+ tegra-pcie 3000.pcie-controller: 2x3 configuration
+ tegra-pcie 3000.pcie-controller: probing port 0, using 2 lanes
+ tegra-pcie 3000.pcie-controller: probing port 2, using 2 lanes
+@@ -404,7 +409,6 @@
+ r8169 0000:01:00.0: enabling device (0140 -> 0143)
+ r8169 0000:01:00.0 eth0: RTL8168evl/8111evl at 0xf002e000, 02:04:4b:01:60:a6, XID 0c900800 IRQ 473
+ r8169 0000:01:00.0 eth0: jumbo features [frames: 9200 bytes, tx checksumming: ko]
+-54280000.hdmi supply hdmi not found, using dummy regulator
+ [drm] Supports vblank timestamp caching Rev 2 (21.10.2013).
+ [drm] No driver support for vblank timestamp query.
+ host1x drm: No connectors reported connected with modes
+Diff for ./tegra30-beaver/tegra30-beaver/tegra_defconfig%tegra30_mergeconfig_log.txt
+--- /tmp/fooa	2014-04-29 01:02:11.079492440 -0700
++++ /tmp/foob	2014-04-29 01:02:11.083492441 -0700
+@@ -38,21 +38,21 @@
+ 	 ###################################
+ 	 3.4 MiB/s
+ done
+-Bytes transferred = 4327368 (4207c8 hex)
++Bytes transferred = 4327424 (420800 hex)
+ Tegra30 (Beaver) # tftpboot 0x82000000 tegra30-beaver.dtb
+ Using asx0 device
+ TFTP from server 192.168.100.1; our IP address is 192.168.100.101
+ Filename 'tegra30-beaver.dtb'.
+ Load address: 0x82000000
+ Loading: *##
+-	 2.5 MiB/s
++	 3.3 MiB/s
+ done
+-Bytes transferred = 23973 (5da5 hex)
++Bytes transferred = 24197 (5e85 hex)
+ Tegra30 (Beaver) # bootz 0x81000000 - 0x82000000
+-Kernel image @ 0x81000000 [ 0x000000 - 0x4207c8 ]
++Kernel image @ 0x81000000 [ 0x000000 - 0x420800 ]
+ ## Flattened Device Tree blob at 82000000
+    Booting using the fdt blob at 0x82000000
+-   Loading Device Tree to 8fff7000, end 8ffffda4 ... OK
++   Loading Device Tree to 8fff7000, end 8ffffe84 ... OK
+ 
+ Starting kernel ...
+ 
+@@ -60,7 +60,7 @@
+ Booting Linux on physical CPU 0x0
+ Initializing cgroup subsys cpu
+ Initializing cgroup subsys cpuacct
+-Linux version 3.15.0-rc2-next-20140428-56744-g5bd4e10 (pwalmsley@tamien) (gcc version 4.7.3 20130328 (prerelease) (crosstool-NG linaro-1.13.1-4.7-2013.04-20130415 - Linaro GCC 2013.04) ) #1 SMP PREEMPT Mon Apr 28 00:36:34 PDT 2014
++Linux version 3.15.0-rc3-next-20140429-56907-g7cd285f (pwalmsley@tamien) (gcc version 4.7.3 20130328 (prerelease) (crosstool-NG linaro-1.13.1-4.7-2013.04-20130415 - Linaro GCC 2013.04) ) #1 SMP PREEMPT Tue Apr 29 00:51:33 PDT 2014
+ CPU: ARMv7 Processor [412fc099] revision 9 (ARMv7), cr=10c5387d
+ CPU: PIPT / VIPT nonaliasing data cache, VIPT aliasing instruction cache
+ Machine model: NVIDIA Tegra30 Beaver evaluation board
+@@ -102,7 +102,7 @@
+     lowmem  : 0xc0000000 - 0xef800000   ( 760 MB)
+     pkmap   : 0xbfe00000 - 0xc0000000   (   2 MB)
+     modules : 0xbf000000 - 0xbfe00000   (  14 MB)
+-      .text : 0xc0008000 - 0xc07ae4d4   (7834 kB)
++      .text : 0xc0008000 - 0xc07ae4e8   (7834 kB)
+       .init : 0xc07af000 - 0xc07ed1c0   ( 249 kB)
+       .data : 0xc07ee000 - 0xc083e600   ( 322 kB)
+        .bss : 0xc083e60c - 0xc0894b10   ( 346 kB)
+@@ -118,7 +118,7 @@
+ Initializing cgroup subsys freezer
+ CPU: Testing write buffer coherency: ok
+ CPU0: thread -1, cpu 0, socket 0, mpidr 80000000
+-Setting up static identity map for 0x8059be70 - 0x8059bf08
++Setting up static identity map for 0x8059c080 - 0x8059c118
+ CPU1: Booted secondary processor
+ CPU1: thread -1, cpu 1, socket 0, mpidr 80000001
+ CPU2: Booted secondary processor
+@@ -155,6 +155,10 @@
+ sys_3v3_pexs: Failed to request enable GPIO95: -517
+ reg-fixed-voltage 7.regulator: Failed to register regulator: -517
+ platform 7.regulator: Driver reg-fixed-voltage requests probe deferral
+++VDD_5V_HDMI: 5000 mV 
++reg-fixed-voltage 8.regulator: Failed to find supply vin
++reg-fixed-voltage 8.regulator: Failed to register regulator: -517
++platform 8.regulator: Driver reg-fixed-voltage requests probe deferral
+ vgaarb: loaded
+ SCSI subsystem initialized
+ usbcore: registered new interface driver usbfs
+@@ -219,8 +223,7 @@
+ 70006000.serial: ttyS0 at MMIO 0x70006000 (irq = 68, base_baud = 25500000) is a Tegra
+ console [ttyS0] enabled
+ [drm] Initialized drm 1.1.0 20060810
+-54280000.hdmi supply hdmi not found, using dummy regulator
+-tegra-hdmi 54280000.hdmi: failed to get VDD regulator
++tegra-hdmi 54280000.hdmi: failed to get HDMI regulator
+ platform 54280000.hdmi: Driver tegra-hdmi requests probe deferral
+ loop: module loaded
+ pegasus: v0.9.3 (2013/04/25), Pegasus/Pegasus II USB Ethernet driver
+@@ -364,6 +367,8 @@
+ sys_3v3,vdd_3v3_alw: supplied by vdd_5v_in
+ sys_3v3_pexs: 3300 mV 
+ sys_3v3_pexs: supplied by sys_3v3,vdd_3v3_alw
+++VDD_5V_HDMI: 5000 mV 
+++VDD_5V_HDMI: supplied by sys_3v3,vdd_3v3_alw
+ tegra-pcie 3000.pcie-controller: 2x3 configuration
+ tegra-pcie 3000.pcie-controller: probing port 0, using 2 lanes
+ tegra-pcie 3000.pcie-controller: probing port 2, using 2 lanes
+@@ -404,7 +409,6 @@
+ r8169 0000:01:00.0: enabling device (0140 -> 0143)
+ r8169 0000:01:00.0 eth0: RTL8168evl/8111evl at 0xf002e000, 02:04:4b:01:60:a6, XID 0c900800 IRQ 473
+ r8169 0000:01:00.0 eth0: jumbo features [frames: 9200 bytes, tx checksumming: ko]
+-54280000.hdmi supply hdmi not found, using dummy regulator
+ [drm] Supports vblank timestamp caching Rev 2 (21.10.2013).
+ [drm] No driver support for vblank timestamp query.
+ host1x drm: No connectors reported connected with modes
+@@ -427,7 +431,7 @@
+ tegra-ehci 7d008000.usb: USB 2.0 started, EHCI 1.00
+ hub 2-0:1.0: USB hub found
+ hub 2-0:1.0: 1 port detected
+-tps65910-rtc tps65910-rtc: setting system clock to 2000-01-01 00:00:03 UTC (946684803)
++tps65910-rtc tps65910-rtc: setting system clock to 2000-01-01 00:00:02 UTC (946684802)
+ ALSA device list:
+   #0: NVIDIA Tegra Beaver
+ kjournald starting.  Commit interval 5 seconds

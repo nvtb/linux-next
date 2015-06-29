@@ -1,0 +1,986 @@
+
+U-Boot SPL 2014.01-00219-gc4d376f (Feb 18 2014 - 19:57:18)
+
+
+U-Boot 2014.01-00219-gc4d376f (Feb 18 2014 - 19:57:18)
+
+TEGRA30
+Board: NVIDIA Beaver
+I2C:   ready
+DRAM:  2 GiB
+MMC:   Tegra SD/MMC: 0, Tegra SD/MMC: 1
+In:    serial
+Out:   serial
+Err:   serial
+Net:   Net Initialization Skipped
+No ethernet found.
+Hit any key to stop autoboot:  2  0 
+Tegra30 (Beaver) # 
+Tegra30 (Beaver) # usb reset
+(Re)start USB...
+USB0:   USB EHCI 1.00
+scanning bus 0 for devices... 2 USB Device(s) found
+       scanning usb for storage devices... 0 Storage Device(s) found
+       scanning usb for ethernet devices... 
+Warning: asx0 using MAC address from net device
+1 Ethernet Device(s) found
+Tegra30 (Beaver) # setenv bootargs 'ignore_loglevel console=ttyS0,115200n8 rw root=/dev/mmcblk0p1 rootwait gpt debug init=/bin/bash noinitrd'
+Tegra30 (Beaver) # setenv ipaddr 192.168.100.101; setenv serverip 192.168.100.1; setenv tftpserverip 192.168.100.1
+Tegra30 (Beaver) # tftpboot 0x81000000 zImage.tegra_defconfig%tegra30_mergeconfig
+Using asx0 device
+TFTP from server 192.168.100.1; our IP address is 192.168.100.101
+Filename 'zImage.tegra_defconfig%tegra30_mergeconfig'.
+Load address: 0x81000000
+Loading: *#################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #############################################################
+	 2.8 MiB/s
+done
+Bytes transferred = 4700048 (47b790 hex)
+Tegra30 (Beaver) # tftpboot 0x82000000 tegra30-beaver.dtb
+Using asx0 device
+TFTP from server 192.168.100.1; our IP address is 192.168.100.101
+Filename 'tegra30-beaver.dtb'.
+Load address: 0x82000000
+Loading: *##
+	 2.6 MiB/s
+done
+Bytes transferred = 24893 (613d hex)
+Tegra30 (Beaver) # bootz 0x81000000 - 0x82000000
+Kernel image @ 0x81000000 [ 0x000000 - 0x47b790 ]
+## Flattened Device Tree blob at 82000000
+   Booting using the fdt blob at 0x82000000
+   Loading Device Tree to 8fff6000, end 8ffff13c ... OK
+
+Starting kernel ...
+
+Uncompressing Linux... done, booting the kernel.
+[    0.000000] Booting Linux on physical CPU 0x0
+[    0.000000] Initializing cgroup subsys cpu
+[    0.000000] Initializing cgroup subsys cpuacct
+[    0.000000] Linux version 3.18.0-rc3-next-20141103-96358-ga641d0e (pwalmsley@tamien) (gcc version 4.7.3 20130328 (prerelease) (crosstool-NG linaro-1.13.1-4.7-2013.04-20130415 - Linaro GCC 2013.04) ) #1 SMP PREEMPT Sun Nov 2 21:51:26 PST 2014
+[    0.000000] CPU: ARMv7 Processor [412fc099] revision 9 (ARMv7), cr=10c5387d
+[    0.000000] CPU: PIPT / VIPT nonaliasing data cache, VIPT aliasing instruction cache
+[    0.000000] Machine model: NVIDIA Tegra30 Beaver evaluation board
+[    0.000000] debug: ignoring loglevel setting.
+[    0.000000] cma: Reserved 64 MiB at 0xfbc00000
+[    0.000000] Memory policy: Data cache writealloc
+[    0.000000] On node 0 totalpages: 524032
+[    0.000000] free_area_init_node: node 0, pgdat c08fddc0, node_mem_map ee7f7000
+[    0.000000]   Normal zone: 1520 pages used for memmap
+[    0.000000]   Normal zone: 0 pages reserved
+[    0.000000]   Normal zone: 194560 pages, LIFO batch:31
+[    0.000000]   HighMem zone: 2574 pages used for memmap
+[    0.000000]   HighMem zone: 329472 pages, LIFO batch:31
+[    0.000000] PERCPU: Embedded 10 pages/cpu @ee7b3000 s8832 r8192 d23936 u40960
+[    0.000000] pcpu-alloc: s8832 r8192 d23936 u40960 alloc=10*4096
+[    0.000000] pcpu-alloc: [0] 0 [0] 1 [0] 2 [0] 3 
+[    0.000000] Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 522512
+[    0.000000] Kernel command line: ignore_loglevel console=ttyS0,115200n8 rw root=/dev/mmcblk0p1 rootwait gpt debug init=/bin/bash noinitrd
+[    0.000000] PID hash table entries: 4096 (order: 2, 16384 bytes)
+[    0.000000] Dentry cache hash table entries: 131072 (order: 7, 524288 bytes)
+[    0.000000] Inode-cache hash table entries: 65536 (order: 6, 262144 bytes)
+[    0.000000] Memory: 2003532K/2096128K available (6451K kernel code, 334K rwdata, 2104K rodata, 288K init, 362K bss, 27060K reserved, 65536K cma-reserved, 1252352K highmem)
+[    0.000000] Virtual kernel memory layout:
+[    0.000000]     vector  : 0xffff0000 - 0xffff1000   (   4 kB)
+[    0.000000]     fixmap  : 0xffc00000 - 0xffe00000   (2048 kB)
+[    0.000000]     vmalloc : 0xf0000000 - 0xff000000   ( 240 MB)
+[    0.000000]     lowmem  : 0xc0000000 - 0xef800000   ( 760 MB)
+[    0.000000]     pkmap   : 0xbfe00000 - 0xc0000000   (   2 MB)
+[    0.000000]     modules : 0xbf000000 - 0xbfe00000   (  14 MB)
+[    0.000000]       .text : 0xc0008000 - 0xc086317c   (8557 kB)
+[    0.000000]       .init : 0xc0864000 - 0xc08ac000   ( 288 kB)
+[    0.000000]       .data : 0xc08ac000 - 0xc08ff860   ( 335 kB)
+[    0.000000]        .bss : 0xc08ff860 - 0xc095a2dc   ( 363 kB)
+[    0.000000] Preemptible hierarchical RCU implementation.
+[    0.000000] NR_IRQS:16 nr_irqs:16 16
+[    0.000000] L2C: platform modifies aux control register: 0x02080000 -> 0x3e480001
+[    0.000000] L2C: DT/platform modifies aux control register: 0x02080000 -> 0x3e480001
+[    0.000000] L2C-310 erratum 769419 enabled
+[    0.000000] L2C-310 enabling early BRESP for Cortex-A9
+[    0.000000] L2C-310: enabling full line of zeros but not enabled in Cortex-A9
+[    0.000000] L2C-310 ID prefetch enabled, offset 1 lines
+[    0.000000] L2C-310 dynamic clock gating enabled, standby mode enabled
+[    0.000000] L2C-310 cache controller enabled, 8 ways, 1024 kB
+[    0.000000] L2C-310: CACHE_ID 0x410000c7, AUX_CTRL 0x7e480001
+[    0.000012] sched_clock: 32 bits at 1000kHz, resolution 1000ns, wraps every 2147483648000ns
+[    0.000032] Switching to timer-based delay loop, resolution 1000ns
+[    0.000551] Console: colour dummy device 80x30
+[    0.000571] Calibrating delay loop (skipped), value calculated using timer frequency.. 2.00 BogoMIPS (lpj=10000)
+[    0.000579] pid_max: default: 32768 minimum: 301
+[    0.000916] Mount-cache hash table entries: 2048 (order: 1, 8192 bytes)
+[    0.000924] Mountpoint-cache hash table entries: 2048 (order: 1, 8192 bytes)
+[    0.002083] Initializing cgroup subsys freezer
+[    0.002104] Initializing cgroup subsys debug
+[    0.002146] CPU: Testing write buffer coherency: ok
+[    0.002447] CPU0: thread -1, cpu 0, socket 0, mpidr 80000000
+[    0.002516] Setting up static identity map for 0x8061e140 - 0x8061e1d8
+[    0.040217] Tegra Revision: A03 SKU: 128 CPU Process: 4 Core Process: 0
+[    0.061345] CPU1: Booted secondary processor
+[    0.061361] CPU1: thread -1, cpu 1, socket 0, mpidr 80000001
+[    0.081326] CPU2: Booted secondary processor
+[    0.081340] CPU2: thread -1, cpu 2, socket 0, mpidr 80000002
+[    0.101317] CPU3: Booted secondary processor
+[    0.101330] CPU3: thread -1, cpu 3, socket 0, mpidr 80000003
+[    0.101379] Brought up 4 CPUs
+[    0.101394] SMP: Total of 4 processors activated.
+[    0.101398] CPU: All CPU(s) started in SVC mode.
+[    0.102165] devtmpfs: initialized
+[    0.113097] VFP support v0.3: implementor 41 architecture 3 part 30 variant 9 rev 4
+[    0.116807] pinctrl core: initialized pinctrl subsystem
+[    0.130258] NET: Registered protocol family 16
+[    0.132527] DMA: preallocated 256 KiB pool for atomic coherent allocations
+[    0.159997] cpuidle: using governor ladder
+[    0.189995] cpuidle: using governor menu
+[    0.204179] No ATAGs?
+[    0.204211] hw-breakpoint: found 5 (+1 reserved) breakpoint and 1 watchpoint registers.
+[    0.204217] hw-breakpoint: maximum watchpoint size is 4 bytes.
+[    0.252679] platform regulators:regulator@1: Driver reg-fixed-voltage requests probe deferral
+[    0.252743] platform regulators:regulator@2: Driver reg-fixed-voltage requests probe deferral
+[    0.253035] vdd_5v_sata: Failed to request enable GPIO30: -517
+[    0.253131] reg-fixed-voltage regulators:regulator@3: Failed to register regulator: -517
+[    0.253144] platform regulators:regulator@3: Driver reg-fixed-voltage requests probe deferral
+[    0.253412] usb1_vbus: Failed to request enable GPIO238: -517
+[    0.253496] reg-fixed-voltage regulators:regulator@4: Failed to register regulator: -517
+[    0.253510] platform regulators:regulator@4: Driver reg-fixed-voltage requests probe deferral
+[    0.253778] usb3_vbus: Failed to request enable GPIO236: -517
+[    0.253861] reg-fixed-voltage regulators:regulator@5: Failed to register regulator: -517
+[    0.253875] platform regulators:regulator@5: Driver reg-fixed-voltage requests probe deferral
+[    0.253936] platform regulators:regulator@6: Driver reg-fixed-voltage requests probe deferral
+[    0.254201] sys_3v3_pexs: Failed to request enable GPIO95: -517
+[    0.254285] reg-fixed-voltage regulators:regulator@7: Failed to register regulator: -517
+[    0.254298] platform regulators:regulator@7: Driver reg-fixed-voltage requests probe deferral
+[    0.254636] reg-fixed-voltage regulators:regulator@8: Failed to find supply vin
+[    0.254729] reg-fixed-voltage regulators:regulator@8: Failed to register regulator: -517
+[    0.254743] platform regulators:regulator@8: Driver reg-fixed-voltage requests probe deferral
+[    0.256071] vgaarb: loaded
+[    0.257241] SCSI subsystem initialized
+[    0.257538] libata version 3.00 loaded.
+[    0.258147] usbcore: registered new interface driver usbfs
+[    0.258279] usbcore: registered new interface driver hub
+[    0.258397] usbcore: registered new device driver usb
+[    0.267775] vrtc: supplied by vdd_5v_in
+[    0.280086] vdd_1v8_gen: supplied by vdd_5v_in
+[    0.281350] ------------[ cut here ]------------
+[    0.281373] WARNING: CPU: 2 PID: 0 at fs/dcache.c:255 __d_free+0x34/0x40()
+[    0.281378] Modules linked in:
+[    0.281388] CPU: 2 PID: 0 Comm: swapper/2 Not tainted 3.18.0-rc3-next-20141103-96358-ga641d0e #1
+[    0.281430] [<c0015990>] (unwind_backtrace) from [<c0011518>] (show_stack+0x10/0x14)
+[    0.281444] [<c0011518>] (show_stack) from [<c0616ebc>] (dump_stack+0x80/0xcc)
+[    0.281458] [<c0616ebc>] (dump_stack) from [<c0024804>] (warn_slowpath_common+0x64/0x88)
+[    0.281467] [<c0024804>] (warn_slowpath_common) from [<c0024844>] (warn_slowpath_null+0x1c/0x24)
+[    0.281475] [<c0024844>] (warn_slowpath_null) from [<c00f0440>] (__d_free+0x34/0x40)
+[    0.281495] [<c00f0440>] (__d_free) from [<c006a748>] (rcu_process_callbacks+0x3a8/0x544)
+[    0.281509] [<c006a748>] (rcu_process_callbacks) from [<c00275f4>] (__do_softirq+0xf0/0x240)
+[    0.281517] [<c00275f4>] (__do_softirq) from [<c00279e8>] (irq_exit+0xa8/0x114)
+[    0.281537] [<c00279e8>] (irq_exit) from [<c006170c>] (__handle_domain_irq+0x58/0xa4)
+[    0.281547] [<c006170c>] (__handle_domain_irq) from [<c00087a0>] (gic_handle_irq+0x20/0x5c)
+[    0.281557] [<c00087a0>] (gic_handle_irq) from [<c00120c0>] (__irq_svc+0x40/0x74)
+[    0.281561] Exception stack(0xee089f98 to 0xee089fe0)
+[    0.281566] 9f80:                                                       ffffffed 00000000
+[    0.281572] 9fa0: ee089fe8 c001ece0 c08b44ec c08b4488 00000000 00000000 c08a9880 c08a8c40
+[    0.281578] 9fc0: ffffffed 00000000 00000000 ee089fe0 c000f484 c000f488 60000113 ffffffff
+[    0.281587] [<c00120c0>] (__irq_svc) from [<c000f488>] (arch_cpu_idle+0x30/0x3c)
+[    0.281608] [<c000f488>] (arch_cpu_idle) from [<c005461c>] (cpu_startup_entry+0x1a0/0x274)
+[    0.281619] [<c005461c>] (cpu_startup_entry) from [<80008864>] (0x80008864)
+[    0.281641] ---[ end trace 57aba8f8473c883a ]---
+[    0.281648] ------------[ cut here ]------------
+[    0.281656] WARNING: CPU: 2 PID: 0 at fs/dcache.c:255 __d_free+0x34/0x40()
+[    0.281659] Modules linked in:
+[    0.281666] CPU: 2 PID: 0 Comm: swapper/2 Tainted: G        W      3.18.0-rc3-next-20141103-96358-ga641d0e #1
+[    0.281677] [<c0015990>] (unwind_backtrace) from [<c0011518>] (show_stack+0x10/0x14)
+[    0.281685] [<c0011518>] (show_stack) from [<c0616ebc>] (dump_stack+0x80/0xcc)
+[    0.281692] [<c0616ebc>] (dump_stack) from [<c0024804>] (warn_slowpath_common+0x64/0x88)
+[    0.281700] [<c0024804>] (warn_slowpath_common) from [<c0024844>] (warn_slowpath_null+0x1c/0x24)
+[    0.281708] [<c0024844>] (warn_slowpath_null) from [<c00f0440>] (__d_free+0x34/0x40)
+[    0.281717] [<c00f0440>] (__d_free) from [<c006a748>] (rcu_process_callbacks+0x3a8/0x544)
+[    0.281726] [<c006a748>] (rcu_process_callbacks) from [<c00275f4>] (__do_softirq+0xf0/0x240)
+[    0.281733] [<c00275f4>] (__do_softirq) from [<c00279e8>] (irq_exit+0xa8/0x114)
+[    0.281742] [<c00279e8>] (irq_exit) from [<c006170c>] (__handle_domain_irq+0x58/0xa4)
+[    0.281749] [<c006170c>] (__handle_domain_irq) from [<c00087a0>] (gic_handle_irq+0x20/0x5c)
+[    0.281758] [<c00087a0>] (gic_handle_irq) from [<c00120c0>] (__irq_svc+0x40/0x74)
+[    0.281762] Exception stack(0xee089f98 to 0xee089fe0)
+[    0.281766] 9f80:                                                       ffffffed 00000000
+[    0.281772] 9fa0: ee089fe8 c001ece0 c08b44ec c08b4488 00000000 00000000 c08a9880 c08a8c40
+[    0.281778] 9fc0: ffffffed 00000000 00000000 ee089fe0 c000f484 c000f488 60000113 ffffffff
+[    0.281787] [<c00120c0>] (__irq_svc) from [<c000f488>] (arch_cpu_idle+0x30/0x3c)
+[    0.281796] [<c000f488>] (arch_cpu_idle) from [<c005461c>] (cpu_startup_entry+0x1a0/0x274)
+[    0.281803] [<c005461c>] (cpu_startup_entry) from [<80008864>] (0x80008864)
+[    0.281807] ---[ end trace 57aba8f8473c883b ]---
+[    0.290102] vddio_ddr_1v2: supplied by vdd_5v_in
+[    0.300084] vdd_1v5_gen: supplied by vdd_5v_in
+[    0.312669] vdd_pexa,vdd_pexb: supplied by vdd_1v5_gen
+[    0.315651] vdd_sata,avdd_plle: supplied by vdd_1v5_gen
+[    0.318262] ldo3: supplied by vdd_5v_in
+[    0.330083] vdd_rtc: supplied by vdd_5v_in
+[    0.340094] vddio_sdmmc,avdd_vdac: supplied by vdd_5v_in
+[    0.343052] avdd_dsi_csi,pwrdet_mipi: supplied by vdd_1v8_gen
+[    0.350079] vdd_pllm,x,u,a_p_c_s: supplied by vdd_1v8_gen
+[    0.360078] vdd_ddr_hs: supplied by vdd_1v8_gen
+[    0.362882] Linux video capture interface: v2.00
+[    0.363000] pps_core: LinuxPPS API ver. 1 registered
+[    0.363005] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[    0.363061] PTP clock support registered
+[    0.363707] platform 7000f010.iommu: Driver tegra-smmu requests probe deferral
+[    0.364055] Advanced Linux Sound Architecture Driver Initialized.
+[    0.365234] Bluetooth: Core ver 2.19
+[    0.365304] NET: Registered protocol family 31
+[    0.365309] Bluetooth: HCI device and connection manager initialized
+[    0.365327] Bluetooth: HCI socket layer initialized
+[    0.365343] Bluetooth: L2CAP socket layer initialized
+[    0.365387] Bluetooth: SCO socket layer initialized
+[    0.366024] cfg80211: Calling CRDA to update world regulatory domain
+[    0.366604] Switched to clocksource timer_us
+[    0.384352] NET: Registered protocol family 2
+[    0.385319] TCP established hash table entries: 8192 (order: 3, 32768 bytes)
+[    0.385379] TCP bind hash table entries: 8192 (order: 4, 65536 bytes)
+[    0.385461] TCP: Hash tables configured (established 8192 bind 8192)
+[    0.385976] TCP: reno registered
+[    0.385990] UDP hash table entries: 512 (order: 2, 16384 bytes)
+[    0.386049] UDP-Lite hash table entries: 512 (order: 2, 16384 bytes)
+[    0.386419] NET: Registered protocol family 1
+[    0.387142] RPC: Registered named UNIX socket transport module.
+[    0.387149] RPC: Registered udp transport module.
+[    0.387153] RPC: Registered tcp transport module.
+[    0.387157] RPC: Registered tcp NFSv4.1 backchannel transport module.
+[    0.387182] PCI: CLS 0 bytes, default 64
+[    0.389069] hw perfevents: enabled with armv7_cortex_a9 PMU driver, 7 counters available
+[    0.391191] futex hash table entries: 1024 (order: 4, 65536 bytes)
+[    0.393664] squashfs: version 4.0 (2009/01/31) Phillip Lougher
+[    0.395654] bounce: pool size: 64 pages
+[    0.395668] io scheduler noop registered (default)
+[    0.396638] ------------[ cut here ]------------
+[    0.396659] WARNING: CPU: 2 PID: 0 at fs/dcache.c:255 __d_free+0x34/0x40()
+[    0.396663] Modules linked in:
+[    0.396675] CPU: 2 PID: 0 Comm: swapper/2 Tainted: G        W      3.18.0-rc3-next-20141103-96358-ga641d0e #1
+[    0.396711] [<c0015990>] (unwind_backtrace) from [<c0011518>] (show_stack+0x10/0x14)
+[    0.396724] [<c0011518>] (show_stack) from [<c0616ebc>] (dump_stack+0x80/0xcc)
+[    0.396738] [<c0616ebc>] (dump_stack) from [<c0024804>] (warn_slowpath_common+0x64/0x88)
+[    0.396748] [<c0024804>] (warn_slowpath_common) from [<c0024844>] (warn_slowpath_null+0x1c/0x24)
+[    0.396757] [<c0024844>] (warn_slowpath_null) from [<c00f0440>] (__d_free+0x34/0x40)
+[    0.396775] [<c00f0440>] (__d_free) from [<c006a748>] (rcu_process_callbacks+0x3a8/0x544)
+[    0.396789] [<c006a748>] (rcu_process_callbacks) from [<c00275f4>] (__do_softirq+0xf0/0x240)
+[    0.396798] [<c00275f4>] (__do_softirq) from [<c00279e8>] (irq_exit+0xa8/0x114)
+[    0.396816] [<c00279e8>] (irq_exit) from [<c006170c>] (__handle_domain_irq+0x58/0xa4)
+[    0.396825] [<c006170c>] (__handle_domain_irq) from [<c00087a0>] (gic_handle_irq+0x20/0x5c)
+[    0.396835] [<c00087a0>] (gic_handle_irq) from [<c00120c0>] (__irq_svc+0x40/0x74)
+[    0.396840] Exception stack(0xee089f98 to 0xee089fe0)
+[    0.396845] 9f80:                                                       ffffffed 00000000
+[    0.396852] 9fa0: ee089fe8 c001ece0 c08b44ec c08b4488 00000000 00000000 c08a9880 c08a8c40
+[    0.396857] 9fc0: ffffffed 00000000 00000000 ee089fe0 c000f484 c000f488 60000113 ffffffff
+[    0.396867] [<c00120c0>] (__irq_svc) from [<c000f488>] (arch_cpu_idle+0x30/0x3c)
+[    0.396887] [<c000f488>] (arch_cpu_idle) from [<c005461c>] (cpu_startup_entry+0x1a0/0x274)
+[    0.396896] [<c005461c>] (cpu_startup_entry) from [<80008864>] (0x80008864)
+[    0.396902] ---[ end trace 57aba8f8473c883c ]---
+[    0.398743] tegra-pcie 3000.pcie-controller: 2x3 configuration
+[    0.398853] tegra-pcie 3000.pcie-controller: Failed to get supply 'hvdd-pex': -517
+[    0.398917] platform 3000.pcie-controller: Driver tegra-pcie requests probe deferral
+[    0.406524] tegra-apbdma 6000a000.dma: Tegra20 APB DMA driver register 32 channels
+[    0.407491] Serial: 8250/16550 driver, 4 ports, IRQ sharing disabled
+[    0.410213] console [ttyS0] disabled
+[    0.410264] of_serial 70006000.serial: ttyS0 at MMIO 0x70006000 (irq = 68, base_baud = 25500000) is a Tegra
+[    0.451447] ------------[ cut here ]------------
+[    0.451460] WARNING: CPU: 0 PID: 1 at fs/dcache.c:255 __d_free+0x34/0x40()
+[    0.451463] Modules linked in:
+[    0.451469] CPU: 0 PID: 1 Comm: swapper/0 Tainted: G        W      3.18.0-rc3-next-20141103-96358-ga641d0e #1
+[    0.451489] [<c0015990>] (unwind_backtrace) from [<c0011518>] (show_stack+0x10/0x14)
+[    0.451497] [<c0011518>] (show_stack) from [<c0616ebc>] (dump_stack+0x80/0xcc)
+[    0.451505] [<c0616ebc>] (dump_stack) from [<c0024804>] (warn_slowpath_common+0x64/0x88)
+[    0.451511] [<c0024804>] (warn_slowpath_common) from [<c0024844>] (warn_slowpath_null+0x1c/0x24)
+[    0.451518] [<c0024844>] (warn_slowpath_null) from [<c00f0440>] (__d_free+0x34/0x40)
+[    0.451529] [<c00f0440>] (__d_free) from [<c006a748>] (rcu_process_callbacks+0x3a8/0x544)
+[    0.451537] [<c006a748>] (rcu_process_callbacks) from [<c00275f4>] (__do_softirq+0xf0/0x240)
+[    0.451543] [<c00275f4>] (__do_softirq) from [<c00279e8>] (irq_exit+0xa8/0x114)
+[    0.451552] [<c00279e8>] (irq_exit) from [<c006170c>] (__handle_domain_irq+0x58/0xa4)
+[    0.451558] [<c006170c>] (__handle_domain_irq) from [<c00087a0>] (gic_handle_irq+0x20/0x5c)
+[    0.451566] [<c00087a0>] (gic_handle_irq) from [<c00120c0>] (__irq_svc+0x40/0x74)
+[    0.451568] Exception stack(0xee065ad8 to 0xee065b20)
+[    0.451571] 5ac0:                                                       c0948ebc 60000193
+[    0.451575] 5ae0: 00000000 00000000 c0902d6c 0000004f 00000004 00000006 00000000 00000006
+[    0.451580] 5b00: 00000000 60000113 00000000 ee065b20 c005edd4 c005fd9c 60000113 ffffffff
+[    0.451587] [<c00120c0>] (__irq_svc) from [<c005fd9c>] (console_unlock+0x4b0/0x508)
+[    0.451593] [<c005fd9c>] (console_unlock) from [<c006102c>] (register_console+0x290/0x364)
+[    0.451610] [<c006102c>] (register_console) from [<c02956f0>] (uart_add_one_port+0x3bc/0x408)
+[    0.451620] [<c02956f0>] (uart_add_one_port) from [<c0298b00>] (serial8250_register_8250_port+0x270/0x380)
+[    0.451632] [<c0298b00>] (serial8250_register_8250_port) from [<c029f3d0>] (of_platform_serial_probe+0x2c4/0x394)
+[    0.451649] [<c029f3d0>] (of_platform_serial_probe) from [<c02e665c>] (platform_drv_probe+0x48/0xa4)
+[    0.451657] [<c02e665c>] (platform_drv_probe) from [<c02e5228>] (driver_probe_device+0x10c/0x22c)
+[    0.451663] [<c02e5228>] (driver_probe_device) from [<c02e53d4>] (__driver_attach+0x8c/0x90)
+[    0.451669] [<c02e53d4>] (__driver_attach) from [<c02e3a68>] (bus_for_each_dev+0x54/0x88)
+[    0.451676] [<c02e3a68>] (bus_for_each_dev) from [<c02e4a28>] (bus_add_driver+0xd4/0x1d0)
+[    0.451682] [<c02e4a28>] (bus_add_driver) from [<c02e59f8>] (driver_register+0x78/0xf4)
+[    0.451687] [<c02e59f8>] (driver_register) from [<c0008b04>] (do_one_initcall+0x80/0x1d0)
+[    0.451699] [<c0008b04>] (do_one_initcall) from [<c0864d6c>] (kernel_init_freeable+0x108/0x1d4)
+[    0.451712] [<c0864d6c>] (kernel_init_freeable) from [<c06130c4>] (kernel_init+0x8/0xec)
+[    0.451720] [<c06130c4>] (kernel_init) from [<c000e9b8>] (ret_from_fork+0x14/0x3c)
+[    0.451722] ---[ end trace 57aba8f8473c883d ]---
+[    0.451725] ------------[ cut here ]------------
+[    0.451731] WARNING: CPU: 0 PID: 1 at fs/dcache.c:255 __d_free+0x34/0x40()
+[    0.451733] Modules linked in:
+[    0.451737] CPU: 0 PID: 1 Comm: swapper/0 Tainted: G        W      3.18.0-rc3-next-20141103-96358-ga641d0e #1
+[    0.451746] [<c0015990>] (unwind_backtrace) from [<c0011518>] (show_stack+0x10/0x14)
+[    0.451752] [<c0011518>] (show_stack) from [<c0616ebc>] (dump_stack+0x80/0xcc)
+[    0.451758] [<c0616ebc>] (dump_stack) from [<c0024804>] (warn_slowpath_common+0x64/0x88)
+[    0.451763] [<c0024804>] (warn_slowpath_common) from [<c0024844>] (warn_slowpath_null+0x1c/0x24)
+[    0.451769] [<c0024844>] (warn_slowpath_null) from [<c00f0440>] (__d_free+0x34/0x40)
+[    0.451777] [<c00f0440>] (__d_free) from [<c006a748>] (rcu_process_callbacks+0x3a8/0x544)
+[    0.451783] [<c006a748>] (rcu_process_callbacks) from [<c00275f4>] (__do_softirq+0xf0/0x240)
+[    0.451789] [<c00275f4>] (__do_softirq) from [<c00279e8>] (irq_exit+0xa8/0x114)
+[    0.451795] [<c00279e8>] (irq_exit) from [<c006170c>] (__handle_domain_irq+0x58/0xa4)
+[    0.451801] [<c006170c>] (__handle_domain_irq) from [<c00087a0>] (gic_handle_irq+0x20/0x5c)
+[    0.451807] [<c00087a0>] (gic_handle_irq) from [<c00120c0>] (__irq_svc+0x40/0x74)
+[    0.451809] Exception stack(0xee065ad8 to 0xee065b20)
+[    0.451812] 5ac0:                                                       c0948ebc 60000193
+[    0.451816] 5ae0: 00000000 00000000 c0902d6c 0000004f 00000004 00000006 00000000 00000006
+[    0.451820] 5b00: 00000000 60000113 00000000 ee065b20 c005edd4 c005fd9c 60000113 ffffffff
+[    0.451827] [<c00120c0>] (__irq_svc) from [<c005fd9c>] (console_unlock+0x4b0/0x508)
+[    0.451833] [<c005fd9c>] (console_unlock) from [<c006102c>] (register_console+0x290/0x364)
+[    0.451840] [<c006102c>] (register_console) from [<c02956f0>] (uart_add_one_port+0x3bc/0x408)
+[    0.451847] [<c02956f0>] (uart_add_one_port) from [<c0298b00>] (serial8250_register_8250_port+0x270/0x380)
+[    0.451853] [<c0298b00>] (serial8250_register_8250_port) from [<c029f3d0>] (of_platform_serial_probe+0x2c4/0x394)
+[    0.451860] [<c029f3d0>] (of_platform_serial_probe) from [<c02e665c>] (platform_drv_probe+0x48/0xa4)
+[    0.451867] [<c02e665c>] (platform_drv_probe) from [<c02e5228>] (driver_probe_device+0x10c/0x22c)
+[    0.451873] [<c02e5228>] (driver_probe_device) from [<c02e53d4>] (__driver_attach+0x8c/0x90)
+[    0.451878] [<c02e53d4>] (__driver_attach) from [<c02e3a68>] (bus_for_each_dev+0x54/0x88)
+[    0.451884] [<c02e3a68>] (bus_for_each_dev) from [<c02e4a28>] (bus_add_driver+0xd4/0x1d0)
+[    0.451890] [<c02e4a28>] (bus_add_driver) from [<c02e59f8>] (driver_register+0x78/0xf4)
+[    0.451895] [<c02e59f8>] (driver_register) from [<c0008b04>] (do_one_initcall+0x80/0x1d0)
+[    0.451901] [<c0008b04>] (do_one_initcall) from [<c0864d6c>] (kernel_init_freeable+0x108/0x1d4)
+[    0.451908] [<c0864d6c>] (kernel_init_freeable) from [<c06130c4>] (kernel_init+0x8/0xec)
+[    0.451914] [<c06130c4>] (kernel_init) from [<c000e9b8>] (ret_from_fork+0x14/0x3c)
+[    0.451916] ---[ end trace 57aba8f8473c883e ]---
+[    0.451918] ------------[ cut here ]------------
+[    0.451924] WARNING: CPU: 0 PID: 1 at fs/dcache.c:255 __d_free+0x34/0x40()
+[    0.451926] Modules linked in:
+[    0.451930] CPU: 0 PID: 1 Comm: swapper/0 Tainted: G        W      3.18.0-rc3-next-20141103-96358-ga641d0e #1
+[    0.451938] [<c0015990>] (unwind_backtrace) from [<c0011518>] (show_stack+0x10/0x14)
+[    0.451944] [<c0011518>] (show_stack) from [<c0616ebc>] (dump_stack+0x80/0xcc)
+[    0.451950] [<c0616ebc>] (dump_stack) from [<c0024804>] (warn_slowpath_common+0x64/0x88)
+[    0.451955] [<c0024804>] (warn_slowpath_common) from [<c0024844>] (warn_slowpath_null+0x1c/0x24)
+[    0.451961] [<c0024844>] (warn_slowpath_null) from [<c00f0440>] (__d_free+0x34/0x40)
+[    0.451968] [<c00f0440>] (__d_free) from [<c006a748>] (rcu_process_callbacks+0x3a8/0x544)
+[    0.451975] [<c006a748>] (rcu_process_callbacks) from [<c00275f4>] (__do_softirq+0xf0/0x240)
+[    0.451980] [<c00275f4>] (__do_softirq) from [<c00279e8>] (irq_exit+0xa8/0x114)
+[    0.451987] [<c00279e8>] (irq_exit) from [<c006170c>] (__handle_domain_irq+0x58/0xa4)
+[    0.451992] [<c006170c>] (__handle_domain_irq) from [<c00087a0>] (gic_handle_irq+0x20/0x5c)
+[    0.451998] [<c00087a0>] (gic_handle_irq) from [<c00120c0>] (__irq_svc+0x40/0x74)
+[    0.452000] Exception stack(0xee065ad8 to 0xee065b20)
+[    0.452003] 5ac0:                                                       c0948ebc 60000193
+[    0.452007] 5ae0: 00000000 00000000 c0902d6c 0000004f 00000004 00000006 00000000 00000006
+[    0.452011] 5b00: 00000000 60000113 00000000 ee065b20 c005edd4 c005fd9c 60000113 ffffffff
+[    0.452018] [<c00120c0>] (__irq_svc) from [<c005fd9c>] (console_unlock+0x4b0/0x508)
+[    0.452024] [<c005fd9c>] (console_unlock) from [<c006102c>] (register_console+0x290/0x364)
+[    0.452031] [<c006102c>] (register_console) from [<c02956f0>] (uart_add_one_port+0x3bc/0x408)
+[    0.452038] [<c02956f0>] (uart_add_one_port) from [<c0298b00>] (serial8250_register_8250_port+0x270/0x380)
+[    0.452044] [<c0298b00>] (serial8250_register_8250_port) from [<c029f3d0>] (of_platform_serial_probe+0x2c4/0x394)
+[    0.452050] [<c029f3d0>] (of_platform_serial_probe) from [<c02e665c>] (platform_drv_probe+0x48/0xa4)
+[    0.452057] [<c02e665c>] (platform_drv_probe) from [<c02e5228>] (driver_probe_device+0x10c/0x22c)
+[    0.452063] [<c02e5228>] (driver_probe_device) from [<c02e53d4>] (__driver_attach+0x8c/0x90)
+[    0.452068] [<c02e53d4>] (__driver_attach) from [<c02e3a68>] (bus_for_each_dev+0x54/0x88)
+[    0.452073] [<c02e3a68>] (bus_for_each_dev) from [<c02e4a28>] (bus_add_driver+0xd4/0x1d0)
+[    0.452079] [<c02e4a28>] (bus_add_driver) from [<c02e59f8>] (driver_register+0x78/0xf4)
+[    0.452084] [<c02e59f8>] (driver_register) from [<c0008b04>] (do_one_initcall+0x80/0x1d0)
+[    0.452090] [<c0008b04>] (do_one_initcall) from [<c0864d6c>] (kernel_init_freeable+0x108/0x1d4)
+[    0.452097] [<c0864d6c>] (kernel_init_freeable) from [<c06130c4>] (kernel_init+0x8/0xec)
+[    0.452103] [<c06130c4>] (kernel_init) from [<c000e9b8>] (ret_from_fork+0x14/0x3c)
+[    0.452106] ---[ end trace 57aba8f8473c883f ]---
+[    0.452109] ------------[ cut here ]------------
+[    0.452114] WARNING: CPU: 0 PID: 1 at fs/dcache.c:255 __d_free+0x34/0x40()
+[    0.452116] Modules linked in:
+[    0.452120] CPU: 0 PID: 1 Comm: swapper/0 Tainted: G        W      3.18.0-rc3-next-20141103-96358-ga641d0e #1
+[    0.452128] [<c0015990>] (unwind_backtrace) from [<c0011518>] (show_stack+0x10/0x14)
+[    0.452134] [<c0011518>] (show_stack) from [<c0616ebc>] (dump_stack+0x80/0xcc)
+[    0.452139] [<c0616ebc>] (dump_stack) from [<c0024804>] (warn_slowpath_common+0x64/0x88)
+[    0.452145] [<c0024804>] (warn_slowpath_common) from [<c0024844>] (warn_slowpath_null+0x1c/0x24)
+[    0.452151] [<c0024844>] (warn_slowpath_null) from [<c00f0440>] (__d_free+0x34/0x40)
+[    0.452158] [<c00f0440>] (__d_free) from [<c006a748>] (rcu_process_callbacks+0x3a8/0x544)
+[    0.452165] [<c006a748>] (rcu_process_callbacks) from [<c00275f4>] (__do_softirq+0xf0/0x240)
+[    0.452170] [<c00275f4>] (__do_softirq) from [<c00279e8>] (irq_exit+0xa8/0x114)
+[    0.452177] [<c00279e8>] (irq_exit) from [<c006170c>] (__handle_domain_irq+0x58/0xa4)
+[    0.452182] [<c006170c>] (__handle_domain_irq) from [<c00087a0>] (gic_handle_irq+0x20/0x5c)
+[    0.452188] [<c00087a0>] (gic_handle_irq) from [<c00120c0>] (__irq_svc+0x40/0x74)
+[    0.452190] Exception stack(0xee065ad8 to 0xee065b20)
+[    0.452193] 5ac0:                                                       c0948ebc 60000193
+[    0.452197] 5ae0: 00000000 00000000 c0902d6c 0000004f 00000004 00000006 00000000 00000006
+[    0.452201] 5b00: 00000000 60000113 00000000 ee065b20 c005edd4 c005fd9c 60000113 ffffffff
+[    0.452208] [<c00120c0>] (__irq_svc) from [<c005fd9c>] (console_unlock+0x4b0/0x508)
+[    0.452214] [<c005fd9c>] (console_unlock) from [<c006102c>] (register_console+0x290/0x364)
+[    0.452222] [<c006102c>] (register_console) from [<c02956f0>] (uart_add_one_port+0x3bc/0x408)
+[    0.452227] [<c02956f0>] (uart_add_one_port) from [<c0298b00>] (serial8250_register_8250_port+0x270/0x380)
+[    0.452234] [<c0298b00>] (serial8250_register_8250_port) from [<c029f3d0>] (of_platform_serial_probe+0x2c4/0x394)
+[    0.452241] [<c029f3d0>] (of_platform_serial_probe) from [<c02e665c>] (platform_drv_probe+0x48/0xa4)
+[    0.452247] [<c02e665c>] (platform_drv_probe) from [<c02e5228>] (driver_probe_device+0x10c/0x22c)
+[    0.452253] [<c02e5228>] (driver_probe_device) from [<c02e53d4>] (__driver_attach+0x8c/0x90)
+[    0.452258] [<c02e53d4>] (__driver_attach) from [<c02e3a68>] (bus_for_each_dev+0x54/0x88)
+[    0.452264] [<c02e3a68>] (bus_for_each_dev) from [<c02e4a28>] (bus_add_driver+0xd4/0x1d0)
+[    0.452270] [<c02e4a28>] (bus_add_driver) from [<c02e59f8>] (driver_register+0x78/0xf4)
+[    0.452275] [<c02e59f8>] (driver_register) from [<c0008b04>] (do_one_initcall+0x80/0x1d0)
+[    0.452281] [<c0008b04>] (do_one_initcall) from [<c0864d6c>] (kernel_init_freeable+0x108/0x1d4)
+[    0.452288] [<c0864d6c>] (kernel_init_freeable) from [<c06130c4>] (kernel_init+0x8/0xec)
+[    0.452294] [<c06130c4>] (kernel_init) from [<c000e9b8>] (ret_from_fork+0x14/0x3c)
+[    0.452297] ---[ end trace 57aba8f8473c8840 ]---
+[    0.452299] ------------[ cut here ]------------
+[    0.452305] WARNING: CPU: 0 PID: 1 at fs/dcache.c:255 __d_free+0x34/0x40()
+[    0.452307] Modules linked in:
+[    0.452311] CPU: 0 PID: 1 Comm: swapper/0 Tainted: G        W      3.18.0-rc3-next-20141103-96358-ga641d0e #1
+[    0.452319] [<c0015990>] (unwind_backtrace) from [<c0011518>] (show_stack+0x10/0x14)
+[    0.452325] [<c0011518>] (show_stack) from [<c0616ebc>] (dump_stack+0x80/0xcc)
+[    0.452330] [<c0616ebc>] (dump_stack) from [<c0024804>] (warn_slowpath_common+0x64/0x88)
+[    0.452336] [<c0024804>] (warn_slowpath_common) from [<c0024844>] (warn_slowpath_null+0x1c/0x24)
+[    0.452341] [<c0024844>] (warn_slowpath_null) from [<c00f0440>] (__d_free+0x34/0x40)
+[    0.452349] [<c00f0440>] (__d_free) from [<c006a748>] (rcu_process_callbacks+0x3a8/0x544)
+[    0.452355] [<c006a748>] (rcu_process_callbacks) from [<c00275f4>] (__do_softirq+0xf0/0x240)
+[    0.452361] [<c00275f4>] (__do_softirq) from [<c00279e8>] (irq_exit+0xa8/0x114)
+[    0.452367] [<c00279e8>] (irq_exit) from [<c006170c>] (__handle_domain_irq+0x58/0xa4)
+[    0.452373] [<c006170c>] (__handle_domain_irq) from [<c00087a0>] (gic_handle_irq+0x20/0x5c)
+[    0.452379] [<c00087a0>] (gic_handle_irq) from [<c00120c0>] (__irq_svc+0x40/0x74)
+[    0.452380] Exception stack(0xee065ad8 to 0xee065b20)
+[    0.452383] 5ac0:                                                       c0948ebc 60000193
+[    0.452387] 5ae0: 00000000 00000000 c0902d6c 0000004f 00000004 00000006 00000000 00000006
+[    0.452391] 5b00: 00000000 60000113 00000000 ee065b20 c005edd4 c005fd9c 60000113 ffffffff
+[    0.452398] [<c00120c0>] (__irq_svc) from [<c005fd9c>] (console_unlock+0x4b0/0x508)
+[    0.452404] [<c005fd9c>] (console_unlock) from [<c006102c>] (register_console+0x290/0x364)
+[    0.452411] [<c006102c>] (register_console) from [<c02956f0>] (uart_add_one_port+0x3bc/0x408)
+[    0.452418] [<c02956f0>] (uart_add_one_port) from [<c0298b00>] (serial8250_register_8250_port+0x270/0x380)
+[    0.452424] [<c0298b00>] (serial8250_register_8250_port) from [<c029f3d0>] (of_platform_serial_probe+0x2c4/0x394)
+[    0.452431] [<c029f3d0>] (of_platform_serial_probe) from [<c02e665c>] (platform_drv_probe+0x48/0xa4)
+[    0.452437] [<c02e665c>] (platform_drv_probe) from [<c02e5228>] (driver_probe_device+0x10c/0x22c)
+[    0.452443] [<c02e5228>] (driver_probe_device) from [<c02e53d4>] (__driver_attach+0x8c/0x90)
+[    0.452448] [<c02e53d4>] (__driver_attach) from [<c02e3a68>] (bus_for_each_dev+0x54/0x88)
+[    0.452454] [<c02e3a68>] (bus_for_each_dev) from [<c02e4a28>] (bus_add_driver+0xd4/0x1d0)
+[    0.452460] [<c02e4a28>] (bus_add_driver) from [<c02e59f8>] (driver_register+0x78/0xf4)
+[    0.452465] [<c02e59f8>] (driver_register) from [<c0008b04>] (do_one_initcall+0x80/0x1d0)
+[    0.452471] [<c0008b04>] (do_one_initcall) from [<c0864d6c>] (kernel_init_freeable+0x108/0x1d4)
+[    0.452478] [<c0864d6c>] (kernel_init_freeable) from [<c06130c4>] (kernel_init+0x8/0xec)
+[    0.452484] [<c06130c4>] (kernel_init) from [<c000e9b8>] (ret_from_fork+0x14/0x3c)
+[    0.452486] ---[ end trace 57aba8f8473c8841 ]---
+[    0.452489] ------------[ cut here ]------------
+[    0.452494] WARNING: CPU: 0 PID: 1 at fs/dcache.c:255 __d_free+0x34/0x40()
+[    0.452496] Modules linked in:
+[    0.452500] CPU: 0 PID: 1 Comm: swapper/0 Tainted: G        W      3.18.0-rc3-next-20141103-96358-ga641d0e #1
+[    0.452508] [<c0015990>] (unwind_backtrace) from [<c0011518>] (show_stack+0x10/0x14)
+[    0.452514] [<c0011518>] (show_stack) from [<c0616ebc>] (dump_stack+0x80/0xcc)
+[    0.452519] [<c0616ebc>] (dump_stack) from [<c0024804>] (warn_slowpath_common+0x64/0x88)
+[    0.452525] [<c0024804>] (warn_slowpath_common) from [<c0024844>] (warn_slowpath_null+0x1c/0x24)
+[    0.452531] [<c0024844>] (warn_slowpath_null) from [<c00f0440>] (__d_free+0x34/0x40)
+[    0.452538] [<c00f0440>] (__d_free) from [<c006a748>] (rcu_process_callbacks+0x3a8/0x544)
+[    0.452544] [<c006a748>] (rcu_process_callbacks) from [<c00275f4>] (__do_softirq+0xf0/0x240)
+[    0.452550] [<c00275f4>] (__do_softirq) from [<c00279e8>] (irq_exit+0xa8/0x114)
+[    0.452556] [<c00279e8>] (irq_exit) from [<c006170c>] (__handle_domain_irq+0x58/0xa4)
+[    0.452562] [<c006170c>] (__handle_domain_irq) from [<c00087a0>] (gic_handle_irq+0x20/0x5c)
+[    0.452567] [<c00087a0>] (gic_handle_irq) from [<c00120c0>] (__irq_svc+0x40/0x74)
+[    0.452569] Exception stack(0xee065ad8 to 0xee065b20)
+[    0.452572] 5ac0:                                                       c0948ebc 60000193
+[    0.452576] 5ae0: 00000000 00000000 c0902d6c 0000004f 00000004 00000006 00000000 00000006
+[    0.452580] 5b00: 00000000 60000113 00000000 ee065b20 c005edd4 c005fd9c 60000113 ffffffff
+[    0.452587] [<c00120c0>] (__irq_svc) from [<c005fd9c>] (console_unlock+0x4b0/0x508)
+[    0.452593] [<c005fd9c>] (console_unlock) from [<c006102c>] (register_console+0x290/0x364)
+[    0.452600] [<c006102c>] (register_console) from [<c02956f0>] (uart_add_one_port+0x3bc/0x408)
+[    0.452606] [<c02956f0>] (uart_add_one_port) from [<c0298b00>] (serial8250_register_8250_port+0x270/0x380)
+[    0.452613] [<c0298b00>] (serial8250_register_8250_port) from [<c029f3d0>] (of_platform_serial_probe+0x2c4/0x394)
+[    0.452620] [<c029f3d0>] (of_platform_serial_probe) from [<c02e665c>] (platform_drv_probe+0x48/0xa4)
+[    0.452626] [<c02e665c>] (platform_drv_probe) from [<c02e5228>] (driver_probe_device+0x10c/0x22c)
+[    0.452632] [<c02e5228>] (driver_probe_device) from [<c02e53d4>] (__driver_attach+0x8c/0x90)
+[    0.452637] [<c02e53d4>] (__driver_attach) from [<c02e3a68>] (bus_for_each_dev+0x54/0x88)
+[    0.452643] [<c02e3a68>] (bus_for_each_dev) from [<c02e4a28>] (bus_add_driver+0xd4/0x1d0)
+[    0.452649] [<c02e4a28>] (bus_add_driver) from [<c02e59f8>] (driver_register+0x78/0xf4)
+[    0.452654] [<c02e59f8>] (driver_register) from [<c0008b04>] (do_one_initcall+0x80/0x1d0)
+[    0.452661] [<c0008b04>] (do_one_initcall) from [<c0864d6c>] (kernel_init_freeable+0x108/0x1d4)
+[    0.452668] [<c0864d6c>] (kernel_init_freeable) from [<c06130c4>] (kernel_init+0x8/0xec)
+[    0.452674] [<c06130c4>] (kernel_init) from [<c000e9b8>] (ret_from_fork+0x14/0x3c)
+[    0.452676] ---[ end trace 57aba8f8473c8842 ]---
+[    0.452681] ------------[ cut here ]------------
+[    0.452686] WARNING: CPU: 0 PID: 1 at fs/dcache.c:255 __d_free+0x34/0x40()
+[    0.452688] Modules linked in:
+[    0.452692] CPU: 0 PID: 1 Comm: swapper/0 Tainted: G        W      3.18.0-rc3-next-20141103-96358-ga641d0e #1
+[    0.452700] [<c0015990>] (unwind_backtrace) from [<c0011518>] (show_stack+0x10/0x14)
+[    0.452706] [<c0011518>] (show_stack) from [<c0616ebc>] (dump_stack+0x80/0xcc)
+[    0.452711] [<c0616ebc>] (dump_stack) from [<c0024804>] (warn_slowpath_common+0x64/0x88)
+[    0.452717] [<c0024804>] (warn_slowpath_common) from [<c0024844>] (warn_slowpath_null+0x1c/0x24)
+[    0.452723] [<c0024844>] (warn_slowpath_null) from [<c00f0440>] (__d_free+0x34/0x40)
+[    0.452730] [<c00f0440>] (__d_free) from [<c006a748>] (rcu_process_callbacks+0x3a8/0x544)
+[    0.452736] [<c006a748>] (rcu_process_callbacks) from [<c00275f4>] (__do_softirq+0xf0/0x240)
+[    0.452742] [<c00275f4>] (__do_softirq) from [<c00279e8>] (irq_exit+0xa8/0x114)
+[    0.452748] [<c00279e8>] (irq_exit) from [<c006170c>] (__handle_domain_irq+0x58/0xa4)
+[    0.452754] [<c006170c>] (__handle_domain_irq) from [<c00087a0>] (gic_handle_irq+0x20/0x5c)
+[    0.452760] [<c00087a0>] (gic_handle_irq) from [<c00120c0>] (__irq_svc+0x40/0x74)
+[    0.452762] Exception stack(0xee065ad8 to 0xee065b20)
+[    0.452765] 5ac0:                                                       c0948ebc 60000193
+[    0.452769] 5ae0: 00000000 00000000 c0902d6c 0000004f 00000004 00000006 00000000 00000006
+[    0.452773] 5b00: 00000000 60000113 00000000 ee065b20 c005edd4 c005fd9c 60000113 ffffffff
+[    0.452779] [<c00120c0>] (__irq_svc) from [<c005fd9c>] (console_unlock+0x4b0/0x508)
+[    0.452785] [<c005fd9c>] (console_unlock) from [<c006102c>] (register_console+0x290/0x364)
+[    0.452793] [<c006102c>] (register_console) from [<c02956f0>] (uart_add_one_port+0x3bc/0x408)
+[    0.452799] [<c02956f0>] (uart_add_one_port) from [<c0298b00>] (serial8250_register_8250_port+0x270/0x380)
+[    0.452805] [<c0298b00>] (serial8250_register_8250_port) from [<c029f3d0>] (of_platform_serial_probe+0x2c4/0x394)
+[    0.452812] [<c029f3d0>] (of_platform_serial_probe) from [<c02e665c>] (platform_drv_probe+0x48/0xa4)
+[    0.452818] [<c02e665c>] (platform_drv_probe) from [<c02e5228>] (driver_probe_device+0x10c/0x22c)
+[    0.452824] [<c02e5228>] (driver_probe_device) from [<c02e53d4>] (__driver_attach+0x8c/0x90)
+[    0.452829] [<c02e53d4>] (__driver_attach) from [<c02e3a68>] (bus_for_each_dev+0x54/0x88)
+[    0.452835] [<c02e3a68>] (bus_for_each_dev) from [<c02e4a28>] (bus_add_driver+0xd4/0x1d0)
+[    0.452841] [<c02e4a28>] (bus_add_driver) from [<c02e59f8>] (driver_register+0x78/0xf4)
+[    0.452847] [<c02e59f8>] (driver_register) from [<c0008b04>] (do_one_initcall+0x80/0x1d0)
+[    0.452853] [<c0008b04>] (do_one_initcall) from [<c0864d6c>] (kernel_init_freeable+0x108/0x1d4)
+[    0.452860] [<c0864d6c>] (kernel_init_freeable) from [<c06130c4>] (kernel_init+0x8/0xec)
+[    0.452866] [<c06130c4>] (kernel_init) from [<c000e9b8>] (ret_from_fork+0x14/0x3c)
+[    0.452869] ---[ end trace 57aba8f8473c8843 ]---
+[    0.476596] ------------[ cut here ]------------
+[    0.476606] WARNING: CPU: 1 PID: 0 at fs/dcache.c:255 __d_free+0x34/0x40()
+[    0.476608] Modules linked in:
+[    0.476613] CPU: 1 PID: 0 Comm: swapper/1 Tainted: G        W      3.18.0-rc3-next-20141103-96358-ga641d0e #1
+[    0.476626] [<c0015990>] (unwind_backtrace) from [<c0011518>] (show_stack+0x10/0x14)
+[    0.476632] [<c0011518>] (show_stack) from [<c0616ebc>] (dump_stack+0x80/0xcc)
+[    0.476638] [<c0616ebc>] (dump_stack) from [<c0024804>] (warn_slowpath_common+0x64/0x88)
+[    0.476644] [<c0024804>] (warn_slowpath_common) from [<c0024844>] (warn_slowpath_null+0x1c/0x24)
+[    0.476650] [<c0024844>] (warn_slowpath_null) from [<c00f0440>] (__d_free+0x34/0x40)
+[    0.476658] [<c00f0440>] (__d_free) from [<c006a748>] (rcu_process_callbacks+0x3a8/0x544)
+[    0.476665] [<c006a748>] (rcu_process_callbacks) from [<c00275f4>] (__do_softirq+0xf0/0x240)
+[    0.476671] [<c00275f4>] (__do_softirq) from [<c00279e8>] (irq_exit+0xa8/0x114)
+[    0.476680] [<c00279e8>] (irq_exit) from [<c006170c>] (__handle_domain_irq+0x58/0xa4)
+[    0.476686] [<c006170c>] (__handle_domain_irq) from [<c00087a0>] (gic_handle_irq+0x20/0x5c)
+[    0.476692] [<c00087a0>] (gic_handle_irq) from [<c00120c0>] (__irq_svc+0x40/0x74)
+[    0.476694] Exception stack(0xee087f98 to 0xee087fe0)
+[    0.476697] 7f80:                                                       ffffffed 00000000
+[    0.476702] 7fa0: ee087fe8 c001ece0 c08b44ec c08b4488 00000000 00000000 c08a9880 c08a8c40
+[    0.476706] 7fc0: ffffffed 00000000 00000000 ee087fe0 c000f484 c000f488 60000113 ffffffff
+[    0.476712] [<c00120c0>] (__irq_svc) from [<c000f488>] (arch_cpu_idle+0x30/0x3c)
+[    0.476724] [<c000f488>] (arch_cpu_idle) from [<c005461c>] (cpu_startup_entry+0x1a0/0x274)
+[    0.476730] [<c005461c>] (cpu_startup_entry) from [<80008864>] (0x80008864)
+[    0.476733] ---[ end trace 57aba8f8473c8844 ]---
+[    3.910736] console [ttyS0] enabled
+[    3.915269] [drm] Initialized drm 1.1.0 20060810
+[    3.920872] tegra-hdmi 54280000.hdmi: failed to get HDMI regulator
+[    3.927067] platform 54280000.hdmi: Driver tegra-hdmi requests probe deferral
+[    3.944161] loop: module loaded
+[    3.951355] m25p80 spi32766.1: w25q32 (4096 Kbytes)
+[    3.958346] CAN device driver interface
+[    3.962267] igb: Intel(R) Gigabit Ethernet Network Driver - version 5.2.15-k
+[    3.969308] igb: Copyright (c) 2007-2014 Intel Corporation.
+[    3.975166] pegasus: v0.9.3 (2013/04/25), Pegasus/Pegasus II USB Ethernet driver
+[    3.982678] usbcore: registered new interface driver pegasus
+[    3.988470] usbcore: registered new interface driver asix
+[    3.993955] usbcore: registered new interface driver ax88179_178a
+[    3.996607] ------------[ cut here ]------------
+[    3.996622] WARNING: CPU: 2 PID: 0 at fs/dcache.c:255 __d_free+0x34/0x40()
+[    3.996625] Modules linked in:
+[    3.996631] CPU: 2 PID: 0 Comm: swapper/2 Tainted: G        W      3.18.0-rc3-next-20141103-96358-ga641d0e #1
+[    3.996661] [<c0015990>] (unwind_backtrace) from [<c0011518>] (show_stack+0x10/0x14)
+[    3.996670] [<c0011518>] (show_stack) from [<c0616ebc>] (dump_stack+0x80/0xcc)
+[    3.996681] [<c0616ebc>] (dump_stack) from [<c0024804>] (warn_slowpath_common+0x64/0x88)
+[    3.996687] [<c0024804>] (warn_slowpath_common) from [<c0024844>] (warn_slowpath_null+0x1c/0x24)
+[    3.996693] [<c0024844>] (warn_slowpath_null) from [<c00f0440>] (__d_free+0x34/0x40)
+[    3.996707] [<c00f0440>] (__d_free) from [<c006a748>] (rcu_process_callbacks+0x3a8/0x544)
+[    3.996717] [<c006a748>] (rcu_process_callbacks) from [<c00275f4>] (__do_softirq+0xf0/0x240)
+[    3.996723] [<c00275f4>] (__do_softirq) from [<c00279e8>] (irq_exit+0xa8/0x114)
+[    3.996737] [<c00279e8>] (irq_exit) from [<c006170c>] (__handle_domain_irq+0x58/0xa4)
+[    3.996744] [<c006170c>] (__handle_domain_irq) from [<c00087a0>] (gic_handle_irq+0x20/0x5c)
+[    3.996751] [<c00087a0>] (gic_handle_irq) from [<c00120c0>] (__irq_svc+0x40/0x74)
+[    3.996753] Exception stack(0xee089f98 to 0xee089fe0)
+[    3.996757] 9f80:                                                       ffffffed 00000000
+[    3.996761] 9fa0: ee089fe8 c001ece0 c08b44ec c08b4488 00000000 00000000 c08a9880 c08a8c40
+[    3.996765] 9fc0: ffffffed 00000000 00000000 ee089fe0 c000f484 c000f488 60000113 ffffffff
+[    3.996772] [<c00120c0>] (__irq_svc) from [<c000f488>] (arch_cpu_idle+0x30/0x3c)
+[    3.996789] [<c000f488>] (arch_cpu_idle) from [<c005461c>] (cpu_startup_entry+0x1a0/0x274)
+[    3.996796] [<c005461c>] (cpu_startup_entry) from [<80008864>] (0x80008864)
+[    3.996800] ---[ end trace 57aba8f8473c8845 ]---
+[    3.996814] ------------[ cut here ]------------
+[    3.996820] WARNING: CPU: 2 PID: 0 at fs/dcache.c:255 __d_free+0x34/0x40()
+[    3.996822] Modules linked in:
+[    3.996826] CPU: 2 PID: 0 Comm: swapper/2 Tainted: G        W      3.18.0-rc3-next-20141103-96358-ga641d0e #1
+[    3.996835] [<c0015990>] (unwind_backtrace) from [<c0011518>] (show_stack+0x10/0x14)
+[    3.996842] [<c0011518>] (show_stack) from [<c0616ebc>] (dump_stack+0x80/0xcc)
+[    3.996847] [<c0616ebc>] (dump_stack) from [<c0024804>] (warn_slowpath_common+0x64/0x88)
+[    3.996853] [<c0024804>] (warn_slowpath_common) from [<c0024844>] (warn_slowpath_null+0x1c/0x24)
+[    3.996859] [<c0024844>] (warn_slowpath_null) from [<c00f0440>] (__d_free+0x34/0x40)
+[    3.996866] [<c00f0440>] (__d_free) from [<c006a748>] (rcu_process_callbacks+0x3a8/0x544)
+[    3.996873] [<c006a748>] (rcu_process_callbacks) from [<c00275f4>] (__do_softirq+0xf0/0x240)
+[    3.996878] [<c00275f4>] (__do_softirq) from [<c00279e8>] (irq_exit+0xa8/0x114)
+[    3.996885] [<c00279e8>] (irq_exit) from [<c006170c>] (__handle_domain_irq+0x58/0xa4)
+[    3.996891] [<c006170c>] (__handle_domain_irq) from [<c00087a0>] (gic_handle_irq+0x20/0x5c)
+[    3.996897] [<c00087a0>] (gic_handle_irq) from [<c00120c0>] (__irq_svc+0x40/0x74)
+[    3.996899] Exception stack(0xee089f98 to 0xee089fe0)
+[    3.996902] 9f80:                                                       ffffffed 00000000
+[    3.996906] 9fa0: ee089fe8 c001ece0 c08b44ec c08b4488 00000000 00000000 c08a9880 c08a8c40
+[    3.996910] 9fc0: ffffffed 00000000 00000000 ee089fe0 c000f484 c000f488 60000113 ffffffff
+[    3.996917] [<c00120c0>] (__irq_svc) from [<c000f488>] (arch_cpu_idle+0x30/0x3c)
+[    3.996924] [<c000f488>] (arch_cpu_idle) from [<c005461c>] (cpu_startup_entry+0x1a0/0x274)
+[    3.996929] [<c005461c>] (cpu_startup_entry) from [<80008864>] (0x80008864)
+[    3.996931] ---[ end trace 57aba8f8473c8846 ]---
+[    4.336197] usbcore: registered new interface driver cdc_ether
+[    4.342167] usbcore: registered new interface driver smsc75xx
+[    4.348049] usbcore: registered new interface driver smsc95xx
+[    4.353880] usbcore: registered new interface driver net1080
+[    4.359640] usbcore: registered new interface driver cdc_subset
+[    4.365658] usbcore: registered new interface driver zaurus
+[    4.371381] usbcore: registered new interface driver cdc_ncm
+[    4.377194] ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+[    4.383708] ehci-pci: EHCI PCI platform driver
+[    4.388253] tegra-ehci: Tegra EHCI driver
+[    4.392476] platform 7d004000.usb: Driver tegra-ehci requests probe deferral
+[    4.399605] platform 7d008000.usb: Driver tegra-ehci requests probe deferral
+[    4.406873] usbcore: registered new interface driver cdc_acm
+[    4.412515] cdc_acm: USB Abstract Control Model driver for USB modems and ISDN adapters
+[    4.420629] usbcore: registered new interface driver cdc_wdm
+[    4.426414] usbcore: registered new interface driver usb-storage
+[    4.432609] platform 7d004000.usb-phy: Driver tegra-phy requests probe deferral
+[    4.439993] platform 7d008000.usb-phy: Driver tegra-phy requests probe deferral
+[    4.447939] mousedev: PS/2 mouse device common for all mice
+[    4.455664] tegra_rtc 7000e000.rtc: rtc core: registered 7000e000.rtc as rtc1
+[    4.462835] tegra_rtc 7000e000.rtc: Tegra internal Real Time Clock
+[    4.482041] tps65910-rtc tps65910-rtc: rtc core: registered tps65910-rtc as rtc0
+[    4.489514] i2c /dev entries driver
+[    4.494707] usbcore: registered new interface driver uvcvideo
+[    4.500450] USB Video Class driver (1.1.1)
+[    4.504538] gspca_main: v2.14.0 registered
+[    4.506602] ------------[ cut here ]------------
+[    4.506615] WARNING: CPU: 1 PID: 0 at fs/dcache.c:255 __d_free+0x34/0x40()
+[    4.506618] Modules linked in:
+[    4.506624] CPU: 1 PID: 0 Comm: swapper/1 Tainted: G        W      3.18.0-rc3-next-20141103-96358-ga641d0e #1
+[    4.506642] [<c0015990>] (unwind_backtrace) from [<c0011518>] (show_stack+0x10/0x14)
+[    4.506650] [<c0011518>] (show_stack) from [<c0616ebc>] (dump_stack+0x80/0xcc)
+[    4.506658] [<c0616ebc>] (dump_stack) from [<c0024804>] (warn_slowpath_common+0x64/0x88)
+[    4.506665] [<c0024804>] (warn_slowpath_common) from [<c0024844>] (warn_slowpath_null+0x1c/0x24)
+[    4.506671] [<c0024844>] (warn_slowpath_null) from [<c00f0440>] (__d_free+0x34/0x40)
+[    4.506681] [<c00f0440>] (__d_free) from [<c006a748>] (rcu_process_callbacks+0x3a8/0x544)
+[    4.506690] [<c006a748>] (rcu_process_callbacks) from [<c00275f4>] (__do_softirq+0xf0/0x240)
+[    4.506697] [<c00275f4>] (__do_softirq) from [<c00279e8>] (irq_exit+0xa8/0x114)
+[    4.506708] [<c00279e8>] (irq_exit) from [<c006170c>] (__handle_domain_irq+0x58/0xa4)
+[    4.506714] [<c006170c>] (__handle_domain_irq) from [<c00087a0>] (gic_handle_irq+0x20/0x5c)
+[    4.506720] [<c00087a0>] (gic_handle_irq) from [<c00120c0>] (__irq_svc+0x40/0x74)
+[    4.506723] Exception stack(0xee087f98 to 0xee087fe0)
+[    4.506726] 7f80:                                                       ffffffed 00000000
+[    4.506730] 7fa0: ee087fe8 c001ece0 c08b44ec c08b4488 00000000 00000000 c08a9880 c08a8c40
+[    4.506735] 7fc0: ffffffed 00000000 00000000 ee087fe0 c000f484 c000f488 60000113 ffffffff
+[    4.506741] [<c00120c0>] (__irq_svc) from [<c000f488>] (arch_cpu_idle+0x30/0x3c)
+[    4.506752] [<c000f488>] (arch_cpu_idle) from [<c005461c>] (cpu_startup_entry+0x1a0/0x274)
+[    4.506758] [<c005461c>] (cpu_startup_entry) from [<80008864>] (0x80008864)
+[    4.506761] ---[ end trace 57aba8f8473c8847 ]---
+[    4.677366] Driver 'mmcblk' needs updating - please use bus_type methods
+[    4.684133] sdhci: Secure Digital Host Controller Interface driver
+[    4.690308] sdhci: Copyright(c) Pierre Ossman
+[    4.694656] sdhci-pltfm: SDHCI platform and OF driver helper
+[    4.700558] sdhci-tegra 78000000.sdhci: Got CD GPIO
+[    4.705431] sdhci-tegra 78000000.sdhci: Got WP GPIO
+[    4.711441] sdhci-tegra 78000000.sdhci: No vmmc regulator found
+[    4.717360] sdhci-tegra 78000000.sdhci: No vqmmc regulator found
+[    4.723351] mmc0: Invalid maximum block size, assuming 512 bytes
+[    4.766770] mmc0: SDHCI controller on 78000000.sdhci [78000000.sdhci] using ADMA
+[    4.777354] sdhci-tegra 78000600.sdhci: No vmmc regulator found
+[    4.783260] sdhci-tegra 78000600.sdhci: No vqmmc regulator found
+[    4.789260] mmc1: Invalid maximum block size, assuming 512 bytes
+[    4.836617] mmc1: SDHCI controller on 78000600.sdhci [78000600.sdhci] using ADMA
+[    4.856488] usbcore: registered new interface driver usbhid
+[    4.864080] usbhid: USB HID core driver
+[    4.906605] ------------[ cut here ]------------
+[    4.911222] WARNING: CPU: 1 PID: 0 at fs/dcache.c:255 __d_free+0x34/0x40()
+[    4.918085] Modules linked in:
+[    4.921135] CPU: 1 PID: 0 Comm: swapper/1 Tainted: G        W      3.18.0-rc3-next-20141103-96358-ga641d0e #1
+[    4.931050] [<c0015990>] (unwind_backtrace) from [<c0011518>] (show_stack+0x10/0x14)
+[    4.938784] [<c0011518>] (show_stack) from [<c0616ebc>] (dump_stack+0x80/0xcc)
+[    4.945992] [<c0616ebc>] (dump_stack) from [<c0024804>] (warn_slowpath_common+0x64/0x88)
+[    4.947921] mmc1: new high speed MMC card at address 0001
+[    4.948582] mmcblk0: mmc1:0001 SEM16G 14.8 GiB 
+[    4.948821] mmcblk0boot0: mmc1:0001 SEM16G partition 1 1.00 MiB
+[    4.949032] mmcblk0boot1: mmc1:0001 SEM16G partition 2 1.00 MiB
+[    4.949221] mmcblk0rpmb: mmc1:0001 SEM16G partition 3 128 KiB
+[    4.981507] [<c0024804>] (warn_slowpath_common) from [<c0024844>] (warn_slowpath_null+0x1c/0x24)
+[    4.990283] [<c0024844>] (warn_slowpath_null) from [<c00f0440>] (__d_free+0x34/0x40)
+[    4.998020] [<c00f0440>] (__d_free) from [<c006a748>] (rcu_process_callbacks+0x3a8/0x544)
+[    5.006183] [<c006a748>] (rcu_process_callbacks) from [<c00275f4>] (__do_softirq+0xf0/0x240)
+[    5.014607] [<c00275f4>] (__do_softirq) from [<c00279e8>] (irq_exit+0xa8/0x114)
+[    5.021912] [<c00279e8>] (irq_exit) from [<c006170c>] (__handle_domain_irq+0x58/0xa4)
+[    5.029732] [<c006170c>] (__handle_domain_irq) from [<c00087a0>] (gic_handle_irq+0x20/0x5c)
+[    5.038074] [<c00087a0>] (gic_handle_irq) from [<c00120c0>] (__irq_svc+0x40/0x74)
+[    5.045535] Exception stack(0xee087f98 to 0xee087fe0)
+[    5.050576] 7f80:                                                       ffffffed 00000000
+[    5.058740] 7fa0: ee087fe8 c001ece0 c08b44ec c08b4488 00000000 00000000 c08a9880 c08a8c40
+[    5.066903] 7fc0: ffffffed 00000000 00000000 ee087fe0 c000f484 c000f488 60000113 ffffffff
+[    5.075064] [<c00120c0>] (__irq_svc) from [<c000f488>] (arch_cpu_idle+0x30/0x3c)
+[    5.082457] [<c000f488>] (arch_cpu_idle) from [<c005461c>] (cpu_startup_entry+0x1a0/0x274)
+[    5.090710] [<c005461c>] (cpu_startup_entry) from [<80008864>] (0x80008864)
+[    5.097660] ---[ end trace 57aba8f8473c8848 ]---
+[    5.105223] Primary GPT is invalid, using alternate GPT.
+[    5.110558]  mmcblk0: p1 p2 p3 p4 p5
+[    5.297719] tegra30-i2s 70080400.i2s: DMA channels sourced from device 70080000.ahub
+[    5.314086] tegra-snd-rt5640 sound: rt5640-aif1 <-> 70080400.i2s mapping ok
+[    5.324849] input: NVIDIA Tegra Beaver Headphones as /devices/soc0/sound/sound/card0/input0
+[    5.334678] TCP: cubic registered
+[    5.338235] NET: Registered protocol family 10
+[    5.344003] mip6: Mobile IPv6
+[    5.346990] sit: IPv6 over IPv4 tunneling driver
+[    5.353911] NET: Registered protocol family 17
+[    5.358408] NET: Registered protocol family 15
+[    5.362843] can: controller area network core (rev 20120528 abi 9)
+[    5.369171] NET: Registered protocol family 29
+[    5.373611] can: raw protocol (rev 20120528)
+[    5.377887] can: broadcast manager protocol (rev 20120528 t)
+[    5.383548] can: netlink gateway (rev 20130117) max_hops=1
+[    5.389179] Bluetooth: RFCOMM socket layer initialized
+[    5.394321] Bluetooth: RFCOMM ver 1.11
+[    5.398086] Bluetooth: BNEP (Ethernet Emulation) ver 1.3
+[    5.403395] Bluetooth: BNEP socket layer initialized
+[    5.408362] Bluetooth: HIDP (Human Interface Emulation) ver 1.2
+[    5.414276] Bluetooth: HIDP socket layer initialized
+[    5.420386] Registering SWP/SWPB emulation handler
+[    5.430416] vdd_ddr: supplied by vdd_5v_in
+[    5.434942] vdd_5v_sata: supplied by vdd_5v_in
+[    5.439838] usb1_vbus: supplied by vdd_5v_in
+[    5.444554] usb3_vbus: supplied by vdd_5v_in
+[    5.450612] sys_3v3,vdd_3v3_alw: supplied by vdd_5v_in
+[    5.456181] sys_3v3_pexs: supplied by sys_3v3,vdd_3v3_alw
+[    5.462121] +VDD_5V_HDMI: supplied by sys_3v3,vdd_3v3_alw
+[    5.467960] tegra-pcie 3000.pcie-controller: 2x3 configuration
+[    5.476528] tegra-pcie 3000.pcie-controller: probing port 0, using 2 lanes
+[    5.541712] tegra-pcie 3000.pcie-controller: probing port 2, using 2 lanes
+[    5.952637] tegra-pcie 3000.pcie-controller: link 2 down, retrying
+[    6.362370] tegra-pcie 3000.pcie-controller: link 2 down, retrying
+[    6.772599] tegra-pcie 3000.pcie-controller: link 2 down, retrying
+[    6.780793] tegra-pcie 3000.pcie-controller: link 2 down, ignoring
+[    6.787323] tegra-pcie 3000.pcie-controller: PCI host bridge to bus 0000:00
+[    6.794271] pci_bus 0000:00: root bus resource [mem 0x20000000-0x27ffffff]
+[    6.801146] pci_bus 0000:00: root bus resource [mem 0x28000000-0x3fffffff pref]
+[    6.808447] pci_bus 0000:00: root bus resource [bus 00-ff]
+[    6.813918] pci_bus 0000:00: root bus resource [io  0x1000-0xffff]
+[    6.820120] pci 0000:00:01.0: [10de:0e1c] type 01 class 0x060400
+[    6.826163] pci 0000:00:01.0: PME# supported from D0 D1 D2 D3hot D3cold
+[    6.833265] PCI: bus0: Fast back to back transfers disabled
+[    6.838840] pci 0000:00:01.0: bridge configuration invalid ([bus 00-00]), reconfiguring
+[    6.847131] pci 0000:01:00.0: [10ec:8168] type 00 class 0x020000
+[    6.853138] pci 0000:01:00.0: reg 0x10: [io  0x0000-0x00ff]
+[    6.858724] pci 0000:01:00.0: reg 0x18: [mem 0x00000000-0x00000fff 64bit pref]
+[    6.865937] pci 0000:01:00.0: reg 0x20: [mem 0x00000000-0x00003fff 64bit pref]
+[    6.873220] pci 0000:01:00.0: supports D1 D2
+[    6.877487] pci 0000:01:00.0: PME# supported from D0 D1 D2 D3hot D3cold
+[    6.896635] PCI: bus1: Fast back to back transfers disabled
+[    6.902197] pci_bus 0000:01: busn_res: [bus 01-ff] end is updated to 01
+[    6.908866] pci 0000:00:01.0: BAR 9: assigned [mem 0x28000000-0x280fffff 64bit pref]
+[    6.916605] pci 0000:00:01.0: BAR 7: assigned [io  0x1000-0x1fff]
+[    6.922689] pci 0000:01:00.0: BAR 4: assigned [mem 0x28000000-0x28003fff 64bit pref]
+[    6.930434] pci 0000:01:00.0: BAR 2: assigned [mem 0x28004000-0x28004fff 64bit pref]
+[    6.938175] pci 0000:01:00.0: BAR 0: assigned [io  0x1000-0x10ff]
+[    6.944257] pci 0000:00:01.0: PCI bridge to [bus 01]
+[    6.949217] pci 0000:00:01.0:   bridge window [io  0x1000-0x1fff]
+[    6.955296] pci 0000:00:01.0:   bridge window [mem 0x28000000-0x280fffff 64bit pref]
+[    6.963041] pci 0000:00:01.0: nv_msi_ht_cap_quirk didn't locate host bridge
+[    6.970452] pcieport 0000:00:01.0: Signaling PME through PCIe PME interrupt
+[    6.977413] pci 0000:01:00.0: Signaling PME through PCIe PME interrupt
+[    6.983926] pcie_pme 0000:00:01.0:pcie01: service driver pcie_pme loaded
+[    6.990883] r8169 Gigabit Ethernet driver 2.3LK-NAPI loaded
+[    6.996484] r8169 0000:01:00.0: enabling device (0140 -> 0143)
+[    7.003907] r8169 0000:01:00.0 eth0: RTL8168evl/8111evl at 0xf00d2000, 02:04:4b:01:60:a6, XID 0c900800 IRQ 473
+[    7.013910] r8169 0000:01:00.0 eth0: jumbo features [frames: 9200 bytes, tx checksumming: ko]
+[    7.025692] [drm] Supports vblank timestamp caching Rev 2 (21.10.2013).
+[    7.032451] [drm] No driver support for vblank timestamp query.
+[    7.038403] host1x drm: No connectors reported connected with modes
+[    7.044665] [drm] Cannot find any crtc or sizes - going 1024x768
+[    7.050668] ------------[ cut here ]------------
+[    7.050687] WARNING: CPU: 1 PID: 6 at fs/dcache.c:255 __d_free+0x34/0x40()
+[    7.050690] Modules linked in:
+[    7.050697] CPU: 1 PID: 6 Comm: kworker/u8:0 Tainted: G        W      3.18.0-rc3-next-20141103-96358-ga641d0e #1
+[    7.050713] Workqueue: deferwq deferred_probe_work_func
+[    7.050745] [<c0015990>] (unwind_backtrace) from [<c0011518>] (show_stack+0x10/0x14)
+[    7.050756] [<c0011518>] (show_stack) from [<c0616ebc>] (dump_stack+0x80/0xcc)
+[    7.050767] [<c0616ebc>] (dump_stack) from [<c0024804>] (warn_slowpath_common+0x64/0x88)
+[    7.050773] [<c0024804>] (warn_slowpath_common) from [<c0024844>] (warn_slowpath_null+0x1c/0x24)
+[    7.050780] [<c0024844>] (warn_slowpath_null) from [<c00f0440>] (__d_free+0x34/0x40)
+[    7.050797] [<c00f0440>] (__d_free) from [<c006a748>] (rcu_process_callbacks+0x3a8/0x544)
+[    7.050808] [<c006a748>] (rcu_process_callbacks) from [<c00275f4>] (__do_softirq+0xf0/0x240)
+[    7.050814] [<c00275f4>] (__do_softirq) from [<c00279e8>] (irq_exit+0xa8/0x114)
+[    7.050829] [<c00279e8>] (irq_exit) from [<c006170c>] (__handle_domain_irq+0x58/0xa4)
+[    7.050836] [<c006170c>] (__handle_domain_irq) from [<c00087a0>] (gic_handle_irq+0x20/0x5c)
+[    7.050844] [<c00087a0>] (gic_handle_irq) from [<c00120c0>] (__irq_svc+0x40/0x74)
+[    7.050847] Exception stack(0xee07bca8 to 0xee07bcf0)
+[    7.050851] bca0:                   c0948ebc 60000193 00000001 ee07a000 c0911960 00000044
+[    7.050856] bcc0: 000002c3 00000006 00000000 00000006 00000000 20000113 00000000 ee07bcf0
+[    7.050858] bce0: c005edd4 c005fd9c 60000113 ffffffff
+[    7.050866] [<c00120c0>] (__irq_svc) from [<c005fd9c>] (console_unlock+0x4b0/0x508)
+[    7.050872] [<c005fd9c>] (console_unlock) from [<c00601dc>] (vprintk_emit+0x20c/0x504)
+[    7.050888] [<c00601dc>] (vprintk_emit) from [<c0615900>] (printk+0x34/0x44)
+[    7.050903] [<c0615900>] (printk) from [<c02abf90>] (drm_fb_helper_initial_config+0x33c/0x3a0)
+[    7.050920] [<c02abf90>] (drm_fb_helper_initial_config) from [<c02c97c4>] (tegra_drm_fb_init+0x4c/0x8c)
+[    7.050928] [<c02c97c4>] (tegra_drm_fb_init) from [<c02c83ec>] (tegra_drm_load+0x9c/0xb8)
+[    7.050941] [<c02c83ec>] (tegra_drm_load) from [<c02b47fc>] (drm_dev_register+0xa0/0x100)
+[    7.050948] [<c02b47fc>] (drm_dev_register) from [<c02c7ff4>] (host1x_drm_probe+0x44/0xb0)
+[    7.050959] [<c02c7ff4>] (host1x_drm_probe) from [<c02d8d08>] (host1x_subdev_register+0xb8/0xd4)
+[    7.050966] [<c02d8d08>] (host1x_subdev_register) from [<c02d9458>] (host1x_client_register+0xf4/0x11c)
+[    7.050976] [<c02d9458>] (host1x_client_register) from [<c02d1700>] (tegra_hdmi_probe+0x170/0x250)
+[    7.050987] [<c02d1700>] (tegra_hdmi_probe) from [<c02e665c>] (platform_drv_probe+0x48/0xa4)
+[    7.050994] [<c02e665c>] (platform_drv_probe) from [<c02e5228>] (driver_probe_device+0x10c/0x22c)
+[    7.051000] [<c02e5228>] (driver_probe_device) from [<c02e39cc>] (bus_for_each_drv+0x44/0x8c)
+[    7.051006] [<c02e39cc>] (bus_for_each_drv) from [<c02e50e4>] (device_attach+0x70/0x88)
+[    7.051013] [<c02e50e4>] (device_attach) from [<c02e483c>] (bus_probe_device+0x84/0xa8)
+[    7.051019] [<c02e483c>] (bus_probe_device) from [<c02e4c10>] (deferred_probe_work_func+0x5c/0x88)
+[    7.051025] [<c02e4c10>] (deferred_probe_work_func) from [<c0036d88>] (process_one_work+0x120/0x314)
+[    7.051031] [<c0036d88>] (process_one_work) from [<c0036fe0>] (worker_thread+0x30/0x45c)
+[    7.051042] [<c0036fe0>] (worker_thread) from [<c003b718>] (kthread+0xd8/0xf4)
+[    7.051050] [<c003b718>] (kthread) from [<c000e9b8>] (ret_from_fork+0x14/0x3c)
+[    7.051053] ---[ end trace 57aba8f8473c884a ]---
+[    7.391674] Console: switching to colour frame buffer device 128x48
+[    7.403613] host1x drm: fb0:  frame buffer device
+[    7.408313] host1x drm: registered panic notifier
+[    7.437016] [drm] Initialized tegra 0.0.0 20120330 on minor 0
+[    7.443024] platform 7d004000.usb: Driver tegra-ehci requests probe deferral
+[    7.450272] platform 7d008000.usb: Driver tegra-ehci requests probe deferral
+[    7.460367] utmi_phy_clk_enable: timeout waiting for phy to stabilize
+[    7.466825] tegra-ehci 7d004000.usb: EHCI Host Controller
+[    7.472237] tegra-ehci 7d004000.usb: new USB bus registered, assigned bus number 1
+[    7.480176] tegra-ehci 7d004000.usb: irq 53, io mem 0x7d004000
+[    7.496620] tegra-ehci 7d004000.usb: USB 2.0 started, EHCI 1.00
+[    7.503705] hub 1-0:1.0: USB hub found
+[    7.507502] hub 1-0:1.0: 1 port detected
+[    7.512187] tegra-ehci 7d008000.usb: EHCI Host Controller
+[    7.517629] tegra-ehci 7d008000.usb: new USB bus registered, assigned bus number 2
+[    7.525475] tegra-ehci 7d008000.usb: irq 129, io mem 0x7d008000
+[    7.531395] ------------[ cut here ]------------
+[    7.531415] WARNING: CPU: 1 PID: 6 at fs/dcache.c:255 __d_free+0x34/0x40()
+[    7.531418] Modules linked in:
+[    7.531425] CPU: 1 PID: 6 Comm: kworker/u8:0 Tainted: G        W      3.18.0-rc3-next-20141103-96358-ga641d0e #1
+[    7.531440] Workqueue: deferwq deferred_probe_work_func
+[    7.531468] [<c0015990>] (unwind_backtrace) from [<c0011518>] (show_stack+0x10/0x14)
+[    7.531479] [<c0011518>] (show_stack) from [<c0616ebc>] (dump_stack+0x80/0xcc)
+[    7.531490] [<c0616ebc>] (dump_stack) from [<c0024804>] (warn_slowpath_common+0x64/0x88)
+[    7.531497] [<c0024804>] (warn_slowpath_common) from [<c0024844>] (warn_slowpath_null+0x1c/0x24)
+[    7.531504] [<c0024844>] (warn_slowpath_null) from [<c00f0440>] (__d_free+0x34/0x40)
+[    7.531519] [<c00f0440>] (__d_free) from [<c006a748>] (rcu_process_callbacks+0x3a8/0x544)
+[    7.531529] [<c006a748>] (rcu_process_callbacks) from [<c00275f4>] (__do_softirq+0xf0/0x240)
+[    7.531536] [<c00275f4>] (__do_softirq) from [<c00279e8>] (irq_exit+0xa8/0x114)
+[    7.531550] [<c00279e8>] (irq_exit) from [<c006170c>] (__handle_domain_irq+0x58/0xa4)
+[    7.531557] [<c006170c>] (__handle_domain_irq) from [<c00087a0>] (gic_handle_irq+0x20/0x5c)
+[    7.531565] [<c00087a0>] (gic_handle_irq) from [<c00120c0>] (__irq_svc+0x40/0x74)
+[    7.531568] Exception stack(0xee07bc48 to 0xee07bc90)
+[    7.531572] bc40:                   c0948ebc 60000193 00000001 ee07a000 c0912e34 00000043
+[    7.531576] bc60: 000002fd 00000006 00000000 00000006 00000000 20000113 00000000 ee07bc90
+[    7.531579] bc80: c005edd4 c005fd9c 60000113 ffffffff
+[    7.531587] [<c00120c0>] (__irq_svc) from [<c005fd9c>] (console_unlock+0x4b0/0x508)
+[    7.531593] [<c005fd9c>] (console_unlock) from [<c00601dc>] (vprintk_emit+0x20c/0x504)
+[    7.531600] [<c00601dc>] (vprintk_emit) from [<c02e1ff0>] (dev_vprintk_emit+0xf8/0x198)
+[    7.531606] [<c02e1ff0>] (dev_vprintk_emit) from [<c02e20b0>] (dev_printk_emit+0x20/0x30)
+[    7.531612] [<c02e20b0>] (dev_printk_emit) from [<c02e210c>] (__dev_printk+0x4c/0x70)
+[    7.531616] [<c02e210c>] (__dev_printk) from [<c02e2164>] (_dev_info+0x34/0x44)
+[    7.531629] [<c02e2164>] (_dev_info) from [<c038f810>] (usb_add_hcd+0x5cc/0x794)
+[    7.531637] [<c038f810>] (usb_add_hcd) from [<c03a8fd4>] (tegra_ehci_probe+0x398/0x4e4)
+[    7.531648] [<c03a8fd4>] (tegra_ehci_probe) from [<c02e665c>] (platform_drv_probe+0x48/0xa4)
+[    7.531655] [<c02e665c>] (platform_drv_probe) from [<c02e5228>] (driver_probe_device+0x10c/0x22c)
+[    7.531661] [<c02e5228>] (driver_probe_device) from [<c02e39cc>] (bus_for_each_drv+0x44/0x8c)
+[    7.531667] [<c02e39cc>] (bus_for_each_drv) from [<c02e50e4>] (device_attach+0x70/0x88)
+[    7.531673] [<c02e50e4>] (device_attach) from [<c02e483c>] (bus_probe_device+0x84/0xa8)
+[    7.531679] [<c02e483c>] (bus_probe_device) from [<c02e4c10>] (deferred_probe_work_func+0x5c/0x88)
+[    7.531685] [<c02e4c10>] (deferred_probe_work_func) from [<c0036d88>] (process_one_work+0x120/0x314)
+[    7.531691] [<c0036d88>] (process_one_work) from [<c0036fe0>] (worker_thread+0x30/0x45c)
+[    7.531701] [<c0036fe0>] (worker_thread) from [<c003b718>] (kthread+0xd8/0xf4)
+[    7.531708] [<c003b718>] (kthread) from [<c000e9b8>] (ret_from_fork+0x14/0x3c)
+[    7.531711] ---[ end trace 57aba8f8473c884b ]---
+[    7.836623] tegra-ehci 7d008000.usb: USB 2.0 started, EHCI 1.00
+[    7.844045] hub 2-0:1.0: USB hub found
+[    7.847839] hub 2-0:1.0: 1 port detected
+[    7.856040] tps65910-rtc tps65910-rtc: setting system clock to 2000-01-01 00:00:03 UTC (946684803)
+[    7.867037] ------------[ cut here ]------------
+[    7.871662] WARNING: CPU: 1 PID: 0 at fs/dcache.c:255 __d_free+0x34/0x40()
+[    7.874920] usb1_vbus: disabling
+[    7.874944] vdd_sata,avdd_plle: disabling
+[    7.875517] ALSA device list:
+[    7.875521]   #0: NVIDIA Tegra Beaver
+[    7.892351] Modules linked in:
+[    7.892358] CPU: 1 PID: 0 Comm: swapper/1 Tainted: G        W      3.18.0-rc3-next-20141103-96358-ga641d0e #1
+[    7.892388] [<c0015990>] (unwind_backtrace) from [<c0011518>] (show_stack+0x10/0x14)
+[    7.892398] [<c0011518>] (show_stack) from [<c0616ebc>] (dump_stack+0x80/0xcc)
+[    7.892408] [<c0616ebc>] (dump_stack) from [<c0024804>] (warn_slowpath_common+0x64/0x88)
+[    7.892414] [<c0024804>] (warn_slowpath_common) from [<c0024844>] (warn_slowpath_null+0x1c/0x24)
+[    7.892421] [<c0024844>] (warn_slowpath_null) from [<c00f0440>] (__d_free+0x34/0x40)
+[    7.892437] [<c00f0440>] (__d_free) from [<c006a748>] (rcu_process_callbacks+0x3a8/0x544)
+[    7.892448] [<c006a748>] (rcu_process_callbacks) from [<c00275f4>] (__do_softirq+0xf0/0x240)
+[    7.892455] [<c00275f4>] (__do_softirq) from [<c00279e8>] (irq_exit+0xa8/0x114)
+[    7.892461] [<c00279e8>] (irq_exit) from [<c0014330>] (handle_IPI+0xd8/0x15c)
+[    7.892467] [<c0014330>] (handle_IPI) from [<c00087d4>] (gic_handle_irq+0x54/0x5c)
+[    7.892474] [<c00087d4>] (gic_handle_irq) from [<c00120c0>] (__irq_svc+0x40/0x74)
+[    7.892477] Exception stack(0xee087f80 to 0xee087fc8)
+[    7.892482] 7f80: d4848958 00000001 d4848958 00000001 d3e5d088 00000001 ee7bdc48 00000001
+[    7.892486] 7fa0: c08a9880 c08a8c40 00000001 00000000 00000015 ee087fc8 c007356c c041d0bc
+[    7.892488] 7fc0: 80000113 ffffffff
+[    7.892498] [<c00120c0>] (__irq_svc) from [<c041d0bc>] (cpuidle_enter_state+0x50/0xd8)
+[    7.892519] [<c041d0bc>] (cpuidle_enter_state) from [<c0054688>] (cpu_startup_entry+0x20c/0x274)
+[    7.892527] [<c0054688>] (cpu_startup_entry) from [<80008864>] (0x80008864)
+[    7.892532] ---[ end trace 57aba8f8473c884c ]---
+[    8.049037] kjournald starting.  Commit interval 5 seconds
+[    8.049072] EXT3-fs (mmcblk0p1): warning: mounting fs with errors, running e2fsck is recommended
+[    8.050217] EXT3-fs (mmcblk0p1): using internal journal
+[    8.050225] EXT3-fs (mmcblk0p1): recovery complete
+[    8.050227] EXT3-fs (mmcblk0p1): mounted filesystem with writeback data mode
+[    8.050284] VFS: Mounted root (ext3 filesystem) on device 179:1.
+[    8.052006] devtmpfs: mounted
+[    8.052288] Freeing unused kernel memory: 288K (c0864000 - c08ac000)
+[    8.086615] ------------[ cut here ]------------
+[    8.086639] WARNING: CPU: 1 PID: 0 at fs/dcache.c:255 __d_free+0x34/0x40()
+[    8.086643] Modules linked in:
+[    8.086650] CPU: 1 PID: 0 Comm: swapper/1 Tainted: G        W      3.18.0-rc3-next-20141103-96358-ga641d0e #1
+[    8.086681] [<c0015990>] (unwind_backtrace) from [<c0011518>] (show_stack+0x10/0x14)
+[    8.086691] [<c0011518>] (show_stack) from [<c0616ebc>] (dump_stack+0x80/0xcc)
+[    8.086702] [<c0616ebc>] (dump_stack) from [<c0024804>] (warn_slowpath_common+0x64/0x88)
+[    8.086709] [<c0024804>] (warn_slowpath_common) from [<c0024844>] (warn_slowpath_null+0x1c/0x24)
+[    8.086715] [<c0024844>] (warn_slowpath_null) from [<c00f0440>] (__d_free+0x34/0x40)
+[    8.086732] [<c00f0440>] (__d_free) from [<c006a748>] (rcu_process_callbacks+0x3a8/0x544)
+[    8.086743] [<c006a748>] (rcu_process_callbacks) from [<c00275f4>] (__do_softirq+0xf0/0x240)
+[    8.086750] [<c00275f4>] (__do_softirq) from [<c00279e8>] (irq_exit+0xa8/0x114)
+[    8.086765] [<c00279e8>] (irq_exit) from [<c006170c>] (__handle_domain_irq+0x58/0xa4)
+[    8.086772] [<c006170c>] (__handle_domain_irq) from [<c00087a0>] (gic_handle_irq+0x20/0x5c)
+bash: cannot set terminal proces[    8.086780] [<c00087a0>] (gic_handle_irq) from [<c00120c0>] (__irq_svc+0x40/0x74)
+s group (-1): Inappropri[    8.086782] Exception stack(0xee087f80 to 0xee087fc8)
+ate ioctl for device
+bash: no j[    8.086787] 7f80: e19b07e8 00000001 e19b07e8 00000001 e19752b0 00000001 ee7bdc48 00000000
+ob control in this shell[    8.086792] 7fa0: c08a9880 c08a8c40 00000000 00000000 00000015 ee087fc8 c007356c c041d0bc
+[    8.086793] 7fc0: 80000113 ffffffff
+
+[    8.086803] [<c00120c0>] (__irq_svc) from [<c041d0bc>] (cpuidle_enter_state+0x50/0xd8)
+[    8.086820] [<c041d0bc>] (cpuidle_enter_state) from [<c0054688>] (cpu_startup_entry+0x20c/0x274)
+[    8.086830] [<c0054688>] (cpu_startup_entry) from [<80008864>] (0x80008864)
+[    8.086838] ---[ end trace 57aba8f8473c884d ]---
+[    8.086851] ------------[ cut here ]------------
+[    8.086857] WARNING: CPU: 1 PID: 0 at fs/dcache.c:255 __d_free+0x34/0x40()
+root@(none):/# [    8.086859] Modules linked in:
+[    8.086864] CPU: 1 PID: 0 Comm: swapper/1 Tainted: G        W      3.18.0-rc3-next-20141103-96358-ga641d0e #1
+[    8.086872] [<c0015990>] (unwind_backtrace) from [<c0011518>] (show_stack+0x10/0x14)
+[    8.086878] [<c0011518>] (show_stack) from [<c0616ebc>] (dump_stack+0x80/0xcc)
+[    8.086885] [<c0616ebc>] (dump_stack) from [<c0024804>] (warn_slowpath_common+0x64/0x88)
+[    8.086890] [<c0024804>] (warn_slowpath_common) from [<c0024844>] (warn_slowpath_null+0x1c/0x24)
+[    8.086896] [<c0024844>] (warn_slowpath_null) from [<c00f0440>] (__d_free+0x34/0x40)
+[    8.086904] [<c00f0440>] (__d_free) from [<c006a748>] (rcu_process_callbacks+0x3a8/0x544)
+[    8.086911] [<c006a748>] (rcu_process_callbacks) from [<c00275f4>] (__do_softirq+0xf0/0x240)
+[    8.086916] [<c00275f4>] (__do_softirq) from [<c00279e8>] (irq_exit+0xa8/0x114)
+[    8.086923] [<c00279e8>] (irq_exit) from [<c006170c>] (__handle_domain_irq+0x58/0xa4)
+[    8.086929] [<c006170c>] (__handle_domain_irq) from [<c00087a0>] (gic_handle_irq+0x20/0x5c)
+[    8.086936] [<c00087a0>] (gic_handle_irq) from [<c00120c0>] (__irq_svc+0x40/0x74)
+[    8.086938] Exception stack(0xee087f80 to 0xee087fc8)
+[    8.086942] 7f80: e19b07e8 00000001 e19b07e8 00000001 e19752b0 00000001 ee7bdc48 00000000
+[    8.086947] 7fa0: c08a9880 c08a8c40 00000000 00000000 00000015 ee087fc8 c007356c c041d0bc
+[    8.086949] 7fc0: 80000113 ffffffff
+[    8.086956] [<c00120c0>] (__irq_svc) from [<c041d0bc>] (cpuidle_enter_state+0x50/0xd8)
+[    8.086963] [<c041d0bc>] (cpuidle_enter_state) from [<c0054688>] (cpu_startup_entry+0x20c/0x274)
+[    8.086968] [<c0054688>] (cpu_startup_entry) from [<80008864>] (0x80008864)
+[    8.086970] ---[ end trace 57aba8f8473c884e ]---
+[    8.086973] ------------[ cut here ]------------
+[    8.086981] WARNING: CPU: 1 PID: 0 at fs/dcache.c:255 __d_free+0x34/0x40()
+[    8.086983] Modules linked in:
+[    8.086987] CPU: 1 PID: 0 Comm: swapper/1 Tainted: G        W      3.18.0-rc3-next-20141103-96358-ga641d0e #1
+[    8.086995] [<c0015990>] (unwind_backtrace) from [<c0011518>] (show_stack+0x10/0x14)
+[    8.087002] [<c0011518>] (show_stack) from [<c0616ebc>] (dump_stack+0x80/0xcc)
+[    8.087008] [<c0616ebc>] (dump_stack) from [<c0024804>] (warn_slowpath_common+0x64/0x88)
+[    8.087014] [<c0024804>] (warn_slowpath_common) from [<c0024844>] (warn_slowpath_null+0x1c/0x24)
+[    8.087021] [<c0024844>] (warn_slowpath_null) from [<c00f0440>] (__d_free+0x34/0x40)
+[    8.087032] [<c00f0440>] (__d_free) from [<c006a748>] (rcu_process_callbacks+0x3a8/0x544)
+[    8.087043] [<c006a748>] (rcu_process_callbacks) from [<c00275f4>] (__do_softirq+0xf0/0x240)
+[    8.087050] [<c00275f4>] (__do_softirq) from [<c00279e8>] (irq_exit+0xa8/0x114)
+[    8.087061] [<c00279e8>] (irq_exit) from [<c006170c>] (__handle_domain_irq+0x58/0xa4)
+[    8.087067] [<c006170c>] (__handle_domain_irq) from [<c00087a0>] (gic_handle_irq+0x20/0x5c)
+[    8.087073] [<c00087a0>] (gic_handle_irq) from [<c00120c0>] (__irq_svc+0x40/0x74)
+[    8.087076] Exception stack(0xee087f80 to 0xee087fc8)
+[    8.087080] 7f80: e19b07e8 00000001 e19b07e8 00000001 e19752b0 00000001 ee7bdc48 00000000
+[    8.087084] 7fa0: c08a9880 c08a8c40 00000000 00000000 00000015 ee087fc8 c007356c c041d0bc
+[    8.087086] 7fc0: 80000113 ffffffff
+[    8.087093] [<c00120c0>] (__irq_svc) from [<c041d0bc>] (cpuidle_enter_state+0x50/0xd8)
+[    8.087099] [<c041d0bc>] (cpuidle_enter_state) from [<c0054688>] (cpu_startup_entry+0x20c/0x274)
+[    8.087105] [<c0054688>] (cpu_startup_entry) from [<80008864>] (0x80008864)
+[    8.087107] ---[ end trace 57aba8f8473c884f ]---
+[    8.166671] usb 2-1: new high-speed USB device number 2 using tegra-ehci
+[    8.662527] asix 2-1:1.0 eth1: register 'asix' at usb-7d008000.usb-1, ASIX AX88772 USB 2.0 Ethernet, 00:50:b6:0f:67:60

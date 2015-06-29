@@ -1,0 +1,467 @@
+
+U-Boot SPL 2014.07-00097-g772e173 (Jul 25 2014 - 20:02:52)
+
+
+U-Boot 2014.07-00097-g772e173 (Jul 25 2014 - 20:02:52)
+
+TEGRA124
+Board: NVIDIA Jetson TK1
+I2C:   ready
+DRAM:  2 GiB
+MMC:   Tegra SD/MMC: 0, Tegra SD/MMC: 1
+In:    serial
+Out:   serial
+Err:   serial
+Net:   Net Initialization Skipped
+No ethernet found.
+Hit any key to stop autoboot:  2  0 
+Tegra124 (Jetson TK1) # 
+Tegra124 (Jetson TK1) # usb reset
+(Re)start USB...
+USB0:   USB EHCI 1.10
+scanning bus 0 for devices... 1 USB Device(s) found
+USB1:   USB EHCI 1.10
+scanning bus 1 for devices... 2 USB Device(s) found
+       scanning usb for storage devices... 0 Storage Device(s) found
+       scanning usb for ethernet devices... 
+Warning: asx0 using MAC address from net device
+1 Ethernet Device(s) found
+Tegra124 (Jetson TK1) # setenv bootargs 'ignore_loglevel console=ttyS0,115200n8 rw root=/dev/mmcblk0p1 rootwait gpt debug init=/bin/bash noinitrd'
+Tegra124 (Jetson TK1) # setenv ipaddr 192.168.100.102; setenv serverip 192.168.100.1; setenv tftpserverip 192.168.100.1
+Tegra124 (Jetson TK1) # tftpboot 0x81000000 zImage.tegra_defconfig%tegra124_mergeconfig
+Using asx0 device
+TFTP from server 192.168.100.1; our IP address is 192.168.100.102
+Filename 'zImage.tegra_defconfig%tegra124_mergeconfig'.
+Load address: 0x81000000
+Loading: *#################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 ############################################################
+	 2.8 MiB/s
+done
+Bytes transferred = 4692504 (479a18 hex)
+Tegra124 (Jetson TK1) # tftpboot 0x82000000 tegra124-jetson-tk1.dtb
+Using asx0 device
+TFTP from server 192.168.100.1; our IP address is 192.168.100.102
+Filename 'tegra124-jetson-tk1.dtb'.
+Load address: 0x82000000
+Loading: *####
+	 2.7 MiB/s
+done
+Bytes transferred = 47577 (b9d9 hex)
+Tegra124 (Jetson TK1) # bootz 0x81000000 - 0x82000000
+Kernel image @ 0x81000000 [ 0x000000 - 0x479a18 ]
+## Flattened Device Tree blob at 82000000
+   Booting using the fdt blob at 0x82000000
+   Using Device Tree in place at 82000000, end 8200e9d8
+
+Starting kernel ...
+
+Uncompressing Linux... done, booting the kernel.
+[    0.000000] Booting Linux on physical CPU 0x0
+[    0.000000] Initializing cgroup subsys cpu
+[    0.000000] Initializing cgroup subsys cpuacct
+[    0.000000] Linux version 3.18.0-rc1-next-20141023-54704-g6757f00 (pwalmsley@kaivo) (gcc version 4.7.3 20130328 (prerelease) (crosstool-NG linaro-1.13.1-4.7-2013.04-20130415 - Linaro GCC 2013.04) ) #1 SMP PREEMPT Wed Oct 22 21:57:58 PDT 2014
+[    0.000000] CPU: ARMv7 Processor [413fc0f3] revision 3 (ARMv7), cr=10c5387d
+[    0.000000] CPU: PIPT / VIPT nonaliasing data cache, PIPT instruction cache
+[    0.000000] Machine model: NVIDIA Tegra124 Jetson TK1
+[    0.000000] debug: ignoring loglevel setting.
+[    0.000000] cma: Reserved 64 MiB at fbc00000
+[    0.000000] Memory policy: Data cache writealloc
+[    0.000000] On node 0 totalpages: 524032
+[    0.000000] free_area_init_node: node 0, pgdat c08f7100, node_mem_map ee7f7000
+[    0.000000]   Normal zone: 1520 pages used for memmap
+[    0.000000]   Normal zone: 0 pages reserved
+[    0.000000]   Normal zone: 194560 pages, LIFO batch:31
+[    0.000000]   HighMem zone: 2574 pages used for memmap
+[    0.000000]   HighMem zone: 329472 pages, LIFO batch:31
+[    0.000000] PERCPU: Embedded 10 pages/cpu @ee79e000 s8960 r8192 d23808 u40960
+[    0.000000] pcpu-alloc: s8960 r8192 d23808 u40960 alloc=10*4096
+[    0.000000] pcpu-alloc: [0] 0 [0] 1 [0] 2 [0] 3 
+[    0.000000] Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 522512
+[    0.000000] Kernel command line: ignore_loglevel console=ttyS0,115200n8 rw root=/dev/mmcblk0p1 rootwait gpt debug init=/bin/bash noinitrd
+[    0.000000] PID hash table entries: 4096 (order: 2, 16384 bytes)
+[    0.000000] Dentry cache hash table entries: 131072 (order: 7, 524288 bytes)
+[    0.000000] Inode-cache hash table entries: 65536 (order: 6, 262144 bytes)
+[    0.000000] Memory: 2003456K/2096128K available (6451K kernel code, 330K rwdata, 2084K rodata, 284K init, 362K bss, 92672K reserved, 1252352K highmem)
+[    0.000000] Virtual kernel memory layout:
+[    0.000000]     vector  : 0xffff0000 - 0xffff1000   (   4 kB)
+[    0.000000]     fixmap  : 0xffc00000 - 0xffe00000   (2048 kB)
+[    0.000000]     vmalloc : 0xf0000000 - 0xff000000   ( 240 MB)
+[    0.000000]     lowmem  : 0xc0000000 - 0xef800000   ( 760 MB)
+[    0.000000]     pkmap   : 0xbfe00000 - 0xc0000000   (   2 MB)
+[    0.000000]     modules : 0xbf000000 - 0xbfe00000   (  14 MB)
+[    0.000000]       .text : 0xc0008000 - 0xc085e0a0   (8537 kB)
+[    0.000000]       .init : 0xc085f000 - 0xc08a6000   ( 284 kB)
+[    0.000000]       .data : 0xc08a6000 - 0xc08f8ba0   ( 331 kB)
+[    0.000000]        .bss : 0xc08f8ba0 - 0xc09535dc   ( 363 kB)
+[    0.000000] Preemptible hierarchical RCU implementation.
+[    0.000000] NR_IRQS:16 nr_irqs:16 16
+[    0.000000] L2C: failed to init: -19
+[    0.000009] sched_clock: 32 bits at 1000kHz, resolution 1000ns, wraps every 2147483648000ns
+[    0.000031] Switching to timer-based delay loop, resolution 1000ns
+[    0.001282] Console: colour dummy device 80x30
+[    0.001309] Calibrating delay loop (skipped), value calculated using timer frequency.. 2.00 BogoMIPS (lpj=10000)
+[    0.001324] pid_max: default: 32768 minimum: 301
+[    0.001783] Mount-cache hash table entries: 2048 (order: 1, 8192 bytes)
+[    0.001796] Mountpoint-cache hash table entries: 2048 (order: 1, 8192 bytes)
+[    0.003181] Initializing cgroup subsys freezer
+[    0.003208] Initializing cgroup subsys debug
+[    0.003262] CPU: Testing write buffer coherency: ok
+[    0.003564] /cpus/cpu@0 missing clock-frequency property
+[    0.003592] /cpus/cpu@1 missing clock-frequency property
+[    0.003619] /cpus/cpu@2 missing clock-frequency property
+[    0.003648] /cpus/cpu@3 missing clock-frequency property
+[    0.003661] CPU0: thread -1, cpu 0, socket 0, mpidr 80000000
+[    0.003703] Setting up static identity map for 0x8061dc28 - 0x8061dcc0
+[    0.041211] Tegra Revision: A01 SKU: 129 CPU Process: 1 Core Process: 1
+[    0.061645] CPU1: Booted secondary processor
+[    0.061672] CPU1: thread -1, cpu 1, socket 0, mpidr 80000001
+[    0.081655] CPU2: Booted secondary processor
+[    0.081680] CPU2: thread -1, cpu 2, socket 0, mpidr 80000002
+[    0.101659] CPU3: Booted secondary processor
+[    0.101684] CPU3: thread -1, cpu 3, socket 0, mpidr 80000003
+[    0.101763] Brought up 4 CPUs
+[    0.101791] SMP: Total of 4 processors activated.
+[    0.101799] CPU: All CPU(s) started in SVC mode.
+[    0.102692] devtmpfs: initialized
+[    0.115107] VFP support v0.3: implementor 41 architecture 4 part 30 variant f rev 0
+[    0.117237] pinctrl core: initialized pinctrl subsystem
+[    0.118015] regulator-dummy: no parameters
+[    0.155965] NET: Registered protocol family 16
+[    0.157211] DMA: preallocated 256 KiB pool for atomic coherent allocations
+[    0.180984] cpuidle: using governor ladder
+[    0.211009] cpuidle: using governor menu
+[    0.230306] No ATAGs?
+[    0.230343] hw-breakpoint: found 5 (+1 reserved) breakpoint and 4 watchpoint registers.
+[    0.230354] hw-breakpoint: maximum watchpoint size is 8 bytes.
+[    0.284173] +VDD_MUX: 12000 mV 
+[    0.284674] +5V_SYS: 5000 mV 
+[    0.284759] +5V_SYS: supplied by +VDD_MUX
+[    0.285264] +3.3V_SYS: 3300 mV 
+[    0.285344] +3.3V_SYS: supplied by +VDD_MUX
+[    0.285578] platform regulators:regulator@3: Driver reg-fixed-voltage requests probe deferral
+[    0.285942] +3.3V_AVDD_HDMI_AP_GATED: 3300 mV 
+[    0.286025] reg-fixed-voltage regulators:regulator@4: Failed to find supply vin
+[    0.286211] reg-fixed-voltage regulators:regulator@4: Failed to register regulator: -517
+[    0.286239] platform regulators:regulator@4: Driver reg-fixed-voltage requests probe deferral
+[    0.286605] +USB0_VBUS_SW: Failed to request enable GPIO108: -517
+[    0.286770] reg-fixed-voltage regulators:regulator@7: Failed to register regulator: -517
+[    0.286797] platform regulators:regulator@7: Driver reg-fixed-voltage requests probe deferral
+[    0.287157] +5V_USB_HS: Failed to request enable GPIO109: -517
+[    0.287319] reg-fixed-voltage regulators:regulator@8: Failed to register regulator: -517
+[    0.287346] platform regulators:regulator@8: Driver reg-fixed-voltage requests probe deferral
+[    0.287456] platform regulators:regulator@10: Driver reg-fixed-voltage requests probe deferral
+[    0.287817] +1.05V_RUN_AVDD_HDMI_PLL: Failed to request enable GPIO63: -517
+[    0.287979] reg-fixed-voltage regulators:regulator@11: Failed to register regulator: -517
+[    0.288006] platform regulators:regulator@11: Driver reg-fixed-voltage requests probe deferral
+[    0.288366] +5V_HDMI_CON: Failed to request enable GPIO86: -517
+[    0.288527] reg-fixed-voltage regulators:regulator@12: Failed to register regulator: -517
+[    0.288554] platform regulators:regulator@12: Driver reg-fixed-voltage requests probe deferral
+[    0.288911] +5V_SATA: Failed to request enable GPIO242: -517
+[    0.289072] reg-fixed-voltage regulators:regulator@13: Failed to register regulator: -517
+[    0.289099] platform regulators:regulator@13: Driver reg-fixed-voltage requests probe deferral
+[    0.289457] +12V_SATA: Failed to request enable GPIO242: -517
+[    0.289617] reg-fixed-voltage regulators:regulator@14: Failed to register regulator: -517
+[    0.289644] platform regulators:regulator@14: Driver reg-fixed-voltage requests probe deferral
+[    0.291377] vgaarb: loaded
+[    0.292807] SCSI subsystem initialized
+[    0.293123] libata version 3.00 loaded.
+[    0.293841] usbcore: registered new interface driver usbfs
+[    0.294001] usbcore: registered new interface driver hub
+[    0.294169] usbcore: registered new device driver usb
+[    0.298978] Linux video capture interface: v2.00
+[    0.299103] pps_core: LinuxPPS API ver. 1 registered
+[    0.299112] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[    0.299181] PTP clock support registered
+[    0.300244] Advanced Linux Sound Architecture Driver Initialized.
+[    0.301649] Bluetooth: Core ver 2.19
+[    0.301726] NET: Registered protocol family 31
+[    0.301734] Bluetooth: HCI device and connection manager initialized
+[    0.301757] Bluetooth: HCI socket layer initialized
+[    0.301778] Bluetooth: L2CAP socket layer initialized
+[    0.301835] Bluetooth: SCO socket layer initialized
+[    0.302563] cfg80211: Calling CRDA to update world regulatory domain
+[    0.303340] Switched to clocksource timer_us
+[    0.326020] NET: Registered protocol family 2
+[    0.327206] TCP established hash table entries: 8192 (order: 3, 32768 bytes)
+[    0.327312] TCP bind hash table entries: 8192 (order: 4, 65536 bytes)
+[    0.327498] TCP: Hash tables configured (established 8192 bind 8192)
+[    0.327909] TCP: reno registered
+[    0.327924] UDP hash table entries: 512 (order: 2, 16384 bytes)
+[    0.327966] UDP-Lite hash table entries: 512 (order: 2, 16384 bytes)
+[    0.328346] NET: Registered protocol family 1
+[    0.328993] RPC: Registered named UNIX socket transport module.
+[    0.329003] RPC: Registered udp transport module.
+[    0.329011] RPC: Registered tcp transport module.
+[    0.329018] RPC: Registered tcp NFSv4.1 backchannel transport module.
+[    0.329044] PCI: CLS 0 bytes, default 64
+[    0.333256] futex hash table entries: 1024 (order: 4, 65536 bytes)
+[    0.335757] squashfs: version 4.0 (2009/01/31) Phillip Lougher
+[    0.338428] bounce: pool size: 64 pages
+[    0.338449] io scheduler noop registered (default)
+[    0.348652] tegra-pcie 1003000.pcie-controller: 2x1, 1x1 configuration
+[    0.348708] tegra-pcie 1003000.pcie-controller: Failed to get supply 'avddio-pex': -517
+[    0.348751] platform 1003000.pcie-controller: Driver tegra-pcie requests probe deferral
+[    0.358352] tegra-apbdma 60020000.dma: Tegra20 APB DMA driver register 32 channels
+[    0.359515] Serial: 8250/16550 driver, 4 ports, IRQ sharing disabled
+[    0.363075] console [ttyS0] disabled
+[    0.363134] of_serial 70006300.serial: ttyS0 at MMIO 0x70006300 (irq = 122, base_baud = 25500000) is a Tegra
+[    1.242777] console [ttyS0] enabled
+[    1.247621] [drm] Initialized drm 1.1.0 20060810
+[    1.253300] tegra-hdmi 54280000.hdmi: failed to get HDMI regulator
+[    1.259702] platform 54280000.hdmi: Driver tegra-hdmi requests probe deferral
+[    1.279515] loop: module loaded
+[    1.283239] at24 0-0056: 256 byte 24c02 EEPROM, writable, 8 bytes/write
+[    1.290669] as3722 4-0040: AS3722 with revision 0x1 found
+[    1.300559] +VDD_CPU_AP: 700 <--> 1400 mV at 1000 mV 3500 mA 
+[    1.307638] +VDD_CORE: 700 <--> 1350 mV at 1100 mV 2500 mA 
+[    1.314183] +1.35V_LP0(sd2): 1350 mV 
+[    1.317970] +1.35V_LP0(sd2): supplied by +5V_SYS
+[    1.323297] +1.35V_LP0(sd3): 1350 mV 
+[    1.327103] +1.35V_LP0(sd3): supplied by +5V_SYS
+[    1.332415] +1.05V_RUN: 1050 mV 
+[    1.335802] +1.05V_RUN: supplied by +5V_SYS
+[    1.340558] +1.8V_VDDIO: 1800 mV 
+[    1.344018] +1.8V_VDDIO: supplied by +5V_SYS
+[    1.349901] +VDD_GPU_AP: 650 <--> 1200 mV at 1000 mV 3500 mA 
+[    1.356306] +1.05V_RUN_AVDD: 1050 mV at 300 mA 
+[    1.360965] +1.05V_RUN_AVDD: supplied by +1.35V_LP0(sd2)
+[    1.367485] +1.8V_RUN_CAM: 1800 mV at 150 mA 
+[    1.371990] as3722-regulator as3722-regulator: Failed to find supply vin-ldo1-6
+[    1.379498] as3722-regulator as3722-regulator: regulator 8 register failed -517
+[    1.388724] platform as3722-regulator: Driver as3722-regulator requests probe deferral
+[    1.398636] tegra-ahci 70027000.sata: Failed to get supply 'avdd': -517
+[    1.405263] tegra-ahci 70027000.sata: Failed to get regulators
+[    1.411129] platform 70027000.sata: Driver tegra-ahci requests probe deferral
+[    1.421821] m25p80 spi32765.0: w25q32dw (4096 Kbytes)
+[    1.429965] CAN device driver interface
+[    1.433941] igb: Intel(R) Gigabit Ethernet Network Driver - version 5.2.15-k
+[    1.440978] igb: Copyright (c) 2007-2014 Intel Corporation.
+[    1.446925] pegasus: v0.9.3 (2013/04/25), Pegasus/Pegasus II USB Ethernet driver
+[    1.454452] usbcore: registered new interface driver pegasus
+[    1.460278] usbcore: registered new interface driver asix
+[    1.465812] usbcore: registered new interface driver ax88179_178a
+[    1.472021] usbcore: registered new interface driver cdc_ether
+[    1.478036] usbcore: registered new interface driver smsc75xx
+[    1.483984] usbcore: registered new interface driver smsc95xx
+[    1.489846] usbcore: registered new interface driver net1080
+[    1.495645] usbcore: registered new interface driver cdc_subset
+[    1.501681] usbcore: registered new interface driver zaurus
+[    1.507454] usbcore: registered new interface driver cdc_ncm
+[    1.513297] ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+[    1.519838] ehci-pci: EHCI PCI platform driver
+[    1.524418] tegra-ehci: Tegra EHCI driver
+[    1.528717] platform 7d004000.usb: Driver tegra-ehci requests probe deferral
+[    1.535951] platform 7d008000.usb: Driver tegra-ehci requests probe deferral
+[    1.543271] usbcore: registered new interface driver cdc_acm
+[    1.548938] cdc_acm: USB Abstract Control Model driver for USB modems and ISDN adapters
+[    1.557072] usbcore: registered new interface driver cdc_wdm
+[    1.562901] usbcore: registered new interface driver usb-storage
+[    1.569158] tegra-phy 7d004000.usb-phy: no vbus regulator
+[    1.574884] platform 7d008000.usb-phy: Driver tegra-phy requests probe deferral
+[    1.583015] mousedev: PS/2 mouse device common for all mice
+[    1.592315] as3722-rtc as3722-rtc: rtc core: registered as3722-rtc as rtc0
+[    1.599206] as3722-rtc as3722-rtc: RTC interrupt 464
+[    1.607375] tegra_rtc 7000e000.rtc: rtc core: registered 7000e000.rtc as rtc1
+[    1.614547] tegra_rtc 7000e000.rtc: Tegra internal Real Time Clock
+[    1.621121] i2c /dev entries driver
+[    1.626865] usbcore: registered new interface driver uvcvideo
+[    1.632600] USB Video Class driver (1.1.1)
+[    1.636720] gspca_main: v2.14.0 registered
+[    1.641634] 0-004c supply vcc not found, using dummy regulator
+[    1.650086] sdhci: Secure Digital Host Controller Interface driver
+[    1.656282] sdhci: Copyright(c) Pierre Ossman
+[    1.660641] sdhci-pltfm: SDHCI platform and OF driver helper
+[    1.666619] sdhci-tegra 700b0400.sdhci: Got CD GPIO
+[    1.671508] sdhci-tegra 700b0400.sdhci: Got WP GPIO
+[    1.676437] mmc0: Unknown controller version (3). You may experience problems.
+[    1.683758] sdhci-tegra 700b0400.sdhci: No vmmc regulator found
+[    1.689717] platform 700b0400.sdhci: Driver sdhci-tegra requests probe deferral
+[    1.697204] mmc0: Unknown controller version (3). You may experience problems.
+[    1.704489] sdhci-tegra 700b0600.sdhci: No vmmc regulator found
+[    1.710401] sdhci-tegra 700b0600.sdhci: No vqmmc regulator found
+[    1.716417] mmc0: Invalid maximum block size, assuming 512 bytes
+[    1.763375] mmc0: SDHCI controller on 700b0600.sdhci [700b0600.sdhci] using ADMA
+[    1.771953] usbcore: registered new interface driver usbhid
+[    1.777544] usbhid: USB HID core driver
+[    1.827382] mmc0: BKOPS_EN bit is not set
+[    1.834709] mmc0: new high speed MMC card at address 0001
+[    1.840882] mmcblk0: mmc0:0001 SEM16G 14.6 GiB 
+[    1.845689] mmcblk0boot0: mmc0:0001 SEM16G partition 1 4.00 MiB
+[    1.851860] mmcblk0boot1: mmc0:0001 SEM16G partition 2 4.00 MiB
+[    1.858013] mmcblk0rpmb: mmc0:0001 SEM16G partition 3 4.00 MiB
+[    1.866420] Primary GPT is invalid, using alternate GPT.
+[    1.871750]  mmcblk0: p1 p2 p3 p4 p5 p6 p7 p8 p9
+[    2.204553] tegra-snd-rt5640 sound: ASoC: CPU DAI (null) not registered
+[    2.211186] tegra-snd-rt5640 sound: snd_soc_register_card failed (-517)
+[    2.217849] platform sound: Driver tegra-snd-rt5640 requests probe deferral
+[    2.226196] TCP: cubic registered
+[    2.229775] NET: Registered protocol family 10
+[    2.235758] mip6: Mobile IPv6
+[    2.238735] sit: IPv6 over IPv4 tunneling driver
+[    2.246235] NET: Registered protocol family 17
+[    2.250719] NET: Registered protocol family 15
+[    2.255188] can: controller area network core (rev 20120528 abi 9)
+[    2.261514] NET: Registered protocol family 29
+[    2.265982] can: raw protocol (rev 20120528)
+[    2.270251] can: broadcast manager protocol (rev 20120528 t)
+[    2.275940] can: netlink gateway (rev 20130117) max_hops=1
+[    2.281594] Bluetooth: RFCOMM socket layer initialized
+[    2.286760] Bluetooth: RFCOMM ver 1.11
+[    2.290522] Bluetooth: BNEP (Ethernet Emulation) ver 1.3
+[    2.295857] Bluetooth: BNEP socket layer initialized
+[    2.300820] Bluetooth: HIDP (Human Interface Emulation) ver 1.2
+[    2.306760] Bluetooth: HIDP socket layer initialized
+[    2.313154] Registering SWP/SWPB emulation handler
+[    2.320584] +3.3V_RUN: 3300 mV 
+[    2.323832] +3.3V_RUN: supplied by +3.3V_SYS
+[    2.328660] +3.3V_AVDD_HDMI_AP_GATED: 3300 mV 
+[    2.333168] +3.3V_AVDD_HDMI_AP_GATED: supplied by +3.3V_RUN
+[    2.339257] +USB0_VBUS_SW: 5000 mV 
+[    2.342823] +USB0_VBUS_SW: supplied by +5V_SYS
+[    2.347811] +5V_USB_HS: 5000 mV 
+[    2.351119] +5V_USB_HS: supplied by +5V_SYS
+[    2.356530] +3.3V_LP0: 3300 mV 
+[    2.359766] +3.3V_LP0: supplied by +3.3V_SYS
+[    2.364570] +1.05V_RUN_AVDD_HDMI_PLL: 1050 mV 
+[    2.369092] reg-fixed-voltage regulators:regulator@11: Failed to find supply vin
+[    2.376687] reg-fixed-voltage regulators:regulator@11: Failed to register regulator: -517
+[    2.384889] platform regulators:regulator@11: Driver reg-fixed-voltage requests probe deferral
+[    2.394026] +5V_HDMI_CON: 5000 mV 
+[    2.397505] +5V_HDMI_CON: supplied by +5V_SYS
+[    2.402370] +5V_SATA: 5000 mV 
+[    2.405525] +5V_SATA: supplied by +5V_SYS
+[    2.410040] +12V_SATA: 12000 mV 
+[    2.413368] +12V_SATA: supplied by +VDD_MUX
+[    2.417863] tegra-pcie 1003000.pcie-controller: 2x1, 1x1 configuration
+[    2.424436] tegra-pcie 1003000.pcie-controller: Failed to get supply 'avddio-pex': -517
+[    2.432457] platform 1003000.pcie-controller: Driver tegra-pcie requests probe deferral
+[    2.440845] tegra-hdmi 54280000.hdmi: failed to get PLL regulator
+[    2.447020] platform 54280000.hdmi: Driver tegra-hdmi requests probe deferral
+[    2.455334] +VDD_CPU_AP: 700 <--> 1400 mV at 1000 mV 3500 mA 
+[    2.461869] +VDD_CORE: 700 <--> 1350 mV at 1100 mV 2500 mA 
+[    2.468106] +1.35V_LP0(sd2): 1350 mV 
+[    2.471888] +1.35V_LP0(sd2): supplied by +5V_SYS
+[    2.477033] +1.35V_LP0(sd3): 1350 mV 
+[    2.480840] +1.35V_LP0(sd3): supplied by +5V_SYS
+[    2.485923] +1.05V_RUN: 1050 mV 
+[    2.489307] +1.05V_RUN: supplied by +5V_SYS
+[    2.494046] +1.8V_VDDIO: 1800 mV 
+[    2.497517] +1.8V_VDDIO: supplied by +5V_SYS
+[    2.503106] +VDD_GPU_AP: 650 <--> 1200 mV at 1000 mV 3500 mA 
+[    2.509450] +1.05V_RUN_AVDD: 1050 mV at 300 mA 
+[    2.514179] +1.05V_RUN_AVDD: supplied by +1.35V_LP0(sd2)
+[    2.520097] +1.8V_RUN_CAM: 1800 mV at 150 mA 
+[    2.524632] +1.8V_RUN_CAM: supplied by +3.3V_RUN
+[    2.530445] +1.2V_GEN_AVDD: 1200 mV at 150 mA 
+[    2.535054] +1.2V_GEN_AVDD: supplied by +1.8V_VDDIO
+[    2.541272] +1.05V_LP0_VDD_RTC: 1000 mV at 150 mA 
+[    2.546206] +1.05V_LP0_VDD_RTC: supplied by +3.3V_SYS
+[    2.551951] +2.8V_RUN_CAM: 2800 mV at 150 mA 
+[    2.556496] +2.8V_RUN_CAM: supplied by +3.3V_SYS
+[    2.561787] +1.2V_RUN_CAM_FRONT: 1200 mV at 150 mA 
+[    2.566825] +1.2V_RUN_CAM_FRONT: supplied by +1.8V_VDDIO
+[    2.572713] +VDDIO_SDMMC3: 1800 <--> 3300 mV at 150 mA 
+[    2.578101] +VDDIO_SDMMC3: supplied by +3.3V_RUN
+[    2.583402] +1.05V_RUN_CAM_REAR: 1050 mV at 150 mA 
+[    2.588429] +1.05V_RUN_CAM_REAR: supplied by +1.8V_VDDIO
+[    2.594626] +3.3V_RUN_TOUCH: 2800 mV at 150 mA 
+[    2.599299] +3.3V_RUN_TOUCH: supplied by +5V_SYS
+[    2.604634] +2.8V_RUN_CAM_AF: 2800 mV at 150 mA 
+[    2.609394] +2.8V_RUN_CAM_AF: supplied by +5V_SYS
+[    2.614800] +1.8V_RUN_VPP_FUSE: 1800 mV at 150 mA 
+[    2.619744] +1.8V_RUN_VPP_FUSE: supplied by +3.3V_RUN
+[    2.627093] tegra-ahci 70027000.sata: AHCI 0001.0301 32 slots 2 ports 3 Gbps 0x1 impl platform mode
+[    2.636181] tegra-ahci 70027000.sata: flags: 64bit ncq sntf pm led pio slum part sadm sds apst 
+[    2.648731] scsi host0: ahci_platform
+[    2.654401] scsi host1: ahci_platform
+[    2.658884] ata1: SATA max UDMA/133 mmio [mem 0x70027000-0x70028fff] port 0x100 irq 55
+[    2.666849] ata2: DUMMY
+[    2.672585] tegra-ehci 7d004000.usb: EHCI Host Controller
+[    2.678097] tegra-ehci 7d004000.usb: new USB bus registered, assigned bus number 1
+[    2.686017] tegra-ehci 7d004000.usb: irq 53, io mem 0x7d004000
+[    2.703465] tegra-ehci 7d004000.usb: USB 2.0 started, EHCI 1.10
+[    2.711101] hub 1-0:1.0: USB hub found
+[    2.714943] hub 1-0:1.0: 1 port detected
+[    2.720050] platform 7d008000.usb: Driver tegra-ehci requests probe deferral
+[    2.727977] sdhci-tegra 700b0400.sdhci: Got CD GPIO
+[    2.732868] sdhci-tegra 700b0400.sdhci: Got WP GPIO
+[    2.737826] mmc1: Unknown controller version (3). You may experience problems.
+[    2.745224] sdhci-tegra 700b0400.sdhci: No vmmc regulator found
+[    2.751218] mmc1: Invalid maximum block size, assuming 512 bytes
+[    2.804002] mmc1: SDHCI controller on 700b0400.sdhci [700b0400.sdhci] using ADMA
+[    2.811890] tegra-snd-rt5640 sound: ASoC: CPU DAI (null) not registered
+[    2.818604] tegra-snd-rt5640 sound: snd_soc_register_card failed (-517)
+[    2.825319] platform sound: Driver tegra-snd-rt5640 requests probe deferral
+[    2.832941] +1.05V_RUN_AVDD_HDMI_PLL: 1050 mV 
+[    2.837560] +1.05V_RUN_AVDD_HDMI_PLL: supplied by +1.05V_RUN
+[    2.843712] tegra-pcie 1003000.pcie-controller: 2x1, 1x1 configuration
+[    2.851504] tegra-pcie 1003000.pcie-controller: probing port 0, using 2 lanes
+[    2.860789] tegra-pcie 1003000.pcie-controller: Slot present pin change, signature: 00000008
+[    3.013516] ata1: SATA link down (SStatus 0 SControl 300)
+[    3.289204] tegra-pcie 1003000.pcie-controller: link 0 down, retrying
+[    3.718279] tegra-pcie 1003000.pcie-controller: link 0 down, retrying
+[    4.146527] tegra-pcie 1003000.pcie-controller: link 0 down, retrying
+[    4.155081] tegra-pcie 1003000.pcie-controller: link 0 down, ignoring
+[    4.161543] tegra-pcie 1003000.pcie-controller: probing port 1, using 1 lanes
+[    4.170819] tegra-pcie 1003000.pcie-controller: Slot present pin change, signature: 00000000
+[    4.599220] tegra-pcie 1003000.pcie-controller: link 1 down, retrying
+[    5.028236] tegra-pcie 1003000.pcie-controller: link 1 down, retrying
+[    5.457264] tegra-pcie 1003000.pcie-controller: link 1 down, retrying
+[    5.465855] tegra-pcie 1003000.pcie-controller: link 1 down, ignoring
+[    5.472771] tegra-pcie 1003000.pcie-controller: PCI host bridge to bus 0000:00
+[    5.480025] pci_bus 0000:00: root bus resource [mem 0x13000000-0x1fffffff]
+[    5.486912] pci_bus 0000:00: root bus resource [mem 0x20000000-0x3fffffff pref]
+[    5.494230] pci_bus 0000:00: root bus resource [bus 00-ff]
+[    5.499711] pci_bus 0000:00: root bus resource [io  0x1000-0xffff]
+[    5.505926] PCI: bus0: Fast back to back transfers enabled
+[    5.514498] [drm] Supports vblank timestamp caching Rev 2 (21.10.2013).
+[    5.521106] [drm] No driver support for vblank timestamp query.
+[    5.527117] host1x drm: No connectors reported connected with modes
+[    5.533420] [drm] Cannot find any crtc or sizes - going 1024x768
+[    5.549975] Console: switching to colour frame buffer device 128x48
+[    5.563275] host1x drm: fb0:  frame buffer device
+[    5.567991] host1x drm: registered panic notifier
+[    5.593522] [drm] Initialized tegra 0.0.0 20120330 on minor 0
+[    5.599749] tegra-ehci 7d008000.usb: EHCI Host Controller
+[    5.605238] tegra-ehci 7d008000.usb: new USB bus registered, assigned bus number 2
+[    5.613126] tegra-ehci 7d008000.usb: irq 129, io mem 0x7d008000
+[    5.633501] tegra-ehci 7d008000.usb: USB 2.0 started, EHCI 1.10
+[    5.641040] hub 2-0:1.0: USB hub found
+[    5.644900] hub 2-0:1.0: 1 port detected
+[    5.650178] tegra-snd-rt5640 sound: ASoC: CPU DAI (null) not registered
+[    5.656897] tegra-snd-rt5640 sound: snd_soc_register_card failed (-517)
+[    5.663574] platform sound: Driver tegra-snd-rt5640 requests probe deferral
+[    5.671480] input: gpio-keys as /devices/soc0/gpio-keys/input/input0
+[    5.679108] tegra-snd-rt5640 sound: ASoC: CPU DAI (null) not registered
+[    5.685755] as3722-rtc as3722-rtc: setting system clock to 2000-02-01 00:00:18 UTC (949363218)
+[    5.694584] tegra-snd-rt5640 sound: snd_soc_register_card failed (-517)
+[    5.701233] platform sound: Driver tegra-snd-rt5640 requests probe deferral
+[    5.716617] +1.05V_RUN_AVDD_HDMI_PLL: disabling
+[    5.721154] +1.8V_RUN_VPP_FUSE: disabling
+[    5.725637] +2.8V_RUN_CAM_AF: disabling
+[    5.729828] +3.3V_RUN_TOUCH: disabling
+[    5.734039] +1.05V_RUN_CAM_REAR: disabling
+[    5.738491] +1.2V_RUN_CAM_FRONT: disabling
+[    5.742716] +2.8V_RUN_CAM: disabling
+[    5.746724] +1.8V_RUN_CAM: disabling
+[    5.750678] +USB0_VBUS_SW: disabling
+[    5.754293] +3.3V_AVDD_HDMI_AP_GATED: disabling
+[    5.759159] ALSA device list:
+[    5.762122]   No soundcards found.
+[    5.766639] EXT3-fs (mmcblk0p1): error: couldn't mount because of unsupported optional features (240)
+[    5.776407] EXT2-fs (mmcblk0p1): error: couldn't mount because of unsupported optional features (244)
+[    5.792828] EXT4-fs (mmcblk0p1): recovery complete
+[    5.797697] EXT4-fs (mmcblk0p1): mounted filesystem with ordered data mode. Opts: (null)
+[    5.805912] VFS: Mounted root (ext4 filesystem) on device 179:1.
+[    5.822419] devtmpfs: mounted
+[    5.825739] Freeing unused kernel memory: 284K (c085f000 - c08a6000)
+[    5.963499] usb 2-1: new high-speed USB device number 2 using tegra-ehci
+bash: cannot set terminal process group (-1): Inappropriate ioctl for device
+bash: no job control in this shell
+root@(none):/# [    6.457568] asix 2-1:1.0 eth0: register 'asix' at usb-7d008000.usb-1, ASIX AX88772 USB 2.0 Ethernet, 00:50:b6:11:31:3b
+[    6.468881] tegra-snd-rt5640 sound: ASoC: CPU DAI (null) not registered
+[    6.475593] tegra-snd-rt5640 sound: snd_soc_register_card failed (-517)
+[    6.482244] platform sound: Driver tegra-snd-rt5640 requests probe deferral

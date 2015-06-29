@@ -1,0 +1,56 @@
+
+
+U-Boot 2011.03 (Jun 11 2013 - 06:07:37)
+
+T114
+Board: NVIDIA Dalmore
+DRAM:  2 GiB
+MMC:   Tegra2 SD/MMC: 0, Tegra2 SD/MMC: 1
+In:    serial
+Out:   serial
+Err:   serial
+Net:   Net Initialization Skipped
+No ethernet found.
+Hit any key to stop autoboot:  2  1  0 
+Dalmore #
+Dalmore #usb reset
+(Re)start USB...
+USB:   Register 10011 NbrPorts 1
+USB EHCI 1.10
+scanning bus for devices... 2 USB Device(s) found
+       scanning bus for storage devices... 0 Storage Device(s) found
+       scanning bus for ethernet devices... 1 Ethernet Device(s) found
+Dalmore #setenv bootargs 'ignore_loglevel console=ttyS0,115200n8 rw root=/dev/mmcblk0p1 rootwait gpt init=/bin/bash'
+Dalmore #setenv ipaddr 192.168.100.100; setenv serverip 192.168.100.1; setenv tftpserverip 192.168.100.1
+Dalmore #tftpboot 0x81000000 zImage.multi_v7_defconfig
+Waiting for Ethernet connection... done.
+Using asx0 device
+TFTP from server 192.168.100.1; our IP address is 192.168.100.100
+Filename 'zImage.multi_v7_defconfig'.
+Load address: 0x81000000
+Loading: *#################################################  2.8 MiB/s
+done
+Bytes transferred = 3973976 (3ca358 hex)
+Dalmore #tftpboot 0x82000000 tegra114-dalmore.dtb
+Using asx0 device
+TFTP from server 192.168.100.1; our IP address is 192.168.100.100
+Filename 'tegra114-dalmore.dtb'.
+Load address: 0x82000000
+Loading: *#################################################  2.6 MiB/s
+done
+Bytes transferred = 29436 (72fc hex)
+Dalmore #bootz 0x81000000 - 0x82000000
+## Flattened Device Tree blob at 82000000
+   Booting using the fdt blob at 0x82000000
+   Loading Device Tree to 81ff5000, end 81fff2fb ... OK
+
+Starting kernel ...
+
+Timer summary in microseconds:
+       Mark    Elapsed  Stage
+          0          0  awake
+  3,052,627  3,052,627  usb_start
+  7,056,373  4,003,746  eth_start
+  7,056,371         -2  tftp start
+ 10,863,369  3,806,998  tftp done
+ 13,068,177  2,204,808  start_kernel
