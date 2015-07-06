@@ -1,0 +1,37 @@
+Tegra baseline test results for next-20150706
+
+
+Here are some basic Tegra test results for Linux next-20150706.
+Logs and other details at:
+
+    https://nvtb.github.io//linux-next/test_next-20150706/20150705211534/
+
+
+Test summary
+------------
+
+Build: zImage:
+    Pass: ( 2/ 2): multi_v7_defconfig, tegra_defconfig
+
+Build: Image:
+    Pass: ( 1/ 1): defconfig
+
+Boot to userspace: defconfig:
+    Pass: ( 1/ 1): qemu-vexpress64
+
+Boot to userspace: multi_v7_defconfig:
+    Pass: ( 4/ 4): tegra114-dalmore-a04, tegra124-jetson-tk1,
+		   tegra20-trimslice, tegra30-beaver
+
+Boot to userspace: tegra_defconfig:
+    Pass: ( 4/ 4): tegra114-dalmore-a04, tegra124-jetson-tk1,
+		   tegra20-trimslice, tegra30-beaver
+
+
+
+-------------------------------------------------------------
+Branch: test_next-20150706
+Test-Serial: 20150705211534
+Commit-ID: d3e8e8e541efab6d818008e24a71a5a9e99a8df6
+Test-Target-Board-Count: 5
+Test-Boot-Count: 9
