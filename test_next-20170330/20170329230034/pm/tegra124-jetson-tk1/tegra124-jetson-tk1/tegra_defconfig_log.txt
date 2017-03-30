@@ -1,0 +1,846 @@
+
+U-Boot SPL 2016.05-rc2 (Apr 21 2016 - 16:23:00)
+Trying to boot from RAM
+
+
+U-Boot 2016.05-rc2 (Apr 21 2016 - 16:23:00 -0700)
+
+TEGRA124
+Model: NVIDIA Jetson TK1
+Board: NVIDIA Jetson TK1
+DRAM:  2 GiB
+MC:   Tegra SD/MMC: 0, Tegra SD/MMC: 1
+In:    serial
+Out:   serial
+Err:   serial
+Net:   No ethernet found.
+Hit any key to stop autoboot:  2  0 
+Tegra124 (Jetson TK1) # 
+Tegra124 (Jetson TK1) # pci enum
+Tegra124 (Jetson TK1) # setenv bootargs 'ignore_loglevel console=ttyS0,115200n8 rw root=PARTUUID=b1791faa-84e8-4e27-83a1-9fb0a77e8803 rootwait gpt debug noinitrd earlyprintk init=/bin/bash'
+Tegra124 (Jetson TK1) # setenv ipaddr 192.168.100.102; setenv serverip 192.168.100.1; setenv tftpserverip 192.168.100.1
+Tegra124 (Jetson TK1) # tftpboot 0x82000000 zImage.tegra_defconfig
+
+Warning: eth_rtl8169 using MAC address from ROM
+Using eth_rtl8169 device
+TFTP from server 192.168.100.1; our IP address is 192.168.100.102
+Filename 'zImage.tegra_defconfig'.
+Load address: 0x82000000
+Loading: *#################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 ######################
+	 4 MiB/s
+done
+Bytes transferred = 6041928 (5c3148 hex)
+Tegra124 (Jetson TK1) # tftpboot 0x83000000 tegra124-jetson-tk1.dtb
+Using eth_rtl8169 device
+TFTP from server 192.168.100.1; our IP address is 192.168.100.102
+Filename 'tegra124-jetson-tk1.dtb'.
+Load address: 0x83000000
+Loading: *#####
+	 3.8 MiB/s
+done
+Bytes transferred = 67133 (1063d hex)
+Tegra124 (Jetson TK1) # bootz 0x82000000 - 0x83000000
+Kernel image @ 0x82000000 [ 0x000000 - 0x5c3148 ]
+## Flattened Device Tree blob at 83000000
+   Booting using the fdt blob at 0x83000000
+   Using Device Tree in place at 83000000, end 8301363c
+
+Starting kernel ...
+
+Uncompressing Linux... done, booting the kernel.
+[    0.000000] Booting Linux on physical CPU 0x0
+[    0.000000] Linux version 4.11.0-rc4-next-20170330-162498-g6fd3fc1 (jonathanh@kaivo) (gcc version 4.7.3 20130328 (prerelease) (crosstool-NG linaro-1.13.1-4.7-2013.04-20130415 - Linaro GCC 2013.04) ) #1 SMP PREEMPT Wed Mar 29 23:03:52 PDT 2017
+[    0.000000] CPU: ARMv7 Processor [413fc0f3] revision 3 (ARMv7), cr=10c5387d
+[    0.000000] CPU: div instructions available: patching division code
+[    0.000000] CPU: PIPT / VIPT nonaliasing data cache, PIPT instruction cache
+[    0.000000] OF: fdt: Machine model: NVIDIA Tegra124 Jetson TK1
+[    0.000000] debug: ignoring loglevel setting.
+[    0.000000] bootconsole [earlycon0] enabled
+[    0.000000] cma: Reserved 64 MiB at 0xfbc00000
+[    0.000000] Memory policy: Data cache writealloc
+[    0.000000] On node 0 totalpages: 524032
+[    0.000000] free_area_init_node: node 0, pgdat c0eab6c0, node_mem_map eeff7000
+[    0.000000]   Normal zone: 1536 pages used for memmap
+[    0.000000]   Normal zone: 0 pages reserved
+[    0.000000]   Normal zone: 196608 pages, LIFO batch:31
+[    0.000000]   HighMem zone: 327424 pages, LIFO batch:31
+[    0.000000] percpu: Embedded 17 pages/cpu @eef81000 s38464 r8192 d22976 u69632
+[    0.000000] pcpu-alloc: s38464 r8192 d22976 u69632 alloc=17*4096
+[    0.000000] pcpu-alloc: [0] 0 [0] 1 [0] 2 [0] 3 
+[    0.000000] Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 522496
+[    0.000000] Kernel command line: ignore_loglevel console=ttyS0,115200n8 rw root=PARTUUID=b1791faa-84e8-4e27-83a1-9fb0a77e8803 rootwait gpt debug noinitrd earlyprintk init=/bin/bash
+[    0.000000] PID hash table entries: 4096 (order: 2, 16384 bytes)
+[    0.000000] Dentry cache hash table entries: 131072 (order: 7, 524288 bytes)
+[    0.000000] Inode-cache hash table entries: 65536 (order: 6, 262144 bytes)
+[    0.000000] Memory: 1998480K/2096128K available (9216K kernel code, 726K rwdata, 2708K rodata, 1024K init, 314K bss, 32112K reserved, 65536K cma-reserved, 1244160K highmem)
+[    0.000000] Virtual kernel memory layout:
+[    0.000000]     vector  : 0xffff0000 - 0xffff1000   (   4 kB)
+[    0.000000]     fixmap  : 0xffc00000 - 0xfff00000   (3072 kB)
+[    0.000000]     vmalloc : 0xf0800000 - 0xff800000   ( 240 MB)
+[    0.000000]     lowmem  : 0xc0000000 - 0xf0000000   ( 768 MB)
+[    0.000000]     pkmap   : 0xbfe00000 - 0xc0000000   (   2 MB)
+[    0.000000]     modules : 0xbf000000 - 0xbfe00000   (  14 MB)
+[    0.000000]       .text : 0xc0008000 - 0xc0a00000   (10208 kB)
+[    0.000000]       .init : 0xc0d00000 - 0xc0e00000   (1024 kB)
+[    0.000000]       .data : 0xc0e00000 - 0xc0eb5a20   ( 727 kB)
+[    0.000000]        .bss : 0xc0eb7000 - 0xc0f0599c   ( 315 kB)
+[    0.000000] Preemptible hierarchical RCU implementation.
+[    0.000000] NR_IRQS:16 nr_irqs:16 16
+[    0.000000] /interrupt-controller@60004000: 160 interrupts forwarded to /interrupt-controller@50041000
+[    0.000000] Tegra clk 127: register failed with -17
+[    0.000008] sched_clock: 32 bits at 1000kHz, resolution 1000ns, wraps every 2147483647500ns
+[    0.007561] clocksource: timer_us: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 1911260446275 ns
+[    0.017177] Switching to timer-based delay loop, resolution 1000ns
+[    0.024719] arm_arch_timer: Architected cp15 timer(s) running at 12.00MHz (virt).
+[    0.030961] clocksource: arch_sys_counter: mask: 0xffffffffffffff max_cycles: 0x2c47f4ee7, max_idle_ns: 440795202497 ns
+[    0.041794] sched_clock: 56 bits at 12MHz, resolution 83ns, wraps every 4398046511096ns
+[    0.049849] Switching to timer-based delay loop, resolution 83ns
+[    0.056389] Console: colour dummy device 80x30
+[    0.060435] Calibrating delay loop (skipped), value calculated using timer frequency.. 24.00 BogoMIPS (lpj=120000)
+[    0.070833] pid_max: default: 32768 minimum: 301
+[    0.076030] Mount-cache hash table entries: 2048 (order: 1, 8192 bytes)
+[    0.082192] Mountpoint-cache hash table entries: 2048 (order: 1, 8192 bytes)
+[    0.090084] CPU: Testing write buffer coherency: ok
+[    0.094522] /cpus/cpu@0 missing clock-frequency property
+[    0.099624] /cpus/cpu@1 missing clock-frequency property
+[    0.105018] /cpus/cpu@2 missing clock-frequency property
+[    0.110372] /cpus/cpu@3 missing clock-frequency property
+[    0.115730] CPU0: thread -1, cpu 0, socket 0, mpidr 80000000
+[    0.155854] Setting up static identity map for 0x80100000 - 0x80100098
+[    0.176367] Tegra Revision: A01 SKU: 129 CPU Process: 1 SoC Process: 1
+[    0.195873] smp: Bringing up secondary CPUs ...
+[    0.246423] CPU1: thread -1, cpu 1, socket 0, mpidr 80000001
+[    0.326534] CPU2: thread -1, cpu 2, socket 0, mpidr 80000002
+[    0.406655] CPU3: thread -1, cpu 3, socket 0, mpidr 80000003
+[    0.416220] smp: Brought up 1 node, 4 CPUs
+[    0.435653] SMP: Total of 4 processors activated (96.00 BogoMIPS).
+[    0.441903] CPU: All CPU(s) started in SVC mode.
+[    0.448406] devtmpfs: initialized
+[    0.473211] VFP support v0.3: implementor 41 architecture 4 part 30 variant f rev 0
+[    0.479315] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+[    0.488959] futex hash table entries: 1024 (order: 4, 65536 bytes)
+[    0.496479] pinctrl core: initialized pinctrl subsystem
+[    0.501781] NET: Registered protocol family 16
+[    0.506412] DMA: preallocated 256 KiB pool for atomic coherent allocations
+[    0.513548] cpuidle: using governor menu
+[    0.542828] No ATAGs?
+[    0.542964] hw-breakpoint: found 5 (+1 reserved) breakpoint and 4 watchpoint registers.
+[    0.551476] hw-breakpoint: maximum watchpoint size is 8 bytes.
+[    0.577319] +5V_SYS: supplied by +VDD_MUX
+[    0.579895] +3.3V_SYS: supplied by +VDD_MUX
+[    0.584495] +USB0_VBUS_SW: Failed to request enable GPIO108: -517
+[    0.589931] reg-fixed-voltage regulators:regulator@7: Failed to register regulator: -517
+[    0.598150] +5V_USB_HS: Failed to request enable GPIO109: -517
+[    0.603968] reg-fixed-voltage regulators:regulator@8: Failed to register regulator: -517
+[    0.612274] +1.05V_RUN_AVDD_HDMI_PLL: Failed to request enable GPIO63: -517
+[    0.619134] reg-fixed-voltage regulators:regulator@11: Failed to register regulator: -517
+[    0.627442] +5V_HDMI_CON: Failed to request enable GPIO86: -517
+[    0.633346] reg-fixed-voltage regulators:regulator@12: Failed to register regulator: -517
+[    0.641654] +5V_SATA: Failed to request enable GPIO242: -517
+[    0.647299] reg-fixed-voltage regulators:regulator@13: Failed to register regulator: -517
+[    0.655608] +12V_SATA: Failed to request enable GPIO242: -517
+[    0.661339] reg-fixed-voltage regulators:regulator@14: Failed to register regulator: -517
+[    0.670867] vgaarb: loaded
+[    0.673124] SCSI subsystem initialized
+[    0.676422] libata version 3.00 loaded.
+[    0.680404] usbcore: registered new interface driver usbfs
+[    0.685686] usbcore: registered new interface driver hub
+[    0.691060] usbcore: registered new device driver usb
+[    0.699123] Linux video capture interface: v2.00
+[    0.701993] pps_core: LinuxPPS API ver. 1 registered
+[    0.706959] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[    0.716174] PTP clock support registered
+[    0.721566] Advanced Linux Sound Architecture Driver Initialized.
+[    0.727046] Bluetooth: Core ver 2.22
+[    0.729962] NET: Registered protocol family 31
+[    0.734434] Bluetooth: HCI device and connection manager initialized
+[    0.740834] Bluetooth: HCI socket layer initialized
+[    0.745786] Bluetooth: L2CAP socket layer initialized
+[    0.750917] Bluetooth: SCO socket layer initialized
+[    0.757217] clocksource: Switched to clocksource arch_sys_counter
+[    0.853429] NET: Registered protocol family 2
+[    0.857156] TCP established hash table entries: 8192 (order: 3, 32768 bytes)
+[    0.863191] TCP bind hash table entries: 8192 (order: 4, 65536 bytes)
+[    0.869764] TCP: Hash tables configured (established 8192 bind 8192)
+[    0.876477] UDP hash table entries: 512 (order: 2, 16384 bytes)
+[    0.882023] UDP-Lite hash table entries: 512 (order: 2, 16384 bytes)
+[    0.888714] NET: Registered protocol family 1
+[    0.893495] RPC: Registered named UNIX socket transport module.
+[    0.898801] RPC: Registered udp transport module.
+[    0.903541] RPC: Registered tcp transport module.
+[    0.908325] RPC: Registered tcp NFSv4.1 backchannel transport module.
+[    0.914813] PCI: CLS 0 bytes, default 64
+[    0.920916] hw perfevents: enabled with armv7_cortex_a15 PMU driver, 7 counters available
+[    0.929528] workingset: timestamp_bits=30 max_order=19 bucket_order=0
+[    0.935747] squashfs: version 4.0 (2009/01/31) Phillip Lougher
+[    0.940862] NFS: Registering the id_resolver key type
+[    0.945169] Key type id_resolver registered
+[    0.949463] Key type id_legacy registered
+[    0.957994] bounce: pool size: 64 pages
+[    0.960008] io scheduler noop registered (default)
+[    0.964860] io scheduler mq-deadline registered
+[    0.971565]  usb2-0: usb2-0 supply vbus not found, using dummy regulator
+[    0.976590]  usb2-1: usb2-1 supply vbus not found, using dummy regulator
+[    0.983725] tegra-xusb-padctl 7009f000.padctl: failed to setup XUSB ports: -517
+[    0.999731] tegra-pcie 1003000.pcie-controller: 2x1, 1x1 configuration
+[    1.004473] tegra-pcie 1003000.pcie-controller: Failed to get supply 'avddio-pex': -517
+[    1.016280] tegra124-dfll 70110000.clock: couldn't get vdd_cpu regulator
+[    1.028700] tegra-apbdma 60020000.dma: Tegra20 APB DMA driver register 32 channels
+[    1.035208] tegra-pmc 7000e400.pmc: emergency thermal reset enabled
+[    1.041351] Serial: 8250/16550 driver, 4 ports, IRQ sharing disabled
+[    1.049285] console [ttyS0] disabled
+[    1.051077] 70006300.serial: ttyS0 at MMIO 0x70006300 (irq = 335, base_baud = 25500000) is a Tegra
+[    1.060796] console [ttyS0] enabled
+[    1.060796] console [ttyS0] enabled
+[    1.066381] bootconsole [earlycon0] disabled
+[    1.066381] bootconsole [earlycon0] disabled
+[    1.075851] 70006000.serial: ttyTHS1 at MMIO 0x70006000 (irq = 333, base_baud = 0) is a TEGRA_UART
+[    1.086891] 70006040.serial: ttyTHS2 at MMIO 0x70006040 (irq = 334, base_baud = 0) is a TEGRA_UART
+[    1.098549] tegra-hdmi 54280000.hdmi: failed to get HDMI regulator
+[    1.118915] loop: module loaded
+[    1.123358] at24 0-0056: 256 byte 24c02 EEPROM, writable, 8 bytes/write
+[    1.130789] as3722 4-0040: AS3722 with revision 0x1 found
+[    1.143431] as3722-sd2: supplied by +5V_SYS
+[    1.148172] as3722-sd3: supplied by +5V_SYS
+[    1.152594] +1.35V_LP0(sd3): Bringing 0uV into 1350000-1350000uV
+[    1.159033] as3722-sd4: supplied by +5V_SYS
+[    1.163744] as3722-sd5: supplied by +5V_SYS
+[    1.169948] as3722-ldo0: supplied by +1.35V_LP0(sd2)
+[    1.176126] +1.8V_RUN_CAM: Bringing 0uV into 1800000-1800000uV
+[    1.182418] as3722-ldo2: supplied by +1.8V_VDDIO
+[    1.188423] as3722-ldo3: supplied by +3.3V_SYS
+[    1.192932] +1.05V_LP0_VDD_RTC: Bringing 1100000uV into 1000000-1000000uV
+[    1.200803] as3722-ldo4: supplied by +3.3V_SYS
+[    1.205473] +2.8V_RUN_CAM: Bringing 0uV into 2800000-2800000uV
+[    1.211773] as3722-ldo5: supplied by +1.8V_VDDIO
+[    1.216618] +1.2V_RUN_CAM_FRONT: Bringing 0uV into 1200000-1200000uV
+[    1.223638] +VDDIO_SDMMC3: bypassed regulator has no supply!
+[    1.229312] +VDDIO_SDMMC3: failed to get the current voltage(-517)
+[    1.235491] as3722-regulator as3722-regulator: regulator 13 register failed -517
+[    1.247718] tegra-ahci 70027000.sata: couldn't get PHY in node sata: -517
+[    1.263798] random: fast init done
+[    1.267409] m25p80 spi32765.0: w25q32dw (4096 Kbytes)
+[    1.274785] libphy: Fixed MDIO Bus: probed
+[    1.278913] CAN device driver interface
+[    1.282803] igb: Intel(R) Gigabit Ethernet Network Driver - version 5.4.0-k
+[    1.289974] igb: Copyright (c) 2007-2014 Intel Corporation.
+[    1.295703] pegasus: v0.9.3 (2013/04/25), Pegasus/Pegasus II USB Ethernet driver
+[    1.303178] usbcore: registered new interface driver pegasus
+[    1.308937] usbcore: registered new interface driver asix
+[    1.314386] usbcore: registered new interface driver ax88179_178a
+[    1.320556] usbcore: registered new interface driver cdc_ether
+[    1.326456] usbcore: registered new interface driver smsc75xx
+[    1.332306] usbcore: registered new interface driver smsc95xx
+[    1.338136] usbcore: registered new interface driver net1080
+[    1.343846] usbcore: registered new interface driver cdc_subset
+[    1.349836] usbcore: registered new interface driver zaurus
+[    1.355478] usbcore: registered new interface driver cdc_ncm
+[    1.361380] tegra-phy 7d004000.usb-phy: no vbus regulator
+[    1.367102] ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+[    1.373642] ehci-pci: EHCI PCI platform driver
+[    1.378165] tegra-ehci: Tegra EHCI driver
+[    1.385010] tegra-ehci 7d004000.usb: EHCI Host Controller
+[    1.390449] tegra-ehci 7d004000.usb: new USB bus registered, assigned bus number 1
+[    1.398262] tegra-ehci 7d004000.usb: irq 354, io mem 0x7d004000
+[    1.427249] tegra-ehci 7d004000.usb: USB 2.0 started, EHCI 1.10
+[    1.434170] hub 1-0:1.0: USB hub found
+[    1.437983] hub 1-0:1.0: 1 port detected
+[    1.443052] usbcore: registered new interface driver cdc_acm
+[    1.448724] cdc_acm: USB Abstract Control Model driver for USB modems and ISDN adapters
+[    1.456781] usbcore: registered new interface driver cdc_wdm
+[    1.462561] usbcore: registered new interface driver usb-storage
+[    1.471479] as3722-rtc as3722-rtc: rtc core: registered as3722-rtc as rtc0
+[    1.478370] as3722-rtc as3722-rtc: RTC interrupt 377
+[    1.486184] tegra_rtc 7000e000.rtc: rtc core: registered 7000e000.rtc as rtc1
+[    1.493373] tegra_rtc 7000e000.rtc: Tegra internal Real Time Clock
+[    1.499854] i2c /dev entries driver
+[    1.504729] usbcore: registered new interface driver uvcvideo
+[    1.510488] USB Video Class driver (1.1.1)
+[    1.514578] gspca_main: v2.14.0 registered
+[    1.519314] lm90 0-004c: 0-004c supply vcc not found, using dummy regulator
+[    1.529672] tegra-wdt 60005000.timer: initialized (heartbeat = 120 sec, nowayout = 0)
+[    1.538500] sdhci: Secure Digital Host Controller Interface driver
+[    1.544670] sdhci: Copyright(c) Pierre Ossman
+[    1.549168] sdhci-pltfm: SDHCI platform and OF driver helper
+[    1.555133] sdhci-tegra 700b0400.sdhci: Got CD GPIO
+[    1.560046] sdhci-tegra 700b0400.sdhci: Got WP GPIO
+[    1.581311] mmc0: Unknown controller version (3). You may experience problems.
+[    1.588584] mmc0: Invalid maximum block size, assuming 512 bytes
+[    1.657286] mmc0: SDHCI controller on 700b0600.sdhci [700b0600.sdhci] using ADMA
+[    1.668764] usbcore: registered new interface driver usbhid
+[    1.674434] usbhid: USB HID core driver
+[    1.723084] mmc0: new high speed MMC card at address 0001
+[    1.729187] mmcblk0: mmc0:0001 SEM16G 14.7 GiB 
+[    1.734126] mmcblk0boot0: mmc0:0001 SEM16G partition 1 4.00 MiB
+[    1.740535] mmcblk0boot1: mmc0:0001 SEM16G partition 2 4.00 MiB
+[    1.746852] mmcblk0rpmb: mmc0:0001 SEM16G partition 3 4.00 MiB
+[    1.754425]  mmcblk0: p1
+[    2.118392] tegra30-i2s 70301100.i2s: DMA channels sourced from device 70300000.ahub
+[    2.138301] tegra-snd-rt5640 sound: rt5640-aif1 <-> 70301100.i2s mapping ok
+[    2.149317] input: NVIDIA Tegra Jetson TK1 Headphones as /devices/soc0/sound/sound/card1/input0
+[    2.160480] NET: Registered protocol family 10
+[    2.166235] Segment Routing with IPv6
+[    2.170088] mip6: Mobile IPv6
+[    2.173056] sit: IPv6, IPv4 and MPLS over IPv4 tunneling driver
+[    2.180662] NET: Registered protocol family 17
+[    2.185118] NET: Registered protocol family 15
+[    2.189614] can: controller area network core (rev 20120528 abi 9)
+[    2.195919] NET: Registered protocol family 29
+[    2.200448] can: raw protocol (rev 20120528)
+[    2.204714] can: broadcast manager protocol (rev 20161123 t)
+[    2.210388] can: netlink gateway (rev 20130117) max_hops=1
+[    2.216049] Bluetooth: RFCOMM socket layer initialized
+[    2.221251] Bluetooth: RFCOMM ver 1.11
+[    2.225018] Bluetooth: BNEP (Ethernet Emulation) ver 1.3
+[    2.230348] Bluetooth: BNEP socket layer initialized
+[    2.235306] Bluetooth: HIDP (Human Interface Emulation) ver 1.2
+[    2.241239] Bluetooth: HIDP socket layer initialized
+[    2.246399] Key type dns_resolver registered
+[    2.251355] Registering SWP/SWPB emulation handler
+[    2.273587] +3.3V_RUN: supplied by +3.3V_SYS
+[    2.278820] +USB0_VBUS_SW: supplied by +5V_SYS
+[    2.283559] +3.3V_AVDD_HDMI_AP_GATED: supplied by +3.3V_RUN
+[    2.289374] +5V_USB_HS: supplied by +5V_SYS
+[    2.294260] +3.3V_LP0: supplied by +3.3V_SYS
+[    2.299808] +5V_HDMI_CON: supplied by +5V_SYS
+[    2.304585] +5V_SATA: supplied by +5V_SYS
+[    2.309253] +12V_SATA: supplied by +VDD_MUX
+[    2.315054]  usb2-0: usb2-0 supply vbus not found, using dummy regulator
+[    2.321915]  usb2-1: usb2-1 supply vbus not found, using dummy regulator
+[    2.328961]  usb3-0: usb3-0 supply vbus not found, using dummy regulator
+[    2.336370] tegra-pcie 1003000.pcie-controller: 2x1, 1x1 configuration
+[    2.342989] tegra-pcie 1003000.pcie-controller: Failed to get supply 'avddio-pex': -517
+[    2.353929] tegra124-dfll 70110000.clock: couldn't get vdd_cpu regulator
+[    2.363714] tegra-hdmi 54280000.hdmi: failed to get PLL regulator
+[    2.372632] as3722-sd2: supplied by +5V_SYS
+[    2.377140] as3722-sd3: supplied by +5V_SYS
+[    2.381699] as3722-sd4: supplied by +5V_SYS
+[    2.386209] as3722-sd5: supplied by +5V_SYS
+[    2.392142] as3722-ldo0: supplied by +1.35V_LP0(sd2)
+[    2.398515] as3722-ldo1: supplied by +3.3V_RUN
+[    2.403295] as3722-ldo2: supplied by +1.8V_VDDIO
+[    2.409056] as3722-ldo3: supplied by +3.3V_SYS
+[    2.414443] as3722-ldo4: supplied by +3.3V_SYS
+[    2.419255] as3722-ldo5: supplied by +1.8V_VDDIO
+[    2.424206] as3722-ldo6: supplied by +3.3V_RUN
+[    2.430020] input: tegra-hda HDMI/DP,pcm=3 as /devices/soc0/70030000.hda/sound/card0/input1
+[    2.438680] as3722-ldo7: supplied by +1.8V_VDDIO
+[    2.443924] +1.05V_RUN_CAM_REAR: Bringing 0uV into 1050000-1050000uV
+[    2.451110] as3722-ldo9: supplied by +5V_SYS
+[    2.456806] +3.3V_RUN_TOUCH: Bringing 0uV into 2800000-2800000uV
+[    2.463375] as3722-ldo10: supplied by +5V_SYS
+[    2.468482] +2.8V_RUN_CAM_AF: Bringing 0uV into 2800000-2800000uV
+[    2.475356] as3722-ldo11: supplied by +3.3V_RUN
+[    2.480667] +1.8V_RUN_VPP_FUSE: Bringing 0uV into 1800000-1800000uV
+[    2.489882] tegra-ahci 70027000.sata: AHCI 0001.0301 32 slots 2 ports 3 Gbps 0x1 impl platform mode
+[    2.498956] tegra-ahci 70027000.sata: flags: 64bit ncq sntf pm led pio slum part sadm sds apst 
+[    2.509774] scsi host0: tegra-ahci
+[    2.514757] scsi host1: tegra-ahci
+[    2.518598] ata1: SATA max UDMA/133 mmio [mem 0x70027000-0x70028fff] port 0x100 irq 345
+[    2.526593] ata2: DUMMY
+[    2.530268] tegra-ehci 7d008000.usb: EHCI Host Controller
+[    2.535717] tegra-ehci 7d008000.usb: new USB bus registered, assigned bus number 2
+[    2.543589] tegra-ehci 7d008000.usb: irq 355, io mem 0x7d008000
+[    2.577347] tegra-ehci 7d008000.usb: USB 2.0 started, EHCI 1.10
+[    2.584596] hub 2-0:1.0: USB hub found
+[    2.588468] hub 2-0:1.0: 1 port detected
+[    2.658021] tegra-xusb 70090000.usb: Firmware timestamp: 2014-09-16 02:10:07 UTC
+[    2.665446] tegra-xusb 70090000.usb: xHCI Host Controller
+[    2.670896] tegra-xusb 70090000.usb: new USB bus registered, assigned bus number 3
+[    2.681097] tegra-xusb 70090000.usb: hcc params 0x0184f525 hci version 0x100 quirks 0x00010010
+[    2.689765] tegra-xusb 70090000.usb: irq 347, io mem 0x70090000
+[    2.696838] hub 3-0:1.0: USB hub found
+[    2.700713] hub 3-0:1.0: 6 ports detected
+[    2.705627] tegra-xusb 70090000.usb: xHCI Host Controller
+[    2.711111] tegra-xusb 70090000.usb: new USB bus registered, assigned bus number 4
+[    2.718863] usb usb4: We don't know the algorithms for LPM for this host, disabling LPM.
+[    2.728426] hub 4-0:1.0: USB hub found
+[    2.732221] hub 4-0:1.0: 2 ports detected
+[    2.738270] sdhci-tegra 700b0400.sdhci: Got CD GPIO
+[    2.743166] sdhci-tegra 700b0400.sdhci: Got WP GPIO
+[    2.756407] mmc1: Unknown controller version (3). You may experience problems.
+[    2.763783] mmc1: Invalid maximum block size, assuming 512 bytes
+[    2.827818] mmc1: SDHCI controller on 700b0400.sdhci [700b0400.sdhci] using ADMA
+[    2.835461] tegra-pcie 1003000.pcie-controller: 2x1, 1x1 configuration
+[    2.847384] tegra-pcie 1003000.pcie-controller: probing port 0, using 2 lanes
+[    2.856674] tegra-pcie 1003000.pcie-controller: Slot present pin change, signature: 00000008
+[    2.870792] ata1: SATA link down (SStatus 0 SControl 300)
+[    2.878707] tegra-pcie 1003000.pcie-controller: probing port 1, using 1 lanes
+[    2.887967] tegra-pcie 1003000.pcie-controller: Slot present pin change, signature: 00000000
+[    2.902857] tegra-pcie 1003000.pcie-controller: PCI host bridge to bus 0000:00
+[    2.910118] pci_bus 0000:00: root bus resource [io  0x0000-0xffff]
+[    2.916301] pci_bus 0000:00: root bus resource [mem 0x13000000-0x1fffffff]
+[    2.923188] pci_bus 0000:00: root bus resource [mem 0x20000000-0x3fffffff pref]
+[    2.930557] pci_bus 0000:00: root bus resource [bus 00-ff]
+[    2.936146] pci 0000:00:01.0: [10de:0e12] type 01 class 0x060400
+[    2.942245] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x88 may corrupt adjacent RW1C bits
+[    2.952026] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x52 may corrupt adjacent RW1C bits
+[    2.961809] pci 0000:00:01.0: PME# supported from D0 D1 D2 D3hot D3cold
+[    2.968471] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x4c may corrupt adjacent RW1C bits
+[    2.978606] pci 0000:00:02.0: [10de:0e13] type 01 class 0x060400
+[    2.984645] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x88 may corrupt adjacent RW1C bits
+[    2.994422] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x52 may corrupt adjacent RW1C bits
+[    3.004205] pci 0000:00:02.0: PME# supported from D0 D1 D2 D3hot D3cold
+[    3.010866] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x4c may corrupt adjacent RW1C bits
+[    3.020945] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x3e may corrupt adjacent RW1C bits
+[    3.030738] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x3e may corrupt adjacent RW1C bits
+[    3.040488] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x4 may corrupt adjacent RW1C bits
+[    3.050146] pci_bus 0000:00: 1-byte config write to 0000:00:01.0 offset 0xc may corrupt adjacent RW1C bits
+[    3.059837] PCI: bus0: Fast back to back transfers disabled
+[    3.065465] pci 0000:00:01.0: bridge configuration invalid ([bus 00-00]), reconfiguring
+[    3.073526] pci 0000:00:02.0: bridge configuration invalid ([bus 00-00]), reconfiguring
+[    3.081793] pci 0000:01:00.0: [8086:4232] type 00 class 0x028000
+[    3.087857] pci 0000:01:00.0: reg 0x10: [mem 0x00000000-0x00001fff 64bit]
+[    3.094837] pci 0000:01:00.0: PME# supported from D0 D3hot D3cold
+[    3.114851] mmc1: new high speed SDHC card at address aaaa
+[    3.121901] mmcblk1: mmc1:aaaa SD04G 3.69 GiB 
+[    3.127363] PCI: bus1: Fast back to back transfers disabled
+[    3.132999] pci_bus 0000:01: busn_res: [bus 01-ff] end is updated to 01
+[    3.140232] pci 0000:02:00.0: [10ec:8168] type 00 class 0x020000
+[    3.146326] pci 0000:02:00.0: reg 0x10: [io  0x0000-0x00ff]
+[    3.152050] pci 0000:02:00.0: reg 0x18: [mem 0x00000000-0x00000fff 64bit]
+[    3.158968] pci 0000:02:00.0: reg 0x20: [mem 0x00000000-0x00003fff 64bit pref]
+[    3.166510] pci 0000:02:00.0: supports D1 D2
+[    3.170870] pci 0000:02:00.0: PME# supported from D0 D1 D2 D3hot D3cold
+[    3.184142]  mmcblk1: p1 p2 p3
+[    3.207386] PCI: bus2: Fast back to back transfers disabled
+[    3.212967] pci_bus 0000:02: busn_res: [bus 02-ff] end is updated to 02
+[    3.219819] pci 0000:00:01.0: BAR 8: assigned [mem 0x13000000-0x130fffff]
+[    3.226615] pci 0000:00:02.0: BAR 8: assigned [mem 0x13100000-0x131fffff]
+[    3.233466] pci 0000:00:02.0: BAR 9: assigned [mem 0x20000000-0x200fffff 64bit pref]
+[    3.241278] pci 0000:00:02.0: BAR 7: assigned [io  0x1000-0x1fff]
+[    3.247432] pci 0000:01:00.0: BAR 0: assigned [mem 0x13000000-0x13001fff 64bit]
+[    3.254773] pci 0000:00:01.0: PCI bridge to [bus 01]
+[    3.259783] pci 0000:00:01.0:   bridge window [mem 0x13000000-0x130fffff]
+[    3.266583] pci 0000:02:00.0: BAR 4: assigned [mem 0x20000000-0x20003fff 64bit pref]
+[    3.274355] pci 0000:02:00.0: BAR 2: assigned [mem 0x13100000-0x13100fff 64bit]
+[    3.281693] pci 0000:02:00.0: BAR 0: assigned [io  0x1000-0x10ff]
+[    3.287802] pci 0000:00:02.0: PCI bridge to [bus 02]
+[    3.292763] pci 0000:00:02.0:   bridge window [io  0x1000-0x1fff]
+[    3.298870] pci 0000:00:02.0:   bridge window [mem 0x13100000-0x131fffff]
+[    3.305652] pci 0000:00:02.0:   bridge window [mem 0x20000000-0x200fffff 64bit pref]
+[    3.313435] pci 0000:00:01.0: nv_msi_ht_cap_quirk didn't locate host bridge
+[    3.320510] pcieport 0000:00:01.0: enabling device (0140 -> 0142)
+[    3.326926] pcieport 0000:00:01.0: Signaling PME with IRQ 393
+[    3.332787] pci 0000:00:02.0: nv_msi_ht_cap_quirk didn't locate host bridge
+[    3.339837] pcieport 0000:00:02.0: enabling device (0140 -> 0143)
+[    3.346202] pcieport 0000:00:02.0: Signaling PME with IRQ 394
+[    3.352251] r8169 Gigabit Ethernet driver 2.3LK-NAPI loaded
+[    3.357878] r8169 0000:02:00.0: enabling device (0140 -> 0143)
+[    3.389222] r8169 0000:02:00.0 eth0: RTL8168g/8111g at 0xf0c01000, 00:04:4b:3a:d9:81, XID 0c000800 IRQ 395
+[    3.398897] r8169 0000:02:00.0 eth0: jumbo features [frames: 9200 bytes, tx checksumming: ko]
+[    3.411775] +1.05V_RUN_AVDD_HDMI_PLL: supplied by +1.05V_RUN
+[    3.420086] [drm] Supports vblank timestamp caching Rev 2 (21.10.2013).
+[    3.426715] [drm] No driver support for vblank timestamp query.
+[    3.558686] tegra-hdmi 54280000.hdmi: cannot set audio to 48000 Hz at 297000000 Hz pixel clock
+[    3.806039] Console: switching to colour frame buffer device 512x135
+[    3.902003] drm drm: fb0:  frame buffer device
+[    3.906541] [drm] Initialized tegra 0.0.0 20120330 for drm on minor 0
+[    3.913865] of: dev_pm_opp_of_cpumask_add_table: couldn't find opp table for cpu:0, -19
+[    3.921954] cpufreq: cpufreq_online: CPU0: Running at unlisted freq: 696000 KHz
+[    3.929304] cpufreq: cpufreq_online: CPU0: Unlisted initial frequency changed to: 714000 KHz
+[    3.938254] input: gpio-keys as /devices/soc0/gpio-keys/input/input2
+[    3.945663] as3722-rtc as3722-rtc: setting system clock to 2000-01-01 00:00:14 UTC (946684814)
+[    3.954601] +USB0_VBUS_SW: disabling
+[    3.958307] +1.8V_RUN_CAM: disabling
+[    3.962085] +2.8V_RUN_CAM: disabling
+[    3.965767] +1.2V_RUN_CAM_FRONT: disabling
+[    3.970053] +1.05V_RUN_CAM_REAR: disabling
+[    3.974255] +3.3V_RUN_TOUCH: disabling
+[    3.978132] +2.8V_RUN_CAM_AF: disabling
+[    3.982063] +1.8V_RUN_VPP_FUSE: disabling
+[    3.986169] ALSA device list:
+[    3.989197]   #0: tegra-hda at 0x70038000 irq 346
+[    3.993909]   #1: NVIDIA Tegra Jetson TK1
+[    3.998704] EXT4-fs (mmcblk0p1): mounting ext3 file system using the ext4 subsystem
+[    4.020797] EXT4-fs (mmcblk0p1): recovery complete
+[    4.025584] EXT4-fs (mmcblk0p1): mounted filesystem with ordered data mode. Opts: (null)
+[    4.033716] VFS: Mounted root (ext3 filesystem) on device 179:1.
+[    4.044834] devtmpfs: mounted
+[    4.048356] Freeing unused kernel memory: 1024K
+bash: cannot set terminal process group (-1): Inappropriate ioctl for device
+bash: no job control in this shell
+root@(none):/# mount -t sysfs none /sys
+root@(none):/# 
+root@(none):/# mount -t debugfs none /sys/kernel/debug
+root@(none):/# 
+root@(none):/# rtcwake -d rtc1 -m mem -s 3
+rtcwake: assuming RTC uses UTC ...
+rtcwake: wakeup from "mem" using /dev/rtc1 at Thu Jan  1 00:00:20 1970
+[    7.352638] PM: Syncing filesystems ... done.
+[    7.365881] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[    7.367502] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[    7.369129] Suspending console(s) (use no_console_suspend to debug)
+[    7.818673] PM: suspend of devices complete after 224.412 msecs
+[    7.819808] PM: late suspend of devices complete after 1.126 msecs
+[    7.847864] PM: noirq suspend of devices complete after 28.050 msecs
+[    7.847867] Disabling non-boot CPUs ...
+[    8.159529] Entering suspend state LP1
+[    8.159529] Suspended for 2.671 seconds
+[    8.159554] Enabling non-boot CPUs ...
+[    8.189677] CPU1 is up
+[    8.229649] CPU2 is up
+[    8.270006] CPU3 is up
+[    8.270498] pci_generic_config_write32: 79 callbacks suppressed
+[    8.270506] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x4c may corrupt adjacent RW1C bits
+[    8.270515] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x4c may corrupt adjacent RW1C bits
+[    8.270527] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x88 may corrupt adjacent RW1C bits
+[    8.270533] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x88 may corrupt adjacent RW1C bits
+[    8.270539] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x90 may corrupt adjacent RW1C bits
+[    8.270545] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x90 may corrupt adjacent RW1C bits
+[    8.270550] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x98 may corrupt adjacent RW1C bits
+[    8.270555] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x98 may corrupt adjacent RW1C bits
+[    8.270561] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x9c may corrupt adjacent RW1C bits
+[    8.270566] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x9c may corrupt adjacent RW1C bits
+[    8.270667] pcieport 0000:00:01.0: nv_msi_ht_cap_quirk didn't locate host bridge
+[    8.270668] pcieport 0000:00:02.0: nv_msi_ht_cap_quirk didn't locate host bridge
+[    8.297317] PM: noirq resume of devices complete after 27.305 msecs
+[    8.298943] PM: early resume of devices complete after 1.111 msecs
+[    8.305926] tegra-hdmi 54280000.hdmi: cannot set audio to 48000 Hz at 297000000 Hz pixel clock
+[    8.629953] ata1: SATA link down (SStatus 0 SControl 300)
+[   11.267336] PM: resume of devices complete after 2968.382 msecs
+[   11.458702] Restarting tasks ... done.
+root@(none):/# 
+root@(none):/# rtcwake -d rtc1 -m mem -s 3
+rtcwake: assuming RTC uses UTC ...
+rtcwake: wakeup from "mem" using /dev/rtc1 at Thu Jan  1 00:00:28 1970
+[   12.716174] PM: Syncing filesystems ... done.
+[   12.723235] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[   12.724832] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[   12.726510] Suspending console(s) (use no_console_suspend to debug)
+[   13.158606] PM: suspend of devices complete after 230.057 msecs
+[   13.159618] PM: late suspend of devices complete after 1.007 msecs
+[   13.187887] PM: noirq suspend of devices complete after 28.263 msecs
+[   13.187889] Disabling non-boot CPUs ...
+[   13.247414] IRQ17 no longer affine to CPU1
+[   13.549300] Entering suspend state LP1
+[   13.549300] Suspended for 2.609 seconds
+[   13.549325] Enabling non-boot CPUs ...
+[   13.579663] CPU1 is up
+[   13.619624] CPU2 is up
+[   13.659981] CPU3 is up
+[   13.660469] pci_generic_config_write32: 33 callbacks suppressed
+[   13.660476] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x4c may corrupt adjacent RW1C bits
+[   13.660484] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x4c may corrupt adjacent RW1C bits
+[   13.660497] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x88 may corrupt adjacent RW1C bits
+[   13.660503] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x88 may corrupt adjacent RW1C bits
+[   13.660509] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x90 may corrupt adjacent RW1C bits
+[   13.660515] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x90 may corrupt adjacent RW1C bits
+[   13.660521] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x98 may corrupt adjacent RW1C bits
+[   13.660526] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x98 may corrupt adjacent RW1C bits
+[   13.660532] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x9c may corrupt adjacent RW1C bits
+[   13.660538] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x9c may corrupt adjacent RW1C bits
+[   13.660637] pcieport 0000:00:01.0: nv_msi_ht_cap_quirk didn't locate host bridge
+[   13.660639] pcieport 0000:00:02.0: nv_msi_ht_cap_quirk didn't locate host bridge
+[   13.687285] PM: noirq resume of devices complete after 27.297 msecs
+[   13.688932] PM: early resume of devices complete after 1.116 msecs
+[   13.695892] tegra-hdmi 54280000.hdmi: cannot set audio to 48000 Hz at 297000000 Hz pixel clock
+[   14.020046] ata1: SATA link down (SStatus 0 SControl 300)
+[   16.657304] PM: resume of devices complete after 2968.363 msecs
+[   16.852749] Restarting tasks ... done.
+root@(none):/# 
+root@(none):/# rtcwake -d rtc1 -m mem -s 3
+rtcwake: assuming RTC uses UTC ...
+rtcwake: wakeup from "mem" using /dev/rtc1 at Thu Jan  1 00:00:36 1970
+[   18.105767] PM: Syncing filesystems ... done.
+[   18.113359] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[   18.114961] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[   18.116646] Suspending console(s) (use no_console_suspend to debug)
+[   18.548688] PM: suspend of devices complete after 230.085 msecs
+[   18.550873] PM: late suspend of devices complete after 2.173 msecs
+[   18.578001] PM: noirq suspend of devices complete after 27.120 msecs
+[   18.578004] Disabling non-boot CPUs ...
+[   18.869730] Entering suspend state LP1
+[   18.869730] Suspended for 2.679 seconds
+[   18.869755] Enabling non-boot CPUs ...
+[   18.899664] CPU1 is up
+[   18.939574] CPU2 is up
+[   18.979948] CPU3 is up
+[   18.980406] pci_generic_config_write32: 32 callbacks suppressed
+[   18.980414] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x4c may corrupt adjacent RW1C bits
+[   18.980427] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x4c may corrupt adjacent RW1C bits
+[   18.980440] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x88 may corrupt adjacent RW1C bits
+[   18.980446] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x88 may corrupt adjacent RW1C bits
+[   18.980452] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x90 may corrupt adjacent RW1C bits
+[   18.980458] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x90 may corrupt adjacent RW1C bits
+[   18.980464] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x98 may corrupt adjacent RW1C bits
+[   18.980469] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x98 may corrupt adjacent RW1C bits
+[   18.980475] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x9c may corrupt adjacent RW1C bits
+[   18.980481] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x9c may corrupt adjacent RW1C bits
+[   18.980581] pcieport 0000:00:02.0: nv_msi_ht_cap_quirk didn't locate host bridge
+[   18.980582] pcieport 0000:00:01.0: nv_msi_ht_cap_quirk didn't locate host bridge
+[   19.007255] PM: noirq resume of devices complete after 27.301 msecs
+[   19.008993] PM: early resume of devices complete after 1.201 msecs
+[   19.015237] tegra-hdmi 54280000.hdmi: cannot set audio to 48000 Hz at 297000000 Hz pixel clock
+[   19.339969] ata1: SATA link down (SStatus 0 SControl 300)
+[   21.987232] PM: resume of devices complete after 2978.231 msecs
+[   22.178700] Restarting tasks ... done.
+root@(none):/# 
+root@(none):/# rtcwake -d rtc1 -m mem -s 3
+rtcwake: assuming RTC uses UTC ...
+rtcwake: wakeup from "mem" using /dev/rtc1 at Thu Jan  1 00:00:44 1970
+[   23.422132] PM: Syncing filesystems ... done.
+[   23.428824] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[   23.430279] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[   23.431800] Suspending console(s) (use no_console_suspend to debug)
+[   23.829326] PM: suspend of devices complete after 246.864 msecs
+[   23.834919] PM: late suspend of devices complete after 5.564 msecs
+[   23.860363] PM: noirq suspend of devices complete after 25.421 msecs
+[   23.860374] Disabling non-boot CPUs ...
+[   24.175813] Entering suspend state LP1
+[   24.175813] Suspended for 2.693 seconds
+[   24.175838] Enabling non-boot CPUs ...
+[   24.199702] CPU1 is up
+[   24.239549] CPU2 is up
+[   24.279933] CPU3 is up
+[   24.280382] pci_generic_config_write32: 32 callbacks suppressed
+[   24.280390] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x4c may corrupt adjacent RW1C bits
+[   24.280403] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x88 may corrupt adjacent RW1C bits
+[   24.280410] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x90 may corrupt adjacent RW1C bits
+[   24.280419] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x4c may corrupt adjacent RW1C bits
+[   24.280425] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x98 may corrupt adjacent RW1C bits
+[   24.280431] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x9c may corrupt adjacent RW1C bits
+[   24.280437] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0xa8 may corrupt adjacent RW1C bits
+[   24.280443] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0xb0 may corrupt adjacent RW1C bits
+[   24.280449] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x88 may corrupt adjacent RW1C bits
+[   24.280457] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x90 may corrupt adjacent RW1C bits
+[   24.280552] pcieport 0000:00:01.0: nv_msi_ht_cap_quirk didn't locate host bridge
+[   24.280554] pcieport 0000:00:02.0: nv_msi_ht_cap_quirk didn't locate host bridge
+[   24.307212] PM: noirq resume of devices complete after 27.272 msecs
+[   24.309078] PM: early resume of devices complete after 1.342 msecs
+[   24.315764] tegra-hdmi 54280000.hdmi: cannot set audio to 48000 Hz at 297000000 Hz pixel clock
+[   24.639958] ata1: SATA link down (SStatus 0 SControl 300)
+[   27.327198] PM: resume of devices complete after 3018.112 msecs
+[   27.518502] Restarting tasks ... done.
+root@(none):/# 
+root@(none):/# rtcwake -d rtc1 -m mem -s 3
+rtcwake: assuming RTC uses UTC ...
+rtcwake: wakeup from "mem" using /dev/rtc1 at Thu Jan  1 00:00:52 1970
+[   28.741518] PM: Syncing filesystems ... done.
+[   28.748588] Freezing user space processes ... (elapsed 0.019 seconds) done.
+[   28.768542] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[   28.770240] Suspending console(s) (use no_console_suspend to debug)
+[   29.168579] PM: suspend of devices complete after 228.886 msecs
+[   29.170226] PM: late suspend of devices complete after 1.636 msecs
+[   29.198000] PM: noirq suspend of devices complete after 27.765 msecs
+[   29.198003] Disabling non-boot CPUs ...
+[   29.489317] Entering suspend state LP1
+[   29.489317] Suspended for 2.686 seconds
+[   29.489342] Enabling non-boot CPUs ...
+[   29.519603] CPU1 is up
+[   29.559609] CPU2 is up
+[   29.599903] CPU3 is up
+[   29.600367] pci_generic_config_write32: 32 callbacks suppressed
+[   29.600375] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x4c may corrupt adjacent RW1C bits
+[   29.600385] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x88 may corrupt adjacent RW1C bits
+[   29.600391] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x90 may corrupt adjacent RW1C bits
+[   29.600396] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x98 may corrupt adjacent RW1C bits
+[   29.600401] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x9c may corrupt adjacent RW1C bits
+[   29.600407] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0xa8 may corrupt adjacent RW1C bits
+[   29.600412] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0xb0 may corrupt adjacent RW1C bits
+[   29.600441] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x52 may corrupt adjacent RW1C bits
+[   29.600447] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x52 may corrupt adjacent RW1C bits
+[   29.600454] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x5c may corrupt adjacent RW1C bits
+[   29.600477] pcieport 0000:00:02.0: nv_msi_ht_cap_quirk didn't locate host bridge
+[   29.600560] pcieport 0000:00:01.0: nv_msi_ht_cap_quirk didn't locate host bridge
+[   29.627186] PM: noirq resume of devices complete after 27.277 msecs
+[   29.628963] PM: early resume of devices complete after 1.253 msecs
+[   29.635740] tegra-hdmi 54280000.hdmi: cannot set audio to 48000 Hz at 297000000 Hz pixel clock
+[   29.959891] ata1: SATA link down (SStatus 0 SControl 300)
+[   32.597204] PM: resume of devices complete after 2968.233 msecs
+[   32.788620] Restarting tasks ... done.
+root@(none):/# 
+root@(none):/# rtcwake -d rtc1 -m mem -s 3
+rtcwake: assuming RTC uses UTC ...
+rtcwake: wakeup from "mem" using /dev/rtc1 at Thu Jan  1 00:01:00 1970
+[   34.047203] PM: Syncing filesystems ... done.
+[   34.054759] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[   34.056387] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[   34.058120] Suspending console(s) (use no_console_suspend to debug)
+[   34.488547] PM: suspend of devices complete after 230.059 msecs
+[   34.490397] PM: late suspend of devices complete after 1.839 msecs
+[   34.517820] PM: noirq suspend of devices complete after 27.416 msecs
+[   34.517823] Disabling non-boot CPUs ...
+[   34.809430] Entering suspend state LP1
+[   34.809430] Suspended for 2.679 seconds
+[   34.809455] Enabling non-boot CPUs ...
+[   34.839577] CPU1 is up
+[   34.879506] CPU2 is up
+[   34.919862] CPU3 is up
+[   34.920322] pci_generic_config_write32: 32 callbacks suppressed
+[   34.920329] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x4c may corrupt adjacent RW1C bits
+[   34.920338] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x4c may corrupt adjacent RW1C bits
+[   34.920350] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x88 may corrupt adjacent RW1C bits
+[   34.920356] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x88 may corrupt adjacent RW1C bits
+[   34.920362] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x90 may corrupt adjacent RW1C bits
+[   34.920368] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x90 may corrupt adjacent RW1C bits
+[   34.920373] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x98 may corrupt adjacent RW1C bits
+[   34.920379] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x98 may corrupt adjacent RW1C bits
+[   34.920384] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x9c may corrupt adjacent RW1C bits
+[   34.920390] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x9c may corrupt adjacent RW1C bits
+[   34.920490] pcieport 0000:00:02.0: nv_msi_ht_cap_quirk didn't locate host bridge
+[   34.920492] pcieport 0000:00:01.0: nv_msi_ht_cap_quirk didn't locate host bridge
+[   34.947155] PM: noirq resume of devices complete after 27.288 msecs
+[   34.948956] PM: early resume of devices complete after 1.286 msecs
+[   34.955838] tegra-hdmi 54280000.hdmi: cannot set audio to 48000 Hz at 297000000 Hz pixel clock
+[   35.279800] ata1: SATA link down (SStatus 0 SControl 300)
+[   37.917138] PM: resume of devices complete after 2968.174 msecs
+[   38.108469] Restarting tasks ... done.
+root@(none):/# 
+root@(none):/# rtcwake -d rtc1 -m mem -s 3
+rtcwake: assuming RTC uses UTC ...
+rtcwake: wakeup from "mem" using /dev/rtc1 at Thu Jan  1 00:01:08 1970
+[   39.365197] PM: Syncing filesystems ... done.
+[   39.372179] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[   39.373785] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[   39.375486] Suspending console(s) (use no_console_suspend to debug)
+[   39.808441] PM: suspend of devices complete after 229.606 msecs
+[   39.809455] PM: late suspend of devices complete after 1.008 msecs
+[   39.837766] PM: noirq suspend of devices complete after 28.306 msecs
+[   39.837769] Disabling non-boot CPUs ...
+[   40.139205] Entering suspend state LP1
+[   40.139205] Suspended for 2.669 seconds
+[   40.139229] Enabling non-boot CPUs ...
+[   40.169566] CPU1 is up
+[   40.209474] CPU2 is up
+[   40.249827] CPU3 is up
+[   40.250295] pci_generic_config_write32: 32 callbacks suppressed
+[   40.250303] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x4c may corrupt adjacent RW1C bits
+[   40.250314] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x4c may corrupt adjacent RW1C bits
+[   40.250324] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x88 may corrupt adjacent RW1C bits
+[   40.250331] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x90 may corrupt adjacent RW1C bits
+[   40.250337] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x88 may corrupt adjacent RW1C bits
+[   40.250342] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x98 may corrupt adjacent RW1C bits
+[   40.250348] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x90 may corrupt adjacent RW1C bits
+[   40.250354] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x9c may corrupt adjacent RW1C bits
+[   40.250359] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x98 may corrupt adjacent RW1C bits
+[   40.250365] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0xa8 may corrupt adjacent RW1C bits
+[   40.250465] pcieport 0000:00:02.0: nv_msi_ht_cap_quirk didn't locate host bridge
+[   40.250467] pcieport 0000:00:01.0: nv_msi_ht_cap_quirk didn't locate host bridge
+[   40.277125] PM: noirq resume of devices complete after 27.292 msecs
+[   40.278889] PM: early resume of devices complete after 1.232 msecs
+[   40.286692] tegra-hdmi 54280000.hdmi: cannot set audio to 48000 Hz at 297000000 Hz pixel clock
+[   40.609875] ata1: SATA link down (SStatus 0 SControl 300)
+[   43.257138] PM: resume of devices complete after 2978.241 msecs
+[   43.448399] Restarting tasks ... done.
+root@(none):/# 
+root@(none):/# rtcwake -d rtc1 -m mem -s 3
+rtcwake: assuming RTC uses UTC ...
+rtcwake: wakeup from "mem" using /dev/rtc1 at Thu Jan  1 00:01:16 1970
+[   44.695272] PM: Syncing filesystems ... done.
+[   44.702328] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[   44.703945] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[   44.705662] Suspending console(s) (use no_console_suspend to debug)
+[   45.138535] PM: suspend of devices complete after 230.426 msecs
+[   45.140685] PM: late suspend of devices complete after 2.139 msecs
+[   45.168019] PM: noirq suspend of devices complete after 27.327 msecs
+[   45.168022] Disabling non-boot CPUs ...
+[   45.417303] IRQ17 no longer affine to CPU3
+[   45.469558] Entering suspend state LP1
+[   45.469558] Suspended for 2.669 seconds
+[   45.469583] Enabling non-boot CPUs ...
+[   45.499543] CPU1 is up
+[   45.539433] CPU2 is up
+[   45.579787] CPU3 is up
+[   45.580233] pci_generic_config_write32: 32 callbacks suppressed
+[   45.580241] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x4c may corrupt adjacent RW1C bits
+[   45.580249] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x4c may corrupt adjacent RW1C bits
+[   45.580261] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x88 may corrupt adjacent RW1C bits
+[   45.580267] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x88 may corrupt adjacent RW1C bits
+[   45.580273] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x90 may corrupt adjacent RW1C bits
+[   45.580279] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x90 may corrupt adjacent RW1C bits
+[   45.580285] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x98 may corrupt adjacent RW1C bits
+[   45.580290] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x98 may corrupt adjacent RW1C bits
+[   45.580296] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x9c may corrupt adjacent RW1C bits
+[   45.580301] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x9c may corrupt adjacent RW1C bits
+[   45.580401] pcieport 0000:00:01.0: nv_msi_ht_cap_quirk didn't locate host bridge
+[   45.580403] pcieport 0000:00:02.0: nv_msi_ht_cap_quirk didn't locate host bridge
+[   45.607093] PM: noirq resume of devices complete after 27.300 msecs
+[   45.608856] PM: early resume of devices complete after 1.240 msecs
+[   45.615748] tegra-hdmi 54280000.hdmi: cannot set audio to 48000 Hz at 297000000 Hz pixel clock
+[   45.939841] ata1: SATA link down (SStatus 0 SControl 300)
+[   48.577111] PM: resume of devices complete after 2968.246 msecs
+[   48.772427] Restarting tasks ... done.
+root@(none):/# 
+root@(none):/# rtcwake -d rtc1 -m mem -s 3
+rtcwake: assuming RTC uses UTC ...
+rtcwake: wakeup from "mem" using /dev/rtc1 at Thu Jan  1 00:01:24 1970
+[   50.025999] PM: Syncing filesystems ... done.
+[   50.033649] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[   50.035264] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[   50.037049] Suspending console(s) (use no_console_suspend to debug)
+[   50.468495] PM: suspend of devices complete after 231.312 msecs
+[   50.470513] PM: late suspend of devices complete after 2.007 msecs
+[   50.497836] PM: noirq suspend of devices complete after 27.315 msecs
+[   50.497839] Disabling non-boot CPUs ...
+[   50.667235] IRQ17 no longer affine to CPU2
+[   50.819554] Entering suspend state LP1
+[   50.819554] Suspended for 2.649 seconds
+[   50.819579] Enabling non-boot CPUs ...
+[   50.849487] CPU1 is up
+[   50.889405] CPU2 is up
+[   50.929775] CPU3 is up
+[   50.930228] pci_generic_config_write32: 32 callbacks suppressed
+[   50.930236] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x4c may corrupt adjacent RW1C bits
+[   50.930246] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x88 may corrupt adjacent RW1C bits
+[   50.930253] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x90 may corrupt adjacent RW1C bits
+[   50.930262] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x4c may corrupt adjacent RW1C bits
+[   50.930267] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x98 may corrupt adjacent RW1C bits
+[   50.930274] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x9c may corrupt adjacent RW1C bits
+[   50.930280] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0xa8 may corrupt adjacent RW1C bits
+[   50.930286] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0xb0 may corrupt adjacent RW1C bits
+[   50.930292] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x88 may corrupt adjacent RW1C bits
+[   50.930299] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x90 may corrupt adjacent RW1C bits
+[   50.930396] pcieport 0000:00:02.0: nv_msi_ht_cap_quirk didn't locate host bridge
+[   50.930398] pcieport 0000:00:01.0: nv_msi_ht_cap_quirk didn't locate host bridge
+[   50.957060] PM: noirq resume of devices complete after 27.280 msecs
+[   50.958755] PM: early resume of devices complete after 1.177 msecs
+[   50.965540] tegra-hdmi 54280000.hdmi: cannot set audio to 48000 Hz at 297000000 Hz pixel clock
+[   51.289801] ata1: SATA link down (SStatus 0 SControl 300)
+[   53.937038] PM: resume of devices complete after 2978.275 msecs
+[   54.132439] Restarting tasks ... done.
+root@(none):/# 
+root@(none):/# rtcwake -d rtc1 -m mem -s 3
+rtcwake: assuming RTC uses UTC ...
+rtcwake: wakeup from "mem" using /dev/rtc1 at Thu Jan  1 00:01:32 1970
+[   55.372401] PM: Syncing filesystems ... done.
+[   55.379143] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[   55.380590] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[   55.382108] Suspending console(s) (use no_console_suspend to debug)
+[   55.779120] PM: suspend of devices complete after 247.233 msecs
+[   55.784673] PM: late suspend of devices complete after 5.524 msecs
+[   55.810275] PM: noirq suspend of devices complete after 25.579 msecs
+[   55.810286] Disabling non-boot CPUs ...
+[   56.125762] Entering suspend state LP1
+[   56.125762] Suspended for 2.693 seconds
+[   56.125786] Enabling non-boot CPUs ...
+[   56.149454] CPU1 is up
+[   56.189372] CPU2 is up
+[   56.229751] CPU3 is up
+[   56.230216] pci_generic_config_write32: 32 callbacks suppressed
+[   56.230224] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x4c may corrupt adjacent RW1C bits
+[   56.230232] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x4c may corrupt adjacent RW1C bits
+[   56.230244] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x88 may corrupt adjacent RW1C bits
+[   56.230250] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x88 may corrupt adjacent RW1C bits
+[   56.230256] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x90 may corrupt adjacent RW1C bits
+[   56.230262] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x90 may corrupt adjacent RW1C bits
+[   56.230268] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x98 may corrupt adjacent RW1C bits
+[   56.230273] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x98 may corrupt adjacent RW1C bits
+[   56.230278] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x9c may corrupt adjacent RW1C bits
+[   56.230284] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x9c may corrupt adjacent RW1C bits
+[   56.230384] pcieport 0000:00:01.0: nv_msi_ht_cap_quirk didn't locate host bridge
+[   56.230386] pcieport 0000:00:02.0: nv_msi_ht_cap_quirk didn't locate host bridge
+[   56.257034] PM: noirq resume of devices complete after 27.277 msecs
+[   56.258909] PM: early resume of devices complete after 1.344 msecs
+[   56.265556] tegra-hdmi 54280000.hdmi: cannot set audio to 48000 Hz at 297000000 Hz pixel clock
+[   56.589675] ata1: SATA link down (SStatus 0 SControl 300)
+[   59.227012] PM: resume of devices complete after 2968.095 msecs
+[   59.418442] Restarting tasks ... done.
+root@(none):/# 
+root@(none):/# NVTB SYSTEM SUSPEND TEST COMPLETE
