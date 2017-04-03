@@ -1,0 +1,469 @@
+
+U-Boot SPL 2016.05-rc2 (Apr 21 2016 - 16:23:00)
+Trying to boot from RAM
+
+
+U-Boot 2016.05-rc2 (Apr 21 2016 - 16:23:00 -0700)
+
+TEGRA124
+Model: NVIDIA Jetson TK1
+Board: NVIDIA Jetson TK1
+DRAM:  2 GiB
+MC:   Tegra SD/MMC: 0, Tegra SD/MMC: 1
+In:    serial
+Out:   serial
+Err:   serial
+Net:   No ethernet found.
+Hit any key to stop autoboot:  2  0 
+Tegra124 (Jetson TK1) # 
+Tegra124 (Jetson TK1) # pci enum
+Tegra124 (Jetson TK1) # setenv bootargs 'ignore_loglevel console=ttyS0,115200n8 rw root=PARTUUID=b1791faa-84e8-4e27-83a1-9fb0a77e8803 rootwait gpt debug noinitrd earlyprintk init=/bin/bash'
+Tegra124 (Jetson TK1) # setenv ipaddr 192.168.100.102; setenv serverip 192.168.100.1; setenv tftpserverip 192.168.100.1
+Tegra124 (Jetson TK1) # tftpboot 0x82000000 zImage.tegra_defconfig
+
+Warning: eth_rtl8169 using MAC address from ROM
+Using eth_rtl8169 device
+TFTP from server 192.168.100.1; our IP address is 192.168.100.102
+Filename 'zImage.tegra_defconfig'.
+Load address: 0x82000000
+Loading: *#################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 ######################
+	 4 MiB/s
+done
+Bytes transferred = 6041520 (5c2fb0 hex)
+Tegra124 (Jetson TK1) # tftpboot 0x83000000 tegra124-jetson-tk1.dtb
+Using eth_rtl8169 device
+TFTP from server 192.168.100.1; our IP address is 192.168.100.102
+Filename 'tegra124-jetson-tk1.dtb'.
+Load address: 0x83000000
+Loading: *#####
+	 3.8 MiB/s
+done
+Bytes transferred = 67133 (1063d hex)
+Tegra124 (Jetson TK1) # bootz 0x82000000 - 0x83000000
+Kernel image @ 0x82000000 [ 0x000000 - 0x5c2fb0 ]
+## Flattened Device Tree blob at 83000000
+   Booting using the fdt blob at 0x83000000
+   Using Device Tree in place at 83000000, end 8301363c
+
+Starting kernel ...
+
+Uncompressing Linux... done, booting the kernel.
+[    0.000000] Booting Linux on physical CPU 0x0
+[    0.000000] Linux version 4.11.0-rc5-next-20170403-163516-g58e756c (jonathanh@kaivo) (gcc version 4.7.3 20130328 (prerelease) (crosstool-NG linaro-1.13.1-4.7-2013.04-20130415 - Linaro GCC 2013.04) ) #1 SMP PREEMPT Mon Apr 3 01:21:55 PDT 2017
+[    0.000000] CPU: ARMv7 Processor [413fc0f3] revision 3 (ARMv7), cr=10c5387d
+[    0.000000] CPU: div instructions available: patching division code
+[    0.000000] CPU: PIPT / VIPT nonaliasing data cache, PIPT instruction cache
+[    0.000000] OF: fdt: Machine model: NVIDIA Tegra124 Jetson TK1
+[    0.000000] debug: ignoring loglevel setting.
+[    0.000000] bootconsole [earlycon0] enabled
+[    0.000000] Memory policy: Data cache writealloc
+[    0.000000] cma: Reserved 64 MiB at 0xfbc00000
+[    0.000000] On node 0 totalpages: 524032
+[    0.000000] free_area_init_node: node 0, pgdat c0eab680, node_mem_map eeff7000
+[    0.000000]   Normal zone: 1536 pages used for memmap
+[    0.000000]   Normal zone: 0 pages reserved
+[    0.000000]   Normal zone: 196608 pages, LIFO batch:31
+[    0.000000]   HighMem zone: 327424 pages, LIFO batch:31
+[    0.000000] percpu: Embedded 17 pages/cpu @eef81000 s38464 r8192 d22976 u69632
+[    0.000000] pcpu-alloc: s38464 r8192 d22976 u69632 alloc=17*4096
+[    0.000000] pcpu-alloc: [0] 0 [0] 1 [0] 2 [0] 3 
+[    0.000000] Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 522496
+[    0.000000] Kernel command line: ignore_loglevel console=ttyS0,115200n8 rw root=PARTUUID=b1791faa-84e8-4e27-83a1-9fb0a77e8803 rootwait gpt debug noinitrd earlyprintk init=/bin/bash
+[    0.000000] PID hash table entries: 4096 (order: 2, 16384 bytes)
+[    0.000000] Dentry cache hash table entries: 131072 (order: 7, 524288 bytes)
+[    0.000000] Inode-cache hash table entries: 65536 (order: 6, 262144 bytes)
+[    0.000000] Memory: 1998480K/2096128K available (9216K kernel code, 726K rwdata, 2708K rodata, 1024K init, 314K bss, 32112K reserved, 65536K cma-reserved, 1244160K highmem)
+[    0.000000] Virtual kernel memory layout:
+[    0.000000]     vector  : 0xffff0000 - 0xffff1000   (   4 kB)
+[    0.000000]     fixmap  : 0xffc00000 - 0xfff00000   (3072 kB)
+[    0.000000]     vmalloc : 0xf0800000 - 0xff800000   ( 240 MB)
+[    0.000000]     lowmem  : 0xc0000000 - 0xf0000000   ( 768 MB)
+[    0.000000]     pkmap   : 0xbfe00000 - 0xc0000000   (   2 MB)
+[    0.000000]     modules : 0xbf000000 - 0xbfe00000   (  14 MB)
+[    0.000000]       .text : 0xc0008000 - 0xc0a00000   (10208 kB)
+[    0.000000]       .init : 0xc0d00000 - 0xc0e00000   (1024 kB)
+[    0.000000]       .data : 0xc0e00000 - 0xc0eb5920   ( 727 kB)
+[    0.000000]        .bss : 0xc0eb7000 - 0xc0f059b4   ( 315 kB)
+[    0.000000] Preemptible hierarchical RCU implementation.
+[    0.000000] NR_IRQS:16 nr_irqs:16 16
+[    0.000000] /interrupt-controller@60004000: 160 interrupts forwarded to /interrupt-controller@50041000
+[    0.000000] Tegra clk 127: register failed with -17
+[    0.000008] sched_clock: 32 bits at 1000kHz, resolution 1000ns, wraps every 2147483647500ns
+[    0.007553] clocksource: timer_us: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 1911260446275 ns
+[    0.017168] Switching to timer-based delay loop, resolution 1000ns
+[    0.024622] arm_arch_timer: Architected cp15 timer(s) running at 12.00MHz (virt).
+[    0.030951] clocksource: arch_sys_counter: mask: 0xffffffffffffff max_cycles: 0x2c47f4ee7, max_idle_ns: 440795202497 ns
+[    0.041786] sched_clock: 56 bits at 12MHz, resolution 83ns, wraps every 4398046511096ns
+[    0.049841] Switching to timer-based delay loop, resolution 83ns
+[    0.056380] Console: colour dummy device 80x30
+[    0.060425] Calibrating delay loop (skipped), value calculated using timer frequency.. 24.00 BogoMIPS (lpj=120000)
+[    0.070824] pid_max: default: 32768 minimum: 301
+[    0.076028] Mount-cache hash table entries: 2048 (order: 1, 8192 bytes)
+[    0.082182] Mountpoint-cache hash table entries: 2048 (order: 1, 8192 bytes)
+[    0.090072] CPU: Testing write buffer coherency: ok
+[    0.094516] /cpus/cpu@0 missing clock-frequency property
+[    0.099615] /cpus/cpu@1 missing clock-frequency property
+[    0.105010] /cpus/cpu@2 missing clock-frequency property
+[    0.110364] /cpus/cpu@3 missing clock-frequency property
+[    0.115721] CPU0: thread -1, cpu 0, socket 0, mpidr 80000000
+[    0.155843] Setting up static identity map for 0x80100000 - 0x80100098
+[    0.176328] Tegra Revision: A01 SKU: 129 CPU Process: 1 SoC Process: 1
+[    0.195864] smp: Bringing up secondary CPUs ...
+[    0.246492] CPU1: thread -1, cpu 1, socket 0, mpidr 80000001
+[    0.326603] CPU2: thread -1, cpu 2, socket 0, mpidr 80000002
+[    0.406724] CPU3: thread -1, cpu 3, socket 0, mpidr 80000003
+[    0.416211] smp: Brought up 1 node, 4 CPUs
+[    0.435645] SMP: Total of 4 processors activated (96.00 BogoMIPS).
+[    0.441893] CPU: All CPU(s) started in SVC mode.
+[    0.448408] devtmpfs: initialized
+[    0.473474] VFP support v0.3: implementor 41 architecture 4 part 30 variant f rev 0
+[    0.479586] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+[    0.489222] futex hash table entries: 1024 (order: 4, 65536 bytes)
+[    0.496745] pinctrl core: initialized pinctrl subsystem
+[    0.502032] NET: Registered protocol family 16
+[    0.506673] DMA: preallocated 256 KiB pool for atomic coherent allocations
+[    0.513828] cpuidle: using governor menu
+[    0.543462] No ATAGs?
+[    0.543602] hw-breakpoint: found 5 (+1 reserved) breakpoint and 4 watchpoint registers.
+[    0.552115] hw-breakpoint: maximum watchpoint size is 8 bytes.
+[    0.578171] +5V_SYS: supplied by +VDD_MUX
+[    0.580723] +3.3V_SYS: supplied by +VDD_MUX
+[    0.585352] +USB0_VBUS_SW: Failed to request enable GPIO108: -517
+[    0.590784] reg-fixed-voltage regulators:regulator@7: Failed to register regulator: -517
+[    0.599003] +5V_USB_HS: Failed to request enable GPIO109: -517
+[    0.604820] reg-fixed-voltage regulators:regulator@8: Failed to register regulator: -517
+[    0.613126] +1.05V_RUN_AVDD_HDMI_PLL: Failed to request enable GPIO63: -517
+[    0.619987] reg-fixed-voltage regulators:regulator@11: Failed to register regulator: -517
+[    0.628294] +5V_HDMI_CON: Failed to request enable GPIO86: -517
+[    0.634200] reg-fixed-voltage regulators:regulator@12: Failed to register regulator: -517
+[    0.642506] +5V_SATA: Failed to request enable GPIO242: -517
+[    0.648151] reg-fixed-voltage regulators:regulator@13: Failed to register regulator: -517
+[    0.656460] +12V_SATA: Failed to request enable GPIO242: -517
+[    0.662192] reg-fixed-voltage regulators:regulator@14: Failed to register regulator: -517
+[    0.671721] vgaarb: loaded
+[    0.673984] SCSI subsystem initialized
+[    0.677275] libata version 3.00 loaded.
+[    0.681267] usbcore: registered new interface driver usbfs
+[    0.686537] usbcore: registered new interface driver hub
+[    0.691913] usbcore: registered new device driver usb
+[    0.700002] Linux video capture interface: v2.00
+[    0.702872] pps_core: LinuxPPS API ver. 1 registered
+[    0.707839] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[    0.717055] PTP clock support registered
+[    0.722446] Advanced Linux Sound Architecture Driver Initialized.
+[    0.727932] Bluetooth: Core ver 2.22
+[    0.730841] NET: Registered protocol family 31
+[    0.735313] Bluetooth: HCI device and connection manager initialized
+[    0.741713] Bluetooth: HCI socket layer initialized
+[    0.746666] Bluetooth: L2CAP socket layer initialized
+[    0.751795] Bluetooth: SCO socket layer initialized
+[    0.758090] clocksource: Switched to clocksource arch_sys_counter
+[    0.855831] NET: Registered protocol family 2
+[    0.859586] TCP established hash table entries: 8192 (order: 3, 32768 bytes)
+[    0.865564] TCP bind hash table entries: 8192 (order: 4, 65536 bytes)
+[    0.872175] TCP: Hash tables configured (established 8192 bind 8192)
+[    0.878898] UDP hash table entries: 512 (order: 2, 16384 bytes)
+[    0.884402] UDP-Lite hash table entries: 512 (order: 2, 16384 bytes)
+[    0.891120] NET: Registered protocol family 1
+[    0.895905] RPC: Registered named UNIX socket transport module.
+[    0.901205] RPC: Registered udp transport module.
+[    0.905945] RPC: Registered tcp transport module.
+[    0.910728] RPC: Registered tcp NFSv4.1 backchannel transport module.
+[    0.917217] PCI: CLS 0 bytes, default 64
+[    0.923553] hw perfevents: enabled with armv7_cortex_a15 PMU driver, 7 counters available
+[    0.932170] workingset: timestamp_bits=30 max_order=19 bucket_order=0
+[    0.938427] squashfs: version 4.0 (2009/01/31) Phillip Lougher
+[    0.943476] NFS: Registering the id_resolver key type
+[    0.947813] Key type id_resolver registered
+[    0.952107] Key type id_legacy registered
+[    0.960724] bounce: pool size: 64 pages
+[    0.962738] io scheduler noop registered (default)
+[    0.967589] io scheduler mq-deadline registered
+[    0.974312]  usb2-0: usb2-0 supply vbus not found, using dummy regulator
+[    0.979363]  usb2-1: usb2-1 supply vbus not found, using dummy regulator
+[    0.986440] tegra-xusb-padctl 7009f000.padctl: failed to setup XUSB ports: -517
+[    1.002361] tegra-pcie 1003000.pcie-controller: 2x1, 1x1 configuration
+[    1.007102] tegra-pcie 1003000.pcie-controller: Failed to get supply 'avddio-pex': -517
+[    1.018904] tegra124-dfll 70110000.clock: couldn't get vdd_cpu regulator
+[    1.031298] tegra-apbdma 60020000.dma: Tegra20 APB DMA driver register 32 channels
+[    1.037797] tegra-pmc 7000e400.pmc: emergency thermal reset enabled
+[    1.043958] Serial: 8250/16550 driver, 4 ports, IRQ sharing disabled
+[    1.051927] console [ttyS0] disabled
+[    1.053723] 70006300.serial: ttyS0 at MMIO 0x70006300 (irq = 335, base_baud = 25500000) is a Tegra
+[    1.063394] console [ttyS0] enabled
+[    1.063394] console [ttyS0] enabled
+[    1.069073] bootconsole [earlycon0] disabled
+[    1.069073] bootconsole [earlycon0] disabled
+[    1.078476] 70006000.serial: ttyTHS1 at MMIO 0x70006000 (irq = 333, base_baud = 0) is a TEGRA_UART
+[    1.089579] 70006040.serial: ttyTHS2 at MMIO 0x70006040 (irq = 334, base_baud = 0) is a TEGRA_UART
+[    1.101167] tegra-hdmi 54280000.hdmi: failed to get HDMI regulator
+[    1.131621] loop: module loaded
+[    1.136052] at24 0-0056: 256 byte 24c02 EEPROM, writable, 8 bytes/write
+[    1.143489] as3722 4-0040: AS3722 with revision 0x1 found
+[    1.156045] as3722-sd2: supplied by +5V_SYS
+[    1.160781] as3722-sd3: supplied by +5V_SYS
+[    1.165196] +1.35V_LP0(sd3): Bringing 0uV into 1350000-1350000uV
+[    1.171622] as3722-sd4: supplied by +5V_SYS
+[    1.176333] as3722-sd5: supplied by +5V_SYS
+[    1.182545] as3722-ldo0: supplied by +1.35V_LP0(sd2)
+[    1.188702] +1.8V_RUN_CAM: Bringing 0uV into 1800000-1800000uV
+[    1.194971] as3722-ldo2: supplied by +1.8V_VDDIO
+[    1.200991] as3722-ldo3: supplied by +3.3V_SYS
+[    1.205491] +1.05V_LP0_VDD_RTC: Bringing 1100000uV into 1000000-1000000uV
+[    1.213361] as3722-ldo4: supplied by +3.3V_SYS
+[    1.218029] +2.8V_RUN_CAM: Bringing 0uV into 2800000-2800000uV
+[    1.224331] as3722-ldo5: supplied by +1.8V_VDDIO
+[    1.229203] +1.2V_RUN_CAM_FRONT: Bringing 0uV into 1200000-1200000uV
+[    1.236197] +VDDIO_SDMMC3: bypassed regulator has no supply!
+[    1.241930] +VDDIO_SDMMC3: failed to get the current voltage(-517)
+[    1.248130] as3722-regulator as3722-regulator: regulator 13 register failed -517
+[    1.260257] tegra-ahci 70027000.sata: couldn't get PHY in node sata: -517
+[    1.277153] random: fast init done
+[    1.280773] m25p80 spi32765.0: w25q32dw (4096 Kbytes)
+[    1.288215] libphy: Fixed MDIO Bus: probed
+[    1.292308] CAN device driver interface
+[    1.296192] igb: Intel(R) Gigabit Ethernet Network Driver - version 5.4.0-k
+[    1.303333] igb: Copyright (c) 2007-2014 Intel Corporation.
+[    1.309089] pegasus: v0.9.3 (2013/04/25), Pegasus/Pegasus II USB Ethernet driver
+[    1.316553] usbcore: registered new interface driver pegasus
+[    1.322334] usbcore: registered new interface driver asix
+[    1.327785] usbcore: registered new interface driver ax88179_178a
+[    1.333954] usbcore: registered new interface driver cdc_ether
+[    1.339883] usbcore: registered new interface driver smsc75xx
+[    1.345708] usbcore: registered new interface driver smsc95xx
+[    1.351528] usbcore: registered new interface driver net1080
+[    1.357236] usbcore: registered new interface driver cdc_subset
+[    1.363225] usbcore: registered new interface driver zaurus
+[    1.368893] usbcore: registered new interface driver cdc_ncm
+[    1.374771] tegra-phy 7d004000.usb-phy: no vbus regulator
+[    1.380522] ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+[    1.387040] ehci-pci: EHCI PCI platform driver
+[    1.391576] tegra-ehci: Tegra EHCI driver
+[    1.398401] tegra-ehci 7d004000.usb: EHCI Host Controller
+[    1.403824] tegra-ehci 7d004000.usb: new USB bus registered, assigned bus number 1
+[    1.411630] tegra-ehci 7d004000.usb: irq 354, io mem 0x7d004000
+[    1.438123] tegra-ehci 7d004000.usb: USB 2.0 started, EHCI 1.10
+[    1.445053] hub 1-0:1.0: USB hub found
+[    1.448871] hub 1-0:1.0: 1 port detected
+[    1.453948] usbcore: registered new interface driver cdc_acm
+[    1.459621] cdc_acm: USB Abstract Control Model driver for USB modems and ISDN adapters
+[    1.467679] usbcore: registered new interface driver cdc_wdm
+[    1.473459] usbcore: registered new interface driver usb-storage
+[    1.482388] as3722-rtc as3722-rtc: rtc core: registered as3722-rtc as rtc0
+[    1.489279] as3722-rtc as3722-rtc: RTC interrupt 377
+[    1.497054] tegra_rtc 7000e000.rtc: rtc core: registered 7000e000.rtc as rtc1
+[    1.504246] tegra_rtc 7000e000.rtc: Tegra internal Real Time Clock
+[    1.510722] i2c /dev entries driver
+[    1.515605] usbcore: registered new interface driver uvcvideo
+[    1.521366] USB Video Class driver (1.1.1)
+[    1.525456] gspca_main: v2.14.0 registered
+[    1.530183] lm90 0-004c: 0-004c supply vcc not found, using dummy regulator
+[    1.540548] tegra-wdt 60005000.timer: initialized (heartbeat = 120 sec, nowayout = 0)
+[    1.549369] sdhci: Secure Digital Host Controller Interface driver
+[    1.555540] sdhci: Copyright(c) Pierre Ossman
+[    1.560039] sdhci-pltfm: SDHCI platform and OF driver helper
+[    1.566005] sdhci-tegra 700b0400.sdhci: Got CD GPIO
+[    1.570919] sdhci-tegra 700b0400.sdhci: Got WP GPIO
+[    1.592181] mmc0: Unknown controller version (3). You may experience problems.
+[    1.599456] mmc0: Invalid maximum block size, assuming 512 bytes
+[    1.668158] mmc0: SDHCI controller on 700b0600.sdhci [700b0600.sdhci] using ADMA
+[    1.679630] usbcore: registered new interface driver usbhid
+[    1.685300] usbhid: USB HID core driver
+[    1.733976] mmc0: new high speed MMC card at address 0001
+[    1.740092] mmcblk0: mmc0:0001 SEM16G 14.7 GiB 
+[    1.745049] mmcblk0boot0: mmc0:0001 SEM16G partition 1 4.00 MiB
+[    1.751454] mmcblk0boot1: mmc0:0001 SEM16G partition 2 4.00 MiB
+[    1.757746] mmcblk0rpmb: mmc0:0001 SEM16G partition 3 4.00 MiB
+[    1.765337]  mmcblk0: p1
+[    2.129238] tegra30-i2s 70301100.i2s: DMA channels sourced from device 70300000.ahub
+[    2.149132] tegra-snd-rt5640 sound: rt5640-aif1 <-> 70301100.i2s mapping ok
+[    2.160072] input: NVIDIA Tegra Jetson TK1 Headphones as /devices/soc0/sound/sound/card1/input0
+[    2.171243] NET: Registered protocol family 10
+[    2.177018] Segment Routing with IPv6
+[    2.180871] mip6: Mobile IPv6
+[    2.183839] sit: IPv6, IPv4 and MPLS over IPv4 tunneling driver
+[    2.191463] NET: Registered protocol family 17
+[    2.195921] NET: Registered protocol family 15
+[    2.200493] can: controller area network core (rev 20120528 abi 9)
+[    2.206783] NET: Registered protocol family 29
+[    2.211242] can: raw protocol (rev 20120528)
+[    2.215507] can: broadcast manager protocol (rev 20161123 t)
+[    2.221178] can: netlink gateway (rev 20130117) max_hops=1
+[    2.226835] Bluetooth: RFCOMM socket layer initialized
+[    2.232037] Bluetooth: RFCOMM ver 1.11
+[    2.235805] Bluetooth: BNEP (Ethernet Emulation) ver 1.3
+[    2.241136] Bluetooth: BNEP socket layer initialized
+[    2.246094] Bluetooth: HIDP (Human Interface Emulation) ver 1.2
+[    2.252027] Bluetooth: HIDP socket layer initialized
+[    2.257192] Key type dns_resolver registered
+[    2.262151] Registering SWP/SWPB emulation handler
+[    2.284380] +3.3V_RUN: supplied by +3.3V_SYS
+[    2.289607] +USB0_VBUS_SW: supplied by +5V_SYS
+[    2.294338] +3.3V_AVDD_HDMI_AP_GATED: supplied by +3.3V_RUN
+[    2.300279] +5V_USB_HS: supplied by +5V_SYS
+[    2.305203] +3.3V_LP0: supplied by +3.3V_SYS
+[    2.310765] +5V_HDMI_CON: supplied by +5V_SYS
+[    2.315536] +5V_SATA: supplied by +5V_SYS
+[    2.320206] +12V_SATA: supplied by +VDD_MUX
+[    2.326023]  usb2-0: usb2-0 supply vbus not found, using dummy regulator
+[    2.332884]  usb2-1: usb2-1 supply vbus not found, using dummy regulator
+[    2.339927]  usb3-0: usb3-0 supply vbus not found, using dummy regulator
+[    2.347331] tegra-pcie 1003000.pcie-controller: 2x1, 1x1 configuration
+[    2.353962] tegra-pcie 1003000.pcie-controller: Failed to get supply 'avddio-pex': -517
+[    2.364836] tegra124-dfll 70110000.clock: couldn't get vdd_cpu regulator
+[    2.374658] tegra-hdmi 54280000.hdmi: failed to get PLL regulator
+[    2.384533] as3722-sd2: supplied by +5V_SYS
+[    2.389087] as3722-sd3: supplied by +5V_SYS
+[    2.393595] as3722-sd4: supplied by +5V_SYS
+[    2.398148] as3722-sd5: supplied by +5V_SYS
+[    2.403931] as3722-ldo0: supplied by +1.35V_LP0(sd2)
+[    2.410275] as3722-ldo1: supplied by +3.3V_RUN
+[    2.415057] as3722-ldo2: supplied by +1.8V_VDDIO
+[    2.420825] as3722-ldo3: supplied by +3.3V_SYS
+[    2.426218] as3722-ldo4: supplied by +3.3V_SYS
+[    2.431028] as3722-ldo5: supplied by +1.8V_VDDIO
+[    2.435983] as3722-ldo6: supplied by +3.3V_RUN
+[    2.441800] input: tegra-hda HDMI/DP,pcm=3 as /devices/soc0/70030000.hda/sound/card0/input1
+[    2.450518] as3722-ldo7: supplied by +1.8V_VDDIO
+[    2.455759] +1.05V_RUN_CAM_REAR: Bringing 0uV into 1050000-1050000uV
+[    2.462953] as3722-ldo9: supplied by +5V_SYS
+[    2.468654] +3.3V_RUN_TOUCH: Bringing 0uV into 2800000-2800000uV
+[    2.475182] as3722-ldo10: supplied by +5V_SYS
+[    2.480302] +2.8V_RUN_CAM_AF: Bringing 0uV into 2800000-2800000uV
+[    2.487177] as3722-ldo11: supplied by +3.3V_RUN
+[    2.492489] +1.8V_RUN_VPP_FUSE: Bringing 0uV into 1800000-1800000uV
+[    2.501744] tegra-ahci 70027000.sata: AHCI 0001.0301 32 slots 2 ports 3 Gbps 0x1 impl platform mode
+[    2.510823] tegra-ahci 70027000.sata: flags: 64bit ncq sntf pm led pio slum part sadm sds apst 
+[    2.521825] scsi host0: tegra-ahci
+[    2.526702] scsi host1: tegra-ahci
+[    2.530539] ata1: SATA max UDMA/133 mmio [mem 0x70027000-0x70028fff] port 0x100 irq 345
+[    2.538558] ata2: DUMMY
+[    2.542144] tegra-ehci 7d008000.usb: EHCI Host Controller
+[    2.547599] tegra-ehci 7d008000.usb: new USB bus registered, assigned bus number 2
+[    2.555462] tegra-ehci 7d008000.usb: irq 355, io mem 0x7d008000
+[    2.588219] tegra-ehci 7d008000.usb: USB 2.0 started, EHCI 1.10
+[    2.595476] hub 2-0:1.0: USB hub found
+[    2.599345] hub 2-0:1.0: 1 port detected
+[    2.668894] tegra-xusb 70090000.usb: Firmware timestamp: 2014-09-16 02:10:07 UTC
+[    2.676319] tegra-xusb 70090000.usb: xHCI Host Controller
+[    2.681768] tegra-xusb 70090000.usb: new USB bus registered, assigned bus number 3
+[    2.691944] tegra-xusb 70090000.usb: hcc params 0x0184f525 hci version 0x100 quirks 0x00010010
+[    2.700612] tegra-xusb 70090000.usb: irq 347, io mem 0x70090000
+[    2.707703] hub 3-0:1.0: USB hub found
+[    2.711586] hub 3-0:1.0: 6 ports detected
+[    2.716504] tegra-xusb 70090000.usb: xHCI Host Controller
+[    2.721979] tegra-xusb 70090000.usb: new USB bus registered, assigned bus number 4
+[    2.729737] usb usb4: We don't know the algorithms for LPM for this host, disabling LPM.
+[    2.739306] hub 4-0:1.0: USB hub found
+[    2.743110] hub 4-0:1.0: 2 ports detected
+[    2.749077] sdhci-tegra 700b0400.sdhci: Got CD GPIO
+[    2.753972] sdhci-tegra 700b0400.sdhci: Got WP GPIO
+[    2.767217] mmc1: Unknown controller version (3). You may experience problems.
+[    2.774579] mmc1: Invalid maximum block size, assuming 512 bytes
+[    2.838662] mmc1: SDHCI controller on 700b0400.sdhci [700b0400.sdhci] using ADMA
+[    2.846317] tegra-pcie 1003000.pcie-controller: 2x1, 1x1 configuration
+[    2.858200] tegra-pcie 1003000.pcie-controller: probing port 0, using 2 lanes
+[    2.867507] tegra-pcie 1003000.pcie-controller: Slot present pin change, signature: 00000008
+[    2.871100] ata1: SATA link down (SStatus 0 SControl 300)
+[    2.888905] tegra-pcie 1003000.pcie-controller: probing port 1, using 1 lanes
+[    2.898069] tegra-pcie 1003000.pcie-controller: Slot present pin change, signature: 00000000
+[    2.912422] tegra-pcie 1003000.pcie-controller: PCI host bridge to bus 0000:00
+[    2.919678] pci_bus 0000:00: root bus resource [io  0x0000-0xffff]
+[    2.925855] pci_bus 0000:00: root bus resource [mem 0x13000000-0x1fffffff]
+[    2.932741] pci_bus 0000:00: root bus resource [mem 0x20000000-0x3fffffff pref]
+[    2.940096] pci_bus 0000:00: root bus resource [bus 00-ff]
+[    2.945679] pci 0000:00:01.0: [10de:0e12] type 01 class 0x060400
+[    2.951779] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x88 may corrupt adjacent RW1C bits
+[    2.961561] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x52 may corrupt adjacent RW1C bits
+[    2.971344] pci 0000:00:01.0: PME# supported from D0 D1 D2 D3hot D3cold
+[    2.977955] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x4c may corrupt adjacent RW1C bits
+[    2.988126] pci 0000:00:02.0: [10de:0e13] type 01 class 0x060400
+[    2.994260] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x88 may corrupt adjacent RW1C bits
+[    3.004066] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x52 may corrupt adjacent RW1C bits
+[    3.013853] pci 0000:00:02.0: PME# supported from D0 D1 D2 D3hot D3cold
+[    3.020523] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x4c may corrupt adjacent RW1C bits
+[    3.030688] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x3e may corrupt adjacent RW1C bits
+[    3.040441] pci_bus 0000:00: 2-byte config write to 0000:00:02.0 offset 0x3e may corrupt adjacent RW1C bits
+[    3.050188] pci_bus 0000:00: 2-byte config write to 0000:00:01.0 offset 0x4 may corrupt adjacent RW1C bits
+[    3.059881] pci_bus 0000:00: 1-byte config write to 0000:00:01.0 offset 0xc may corrupt adjacent RW1C bits
+[    3.069593] PCI: bus0: Fast back to back transfers disabled
+[    3.075203] pci 0000:00:01.0: bridge configuration invalid ([bus 00-00]), reconfiguring
+[    3.083225] pci 0000:00:02.0: bridge configuration invalid ([bus 00-00]), reconfiguring
+[    3.091495] pci 0000:01:00.0: [8086:4232] type 00 class 0x028000
+[    3.097545] pci 0000:01:00.0: reg 0x10: [mem 0x00000000-0x00001fff 64bit]
+[    3.104581] pci 0000:01:00.0: PME# supported from D0 D3hot D3cold
+[    3.123857] mmc1: new high speed SDHC card at address aaaa
+[    3.130928] mmcblk1: mmc1:aaaa SD04G 3.69 GiB 
+[    3.138195] PCI: bus1: Fast back to back transfers disabled
+[    3.143784] pci_bus 0000:01: busn_res: [bus 01-ff] end is updated to 01
+[    3.151007] pci 0000:02:00.0: [10ec:8168] type 00 class 0x020000
+[    3.157116] pci 0000:02:00.0: reg 0x10: [io  0x0000-0x00ff]
+[    3.162853] pci 0000:02:00.0: reg 0x18: [mem 0x00000000-0x00000fff 64bit]
+[    3.169782] pci 0000:02:00.0: reg 0x20: [mem 0x00000000-0x00003fff 64bit pref]
+[    3.177307] pci 0000:02:00.0: supports D1 D2
+[    3.181670] pci 0000:02:00.0: PME# supported from D0 D1 D2 D3hot D3cold
+[    3.194631]  mmcblk1: p1 p2 p3
+[    3.218286] PCI: bus2: Fast back to back transfers disabled
+[    3.223877] pci_bus 0000:02: busn_res: [bus 02-ff] end is updated to 02
+[    3.230699] pci 0000:00:01.0: BAR 8: assigned [mem 0x13000000-0x130fffff]
+[    3.237482] pci 0000:00:02.0: BAR 8: assigned [mem 0x13100000-0x131fffff]
+[    3.244342] pci 0000:00:02.0: BAR 9: assigned [mem 0x20000000-0x200fffff 64bit pref]
+[    3.252156] pci 0000:00:02.0: BAR 7: assigned [io  0x1000-0x1fff]
+[    3.258288] pci 0000:01:00.0: BAR 0: assigned [mem 0x13000000-0x13001fff 64bit]
+[    3.265636] pci 0000:00:01.0: PCI bridge to [bus 01]
+[    3.270661] pci 0000:00:01.0:   bridge window [mem 0x13000000-0x130fffff]
+[    3.277468] pci 0000:02:00.0: BAR 4: assigned [mem 0x20000000-0x20003fff 64bit pref]
+[    3.285247] pci 0000:02:00.0: BAR 2: assigned [mem 0x13100000-0x13100fff 64bit]
+[    3.292584] pci 0000:02:00.0: BAR 0: assigned [io  0x1000-0x10ff]
+[    3.298697] pci 0000:00:02.0: PCI bridge to [bus 02]
+[    3.303659] pci 0000:00:02.0:   bridge window [io  0x1000-0x1fff]
+[    3.309765] pci 0000:00:02.0:   bridge window [mem 0x13100000-0x131fffff]
+[    3.316547] pci 0000:00:02.0:   bridge window [mem 0x20000000-0x200fffff 64bit pref]
+[    3.324329] pci 0000:00:01.0: nv_msi_ht_cap_quirk didn't locate host bridge
+[    3.331403] pcieport 0000:00:01.0: enabling device (0140 -> 0142)
+[    3.337828] pcieport 0000:00:01.0: Signaling PME with IRQ 393
+[    3.343689] pci 0000:00:02.0: nv_msi_ht_cap_quirk didn't locate host bridge
+[    3.350738] pcieport 0000:00:02.0: enabling device (0140 -> 0143)
+[    3.357105] pcieport 0000:00:02.0: Signaling PME with IRQ 394
+[    3.363155] r8169 Gigabit Ethernet driver 2.3LK-NAPI loaded
+[    3.368782] r8169 0000:02:00.0: enabling device (0140 -> 0143)
+[    3.400105] r8169 0000:02:00.0 eth0: RTL8168g/8111g at 0xf0c01000, 00:04:4b:3a:d9:81, XID 0c000800 IRQ 395
+[    3.409781] r8169 0000:02:00.0 eth0: jumbo features [frames: 9200 bytes, tx checksumming: ko]
+[    3.422624] +1.05V_RUN_AVDD_HDMI_PLL: supplied by +1.05V_RUN
+[    3.430933] [drm] Supports vblank timestamp caching Rev 2 (21.10.2013).
+[    3.437564] [drm] No driver support for vblank timestamp query.
+[    3.571887] tegra-hdmi 54280000.hdmi: cannot set audio to 48000 Hz at 297000000 Hz pixel clock
+[    3.819113] Console: switching to colour frame buffer device 512x135
+[    3.915061] drm drm: fb0:  frame buffer device
+[    3.919605] [drm] Initialized tegra 0.0.0 20120330 for drm on minor 0
+[    3.926966] of: dev_pm_opp_of_cpumask_add_table: couldn't find opp table for cpu:0, -19
+[    3.935054] cpufreq: cpufreq_online: CPU0: Running at unlisted freq: 696000 KHz
+[    3.942404] cpufreq: cpufreq_online: CPU0: Unlisted initial frequency changed to: 714000 KHz
+[    3.951350] input: gpio-keys as /devices/soc0/gpio-keys/input/input2
+[    3.958610] as3722-rtc as3722-rtc: setting system clock to 2000-01-01 00:00:13 UTC (946684813)
+[    3.967500] +USB0_VBUS_SW: disabling
+[    3.971176] +1.8V_RUN_CAM: disabling
+[    3.974971] +2.8V_RUN_CAM: disabling
+[    3.978818] +1.2V_RUN_CAM_FRONT: disabling
+[    3.983096] +1.05V_RUN_CAM_REAR: disabling
+[    3.987370] +3.3V_RUN_TOUCH: disabling
+[    3.991413] +2.8V_RUN_CAM_AF: disabling
+[    3.995426] +1.8V_RUN_VPP_FUSE: disabling
+[    3.999798] ALSA device list:
+[    4.002762]   #0: tegra-hda at 0x70038000 irq 346
+[    4.007451]   #1: NVIDIA Tegra Jetson TK1
+[    4.012417] EXT4-fs (mmcblk0p1): mounting ext3 file system using the ext4 subsystem
+[    4.052851] EXT4-fs (mmcblk0p1): recovery complete
+[    4.058848] EXT4-fs (mmcblk0p1): mounted filesystem with ordered data mode. Opts: (null)
+[    4.066962] VFS: Mounted root (ext3 filesystem) on device 179:1.
+[    4.078053] devtmpfs: mounted
+[    4.081575] Freeing unused kernel memory: 1024K
+bash: cannot set terminal process group (-1): Inappropriate ioctl for device
+bash: no job control in this shell
+root@(none):/# 
